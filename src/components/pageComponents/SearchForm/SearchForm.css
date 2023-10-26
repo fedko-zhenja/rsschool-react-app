@@ -1,0 +1,36 @@
+.search-wrapper {
+    width: 100%;
+    padding: 50px 0px;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.search_input {
+    width: 300px;
+    height: 30px;
+    border-radius: 0%;
+    border-right: none;
+}
+
+.search_input:focus {
+    box-shadow: 0px 0px 10px 10px rgba(24, 98, 217, 0.14);
+}
+
+.search_btn {
+    width: 60px;
+    height: 36px;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    border: none;
+}
+
+.search_btn:hover {
+    background-color: blue;
+}
+
+.search_btn:active {
+    background-color: black;
+}

@@ -1,10 +1,8 @@
 import React from 'react';
 import { SearchFormProps, SearchFormState } from '../../../types/types';
+import './SearchForm.css';
 
-export class SearchForm extends React.Component<
-    SearchFormProps,
-    SearchFormState
-> {
+export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
     constructor(props: SearchFormProps) {
         super(props);
 
@@ -27,17 +25,18 @@ export class SearchForm extends React.Component<
 
     render(): React.ReactNode {
         return (
-            <div>
+            <div className="search-wrapper">
                 <h1>{this.props.title}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <input
+                            className="search_input"
                             type="text"
                             value={this.state.value}
                             onChange={this.handleChange}
                         />
                     </label>
-                    <input type="submit" value="submit" />
+                    <input className="search_btn" type="submit" value="Search" />
                 </form>
             </div>
         );

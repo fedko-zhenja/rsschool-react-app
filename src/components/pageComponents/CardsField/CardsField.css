@@ -1,0 +1,26 @@
+.card-field {
+    padding-bottom: 50px;
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    width: 200px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.card:hover {
+    border-color: blue;
+    box-shadow: 0px 0px 10px 10px rgba(24, 98, 217, 0.14);
+}
