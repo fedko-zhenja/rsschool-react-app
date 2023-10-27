@@ -6,7 +6,9 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     constructor(props: SearchFormProps) {
         super(props);
 
-        this.state = { value: '' };
+        const localStorageInputValue = localStorage.getItem('inputValue') || '';
+
+        this.state = { value: localStorageInputValue };
     }
 
     handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
@@ -20,6 +22,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
         if (this.state.value !== '') {
             console.log(this.state.value);
         }
+        localStorage.setItem('inputValue', this.state.value);
         event.preventDefault();
     };
 
