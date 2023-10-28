@@ -22,7 +22,9 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
         if (this.state.value !== '') {
             console.log(this.state.value);
         }
+
         localStorage.setItem('inputValue', this.state.value);
+
         event.preventDefault();
     };
 

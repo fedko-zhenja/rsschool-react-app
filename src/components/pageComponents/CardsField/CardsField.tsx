@@ -2,109 +2,54 @@ import React from 'react';
 import { CardsFieldProps, CardsFieldState } from '../../../types/types';
 import './CardsField.css';
 
-// import { getCardsData, getCardByValue } from '../../../api/PokemonApi';
+import { getCardsData } from '../../../api/PokemonApi';
 
 export class CardsField extends React.Component<CardsFieldProps, CardsFieldState> {
     constructor(props: CardsFieldProps) {
         super(props);
 
         this.state = {
-            error: null,
-            isLoaded: false,
-            items: [],
-            img: [],
-            description: [],
+            inputValue: '',
+            isDataLoaded: false,
+            cardsData: {
+                data: [],
+                page: 0,
+                pageSize: 0,
+                count: 0,
+                totalCount: 0,
+            },
         };
 
-        // console.log(
-        //     getCardsData().then((res) => {
-        //         console.log(res);
-        //     })
-        // );
-
-        // console.log(
-        //     getCardByValue('Ampharos').then((res) => {
-        //         console.log(res);
-        //     })
-        // );
+        // getCardByValue('Ampharos').then((res) => {
+        //     console.log(res);
+        // });
     }
 
-    // getCardsData = async () => {
-    //     try {
-    //         const response = await fetch('https://pokeapi.co/api/v2/pokemon');
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
+    getCardsData = async () => {
+        try {
+            const data = await getCardsData();
+            this.setState({ cardsData: data, isDataLoaded: true });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
-    //         const result = await response.json();
-
-    //         this.setState({
-    //             isLoaded: true,
-    //             items: result.results,
-    //         });
-
-    //         const arrImg = this.state.items.map((el, index) => {
-    //             return (
-    //                 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + (index + 1) + '.png'
-    //             );
-    //         });
-
-    //         this.setState({ img: arrImg });
-    //     } catch (error) {
-    //         this.setState({
-    //             isLoaded: true,
-    //             error: error as Error,
-    //         });
-    //     }
-
-    //     try {
-    //         const response = await fetch('https://pokeapi.co/api/v2/ability');
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-
-    //         const result = await response.json();
-
-    //         this.setState({
-    //             isLoaded: true,
-    //             description: result.results,
-    //         });
-    //     } catch (error) {
-    //         this.setState({
-    //             isLoaded: true,
-    //             error: error as Error,
-    //         });
-    //     }
-    // };
-
-    // componentDidMount(): void {
-    //     this.getCardsData();
-    // }
+    componentDidMount() {
+        this.getCardsData();
+    }
 
     render() {
-        // const { error, isLoaded, items, img, description } = this.state;
+        const { cardsData, isDataLoaded } = this.state;
 
-        // if (description.length === 0) {
-        //     return <p>Loading2...</p>;
-        // }
-
-        // if (error) {
-        //     return <p>Error {error.message}</p>;
-        // }
-
-        // if (!isLoaded) {
-        //     return <p>Loading...</p>;
-        // }
+        if (isDataLoaded === false) {
+            return <div>Loading...</div>;
+        }
 
         return (
-            <div className="card-field">
-                {/* {items.map((item, index) => (
-                    <div className="card" key={item.name}>
-                        <p>Name: {item.name}</p>
-                        <p>Ability: {description[index].name}</p>
-                        <img width="120px" src={img[index]}></img>
-                    </div>
-                ))} */}
+            <div>
+                {cardsData.data.map((card, index) => (
+                    <div key={index}>{card.name}</div>
+                ))}
             </div>
         );
     }
