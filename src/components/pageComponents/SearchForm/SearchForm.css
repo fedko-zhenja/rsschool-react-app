@@ -1,10 +1,16 @@
 .search-wrapper {
+    flex: 1, 0;
     width: 100%;
-    padding: 50px 0px;
+    padding: 50px 10px;
     border-bottom: 2px solid black;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    background-color: #ffcb05;
+}
+
+.search-wrapper h1 {
+    font-family: cursive;
 }
 
 .search_input {

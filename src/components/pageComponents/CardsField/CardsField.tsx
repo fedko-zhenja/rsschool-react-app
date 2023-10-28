@@ -9,7 +9,6 @@ export class CardsField extends React.Component<CardsFieldProps, CardsFieldState
         super(props);
 
         this.state = {
-            inputValue: '',
             isDataLoaded: false,
             cardsData: {
                 data: [],
@@ -36,9 +35,18 @@ export class CardsField extends React.Component<CardsFieldProps, CardsFieldState
 
     componentDidMount() {
         this.getCardsData();
+        // console.log(555);
     }
 
     render() {
+        // const { inputValue } = this.props;
+        // if (inputValue !== '' && inputValue !== undefined) {
+        //     console.log('CF', inputValue);
+        //     // this.setState({ inputValue: this.props.inputValue });
+        // }
+
+        // console.log('CF', this.props.inputValue);
+
         const { cardsData, isDataLoaded } = this.state;
 
         if (isDataLoaded === false) {

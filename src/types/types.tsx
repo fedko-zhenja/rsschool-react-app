@@ -1,5 +1,6 @@
 export interface SearchFormProps {
     title?: string;
+    onValueChange: (value: string) => void;
 }
 
 export interface SearchFormState {
@@ -8,6 +9,10 @@ export interface SearchFormState {
 
 export interface CardsFieldProps {
     inputValue?: string;
+}
+
+export interface CardsPageState {
+    inputValue: string;
 }
 
 // interface PokemonResult {
@@ -69,7 +74,6 @@ export interface PokemonCard {
 // }
 
 export interface CardsFieldState {
-    inputValue: string;
     isDataLoaded: boolean;
     cardsData: PokemonCard;
 }

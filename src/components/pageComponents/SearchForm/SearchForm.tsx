@@ -14,18 +14,18 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
         if (event.target) {
             this.setState({ value: (event.target as HTMLInputElement).value });
-            console.log(this.state);
         }
     };
 
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-        if (this.state.value !== '') {
-            console.log(this.state.value);
-        }
-
         localStorage.setItem('inputValue', this.state.value);
-
         event.preventDefault();
+
+        //----
+        console.log(this.state.value);
+        this.props.onValueChange(this.state.value);
+
+        //----
     };
 
     render(): React.ReactNode {

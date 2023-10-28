@@ -1,15 +1,9 @@
-import './App.css';
 import React from 'react';
-import { SearchForm } from './components/pageComponents/SearchForm/SearchForm';
-import { CardsField } from './components/pageComponents/CardsField/CardsField';
+import { CardsPage } from './components/pages/CardsPage';
+import './App.css';
 
 export default class App extends React.Component {
     render() {
-        return (
-            <div className="app">
-                <SearchForm title="Pokémon" />
-                <CardsField />
-            </div>
-        );
+        return <CardsPage />;
     }
 }
