@@ -1,42 +1,42 @@
 import React from 'react';
-import { CardsFieldProps, CardsFieldState } from '../../../types/types';
+import { CardsFieldProps } from '../../../types/types';
 import './CardsField.css';
 
-import { getCardsData } from '../../../api/PokemonApi';
+// import { getCardsData } from '../../../api/PokemonApi';
 
-export class CardsField extends React.Component<CardsFieldProps, CardsFieldState> {
+export class CardsField extends React.Component<CardsFieldProps> {
     constructor(props: CardsFieldProps) {
         super(props);
 
-        this.state = {
-            isDataLoaded: false,
-            cardsData: {
-                data: [],
-                page: 0,
-                pageSize: 0,
-                count: 0,
-                totalCount: 0,
-            },
-        };
+        // this.state = {
+        //     isDataLoaded: false,
+        //     cardsData: {
+        //         data: [],
+        //         page: 0,
+        //         pageSize: 0,
+        //         count: 0,
+        //         totalCount: 0,
+        //     },
+        // };
 
         // getCardByValue('Ampharos').then((res) => {
         //     console.log(res);
         // });
     }
 
-    getCardsData = async () => {
-        try {
-            const data = await getCardsData();
-            this.setState({ cardsData: data, isDataLoaded: true });
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+    // getCardsData = async () => {
+    //     try {
+    //         const data = await getCardsData();
+    //         this.setState({ cardsData: data, isDataLoaded: true });
+    //     } catch (error) {
+    //         console.error('Error fetching data:', error);
+    //     }
+    // };
 
-    componentDidMount() {
-        this.getCardsData();
-        // console.log(555);
-    }
+    // componentDidMount() {
+    //     this.getCardsData();
+    //     // console.log(555);
+    // }
 
     render() {
         // const { inputValue } = this.props;
@@ -47,15 +47,19 @@ export class CardsField extends React.Component<CardsFieldProps, CardsFieldState
 
         // console.log('CF', this.props.inputValue);
 
-        const { cardsData, isDataLoaded } = this.state;
+        // const { cardsData, isDataLoaded } = this.state;
 
-        if (isDataLoaded === false) {
+        if (this.props.isDataLoaded === false) {
             return <div>Loading...</div>;
+        }
+
+        if (this.props.cardsData.data.length === 0) {
+            return <div>Not Found</div>;
         }
 
         return (
             <div className="card-field">
-                {cardsData.data.map((card, index) => (
+                {this.props.cardsData.data.map((card, index) => (
                     <div className="card" key={index}>
                         <span>
                             Name: <span className="card-data">{card.name}</span>

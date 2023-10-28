@@ -22,7 +22,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
         event.preventDefault();
 
         //----
-        console.log(this.state.value);
+        // console.log(this.state.value);
         this.props.onValueChange(this.state.value);
 
         //----

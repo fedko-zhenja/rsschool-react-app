@@ -7,13 +7,9 @@ export interface SearchFormState {
     value: string;
 }
 
-export interface CardsFieldProps {
-    inputValue?: string;
-}
-
-export interface CardsPageState {
-    inputValue: string;
-}
+// export interface CardsPageState {
+//     inputValue: string;
+// }
 
 // interface PokemonResult {
 //     name: string;
@@ -72,8 +68,21 @@ export interface PokemonCard {
 //     inputValue: string;
 //     cardsData: PokemonCard | object;
 // }
+// export interface CardsFieldProps {
+//     inputValue?: string;
+// }
 
+export interface CardsFieldProps {
+    isDataLoaded: boolean;
+    cardsData: PokemonCard;
+}
 export interface CardsFieldState {
+    isDataLoaded: boolean;
+    cardsData: PokemonCard;
+}
+
+export interface CardsPageState {
+    inputValue: string;
     isDataLoaded: boolean;
     cardsData: PokemonCard;
 }
