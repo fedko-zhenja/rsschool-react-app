@@ -4,7 +4,7 @@ const defaultHeaders = {
 };
 
 export async function getCardsData() {
-    const paramString = '?page=1&pageSize=20&select=id,name,abilities,images';
+    const paramString = '?page=1&pageSize=20&select=id,name,abilities,images,hp,attacks';
     const response = await fetch(path + paramString, {
         method: 'GET',
         headers: defaultHeaders,

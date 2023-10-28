@@ -1,6 +1,6 @@
 .card-field {
     padding-bottom: 50px;
-    max-width: 1200px;
+    max-width: 1400px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -9,11 +9,13 @@
 }
 
 .card {
-    width: 200px;
-    padding: 0px;
+    /* width: 200px; */
+    padding: 10px 20px;
     display: flex;
-    align-items: center;
+    gap: 10px;
+    align-items: baseline;
     flex-direction: column;
+    /* color: blue; */
     border: 2px solid black;
     font-size: 17px;
     font-weight: 500;
@@ -21,6 +23,14 @@
 }
 
 .card:hover {
+    /* transform: scale(1.4);
+    background: white;
+    z-index: 1;
+    transition: transform .5s; */
     border-color: blue;
-    box-shadow: 0px 0px 10px 10px rgba(24, 98, 217, 0.14);
+    box-shadow: 0px 0px 10px 10px rgba(24, 98, 217, 0.25);
+}
+
+.card-data {
+    color: blue;
 }

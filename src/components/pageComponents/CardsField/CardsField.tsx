@@ -46,9 +46,23 @@ export class CardsField extends React.Component<CardsFieldProps, CardsFieldState
         }
 
         return (
-            <div>
+            <div className="card-field">
                 {cardsData.data.map((card, index) => (
-                    <div key={index}>{card.name}</div>
+                    <div className="card" key={index}>
+                        <span>
+                            Name: <span className="card-data">{card.name}</span>
+                        </span>
+                        {/* <p>Ability: {card.abilities?.[0]?.name}</p> */}
+                        <span>
+                            Health power:
+                            <span className="card-data"> {card.hp}</span>
+                        </span>
+                        <span>
+                            Attacks:
+                            <span className="card-data"> {card.attacks?.[0]?.name}</span>
+                        </span>
+                        <img width="250px" src={card.images.large}></img>
+                    </div>
                 ))}
             </div>
         );
