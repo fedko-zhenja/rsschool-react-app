@@ -9,11 +9,11 @@ export class CardsField extends React.Component<CardsFieldProps> {
 
     render() {
         if (this.props.isDataLoaded === false) {
-            return <div>Loading...</div>;
+            return <h3>Loading...</h3>;
         }
 
         if (this.props.cardsData.data.length === 0) {
-            return <div>Not Found</div>;
+            return <h3>Not Found</h3>;
         }
 
         return (

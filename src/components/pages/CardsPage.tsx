@@ -34,6 +34,8 @@ export class CardsPage extends React.Component<object, CardsPageState> {
 
     getCardsData = async () => {
         try {
+            this.setState({ isDataLoaded: false });
+
             let data = null;
 
             if (this.state.inputValue === '') {
