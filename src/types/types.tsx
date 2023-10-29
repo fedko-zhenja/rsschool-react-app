@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface SearchFormProps {
     title?: string;
     onValueChange: (value: string) => void;
@@ -58,4 +60,12 @@ export interface CardsPageState {
 
 export interface ErrorBoundaryState {
     hasError: boolean;
+}
+
+export interface ErrorButtonState {
+    hasError: boolean;
+}
+
+export interface ErrorBoundaryProps {
+    children: ReactNode;
 }

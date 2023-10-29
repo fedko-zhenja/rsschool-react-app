@@ -18,10 +18,11 @@
     height: 30px;
     border-radius: 0%;
     border-right: none;
+    transition: 0.2s;
 }
 
 .search_input:focus {
-    box-shadow: 0px 0px 10px 10px rgba(24, 98, 217, 0.14);
+    box-shadow: 0px 0px 10px 10px rgba(4, 55, 138, 0.2);
 }
 
 .search_btn {
@@ -31,6 +32,7 @@
     background-color: black;
     cursor: pointer;
     border: none;
+    transition: 0.2s;
 }
 
 .search_btn:hover {

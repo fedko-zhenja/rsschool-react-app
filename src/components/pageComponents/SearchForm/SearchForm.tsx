@@ -1,5 +1,6 @@
 import React from 'react';
 import { SearchFormProps, SearchFormState } from '../../../types/types';
+import { ErrorButton } from '../ErrorButton/ErrorButton';
 import './SearchForm.css';
 
 export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
@@ -40,6 +41,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
                     </label>
                     <input className="search_btn" type="submit" value="Search" />
                 </form>
+                <ErrorButton />
             </div>
         );
     }

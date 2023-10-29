@@ -1,20 +1,34 @@
 import React from 'react';
-import { ErrorBoundaryState } from '../../../types/types';
+import { ErrorBoundaryState, ErrorBoundaryProps } from '../../../types/types';
+import './ErrorBoundary.css';
 
-export class ErrorBoundary extends React.Component<object, ErrorBoundaryState> {
-    constructor(props: object) {
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+    constructor(props: ErrorBoundaryProps) {
         super(props);
         this.state = { hasError: false };
     }
 
-    static getDerivedStateFromError(error: Error, errorInfo: React.ErrorInfo) {
-        console.error(error, errorInfo);
+    static getDerivedStateFromError() {
         return { hasError: true };
     }
 
+    reloadPage = () => {
+        location.reload();
+    };
+
     render() {
         if (this.state.hasError) {
-            return <div>Something went wrong... Reload the page!</div>;
+            return (
+                <div className="error-wrapper">
+                    <h3>Something went wrong... Reload the page!</h3>
+                    <button className="reload-page_btn" onClick={this.reloadPage}>
+                        Reload page
+                    </button>
+                    <div className="error-image" />
+                </div>
+            );
         }
+
+        return this.props.children;
     }
 }
