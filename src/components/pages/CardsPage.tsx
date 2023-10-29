@@ -4,7 +4,7 @@ import { CardsField } from '../pageComponents/CardsField/CardsField';
 import { CardsPageState } from '../../types/types';
 import './CardsPage.css';
 
-import { getCardsData2 } from '../../api/PokemonApi';
+import { getCardsData } from '../../api/PokemonApi';
 
 export class CardsPage extends React.Component<object, CardsPageState> {
     constructor(props: object) {
@@ -37,9 +37,9 @@ export class CardsPage extends React.Component<object, CardsPageState> {
             let data = null;
 
             if (this.state.inputValue === '') {
-                data = await getCardsData2();
+                data = await getCardsData();
             } else {
-                data = await getCardsData2(this.state.inputValue);
+                data = await getCardsData(this.state.inputValue);
             }
 
             this.setState({ cardsData: data, isDataLoaded: true });

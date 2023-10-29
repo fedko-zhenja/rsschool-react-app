@@ -25,11 +25,11 @@ export class CardsField extends React.Component<CardsFieldProps> {
                         </span>
                         <span>
                             Health power:
-                            <span className="card-data"> {card.hp}</span>
+                            <span className="card-data"> {card.hp ? card.hp : 'none'}</span>
                         </span>
                         <span>
                             Attacks:
-                            <span className="card-data"> {card.attacks?.[0]?.name}</span>
+                            <span className="card-data"> {card.attacks?.[0] ? card.attacks?.[0].name : 'none'}</span>
                         </span>
                         <img width="250px" src={card.images.large}></img>
                     </div>

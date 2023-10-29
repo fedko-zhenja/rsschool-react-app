@@ -3,11 +3,11 @@ const defaultHeaders = {
     'X-Api-Key': '160faf7f-a9ed-4d59-ba6e-8efe08144340',
 };
 
-export async function getCardsData2(name?: string) {
+export async function getCardsData(name?: string) {
     let paramString = '?page=1&pageSize=20&select=id,name,abilities,images,hp,attacks';
 
     if (name !== '' && name !== undefined) {
-        paramString = `?q=name:${name}*&page=1&pageSize=1&select=id,name,abilities,images`;
+        paramString = `?q=name:${name}*&page=1&pageSize=20&select=id,name,abilities,images,hp,attacks`;
     }
 
     const response = await fetch(path + paramString, {
