@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ErrorButtonState } from '../../../types/types';
 import './ErrorButton.css';
 
@@ -11,11 +11,11 @@ export class ErrorButton extends React.Component<object, ErrorButtonState> {
         };
     }
 
-    handleClick = () => {
+    handleClick = (): void => {
         this.setState({ hasError: true });
     };
 
-    render() {
+    render(): ReactNode {
         const { hasError } = this.state;
 
         if (hasError) {

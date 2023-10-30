@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CardsFieldProps } from '../../../types/types';
 import './CardsField.css';
 
 export class CardsField extends React.Component<CardsFieldProps> {
-    render() {
+    render(): ReactNode {
         const { isDataLoaded, cardsData } = this.props;
 
         if (isDataLoaded === false) {

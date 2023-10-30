@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CardsPage } from './components/pages/CardsPage';
 import './App.css';
 
 export default class App extends React.Component {
-    render() {
+    render(): ReactNode {
         return <CardsPage />;
     }
 }

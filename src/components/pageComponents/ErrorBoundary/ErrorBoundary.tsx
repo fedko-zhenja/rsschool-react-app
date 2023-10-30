@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ErrorBoundaryState, ErrorBoundaryProps } from '../../../types/types';
 import './ErrorBoundary.css';
 
@@ -8,15 +8,15 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
         this.state = { hasError: false };
     }
 
-    static getDerivedStateFromError() {
+    static getDerivedStateFromError(): ErrorBoundaryState {
         return { hasError: true };
     }
 
-    reloadPage = () => {
+    reloadPage = (): void => {
         location.reload();
     };
 
-    render() {
+    render(): ReactNode {
         const { hasError } = this.state;
         const { children } = this.props;
 

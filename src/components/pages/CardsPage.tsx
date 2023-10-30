@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { SearchForm } from '../pageComponents/SearchForm/SearchForm';
 import { CardsField } from '../pageComponents/CardsField/CardsField';
 import { CardsPageState } from '../../types/types';
@@ -25,14 +25,14 @@ export class CardsPage extends React.Component<object, CardsPageState> {
         };
     }
 
-    handleValueChange = (value: string) => {
+    handleValueChange = (value: string): void => {
         this.setState({ inputValue: value });
         setTimeout(() => {
             this.getCardsData();
         }, 0);
     };
 
-    getCardsData = async () => {
+    getCardsData = async (): Promise<void> => {
         try {
             const { inputValue } = this.state;
 
@@ -52,11 +52,11 @@ export class CardsPage extends React.Component<object, CardsPageState> {
         }
     };
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.getCardsData();
     }
 
-    render() {
+    render(): ReactNode {
         const { cardsData, isDataLoaded } = this.state;
 
         return (
