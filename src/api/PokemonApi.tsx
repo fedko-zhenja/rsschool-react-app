@@ -4,13 +4,11 @@ const defaultHeaders = {
 };
 
 export async function getCardsData(name?: string) {
-    let paramString = '?page=1&pageSize=20&select=id,name,abilities,images,hp,attacks';
+    const paramString = 'page=1&pageSize=20&select=id,name,abilities,images,hp,attacks';
 
-    if (name !== '' && name !== undefined) {
-        paramString = `?q=name:${name}*&page=1&pageSize=20&select=id,name,abilities,images,hp,attacks`;
-    }
+    const urlWithSearch = name ? `?q=name:${name}*&${paramString}` : `?${paramString}`;
 
-    const response = await fetch(path + paramString, {
+    const response = await fetch(path + urlWithSearch, {
         method: 'GET',
         headers: defaultHeaders,
     });

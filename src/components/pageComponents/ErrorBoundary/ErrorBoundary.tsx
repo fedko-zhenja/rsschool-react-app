@@ -17,7 +17,10 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
     };
 
     render() {
-        if (this.state.hasError) {
+        const { hasError } = this.state;
+        const { children } = this.props;
+
+        if (hasError) {
             return (
                 <div className="error-wrapper">
                     <h3>Something went wrong... Reload the page!</h3>
@@ -29,6 +32,6 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
             );
         }
 
-        return this.props.children;
+        return children;
     }
 }

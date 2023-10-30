@@ -6,7 +6,7 @@ export interface SearchFormProps {
 }
 
 export interface SearchFormState {
-    value: string;
+    inputValue: string;
 }
 
 interface Ability {

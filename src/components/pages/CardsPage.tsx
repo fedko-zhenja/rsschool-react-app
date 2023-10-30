@@ -34,14 +34,16 @@ export class CardsPage extends React.Component<object, CardsPageState> {
 
     getCardsData = async () => {
         try {
+            const { inputValue } = this.state;
+
             this.setState({ isDataLoaded: false });
 
             let data = null;
 
-            if (this.state.inputValue === '') {
+            if (inputValue === '') {
                 data = await getCardsData();
             } else {
-                data = await getCardsData(this.state.inputValue);
+                data = await getCardsData(inputValue);
             }
 
             this.setState({ cardsData: data, isDataLoaded: true });
@@ -55,10 +57,12 @@ export class CardsPage extends React.Component<object, CardsPageState> {
     }
 
     render() {
+        const { cardsData, isDataLoaded } = this.state;
+
         return (
             <div className="cards-page">
                 <SearchForm title="Pokémon" onValueChange={this.handleValueChange} />
-                <CardsField cardsData={this.state.cardsData} isDataLoaded={this.state.isDataLoaded} />
+                <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
             </div>
         );
     }

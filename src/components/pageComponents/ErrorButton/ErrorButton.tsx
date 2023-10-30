@@ -16,7 +16,9 @@ export class ErrorButton extends React.Component<object, ErrorButtonState> {
     };
 
     render() {
-        if (this.state.hasError) {
+        const { hasError } = this.state;
+
+        if (hasError) {
             throw new Error('Create Error');
         }
 

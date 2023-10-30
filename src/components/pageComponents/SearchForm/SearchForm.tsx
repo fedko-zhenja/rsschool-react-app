@@ -9,17 +9,17 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
         const localStorageInputValue = localStorage.getItem('inputValue') || '';
 
-        this.state = { value: localStorageInputValue };
+        this.state = { inputValue: localStorageInputValue };
     }
 
     handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
         if (event.target) {
-            this.setState({ value: (event.target as HTMLInputElement).value });
+            this.setState({ inputValue: (event.target as HTMLInputElement).value });
         }
     };
 
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-        const inputValue = this.state.value.trim();
+        const inputValue = this.state.inputValue.trim();
 
         localStorage.setItem('inputValue', inputValue);
         event.preventDefault();
@@ -27,17 +27,15 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     };
 
     render(): React.ReactNode {
+        const { inputValue } = this.state;
+        const { title } = this.props;
+
         return (
             <div className="search-wrapper">
-                <h1>{this.props.title}</h1>
+                <h1>{title}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        <input
-                            className="search_input"
-                            type="text"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                        />
+                        <input className="search_input" type="text" value={inputValue} onChange={this.handleChange} />
                     </label>
                     <input className="search_btn" type="submit" value="Search" />
                 </form>
