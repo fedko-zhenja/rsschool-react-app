@@ -1,0 +1,19 @@
+.error_btn {
+    width: 60px;
+    height: 36px;
+    color: white;
+    background-color: red;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.error_btn:hover {
+    border-color: red;
+    color: black;
+    background-color: white;
+}
+
+.error_btn:active {
+    background-color: red;
+}
