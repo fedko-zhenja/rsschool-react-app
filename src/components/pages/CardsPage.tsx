@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { SearchForm } from '../pageComponents/SearchForm/SearchForm';
 import { CardsField } from '../pageComponents/CardsField/CardsField';
 import { CardsPageState } from '../../types/types';
@@ -6,64 +6,50 @@ import './CardsPage.css';
 
 import { getCardsData } from '../../api/PokemonApi';
 
-export class CardsPage extends React.Component<object, CardsPageState> {
-    constructor(props: object) {
-        super(props);
+export function CardsPage(): ReactNode {
+    const localStorageInputValue = localStorage.getItem('inputValue') || '';
 
-        const localStorageInputValue = localStorage.getItem('inputValue') || '';
+    const [inputValue, setInputValue] = useState<CardsPageState['inputValue']>(localStorageInputValue);
+    const [isDataLoaded, setIsDataLoaded] = useState<CardsPageState['isDataLoaded']>(false);
+    const [cardsData, setCardsData] = useState<CardsPageState['cardsData']>({
+        data: [],
+        page: 0,
+        pageSize: 0,
+        count: 0,
+        totalCount: 0,
+    });
 
-        this.state = {
-            inputValue: localStorageInputValue,
-            isDataLoaded: false,
-            cardsData: {
-                data: [],
-                page: 0,
-                pageSize: 0,
-                count: 0,
-                totalCount: 0,
-            },
-        };
-    }
-
-    handleValueChange = (value: string): void => {
-        this.setState({ inputValue: value });
-        setTimeout(() => {
-            this.getCardsData();
-        }, 0);
+    const handleValueChange = (value: string): void => {
+        setInputValue(value);
     };
 
-    getCardsData = async (): Promise<void> => {
+    const getDataFromApi = async (value: string): Promise<void> => {
         try {
-            const { inputValue } = this.state;
-
-            this.setState({ isDataLoaded: false });
+            setIsDataLoaded(false);
 
             let data = null;
 
-            if (inputValue === '') {
+            if (value === '') {
                 data = await getCardsData();
             } else {
-                data = await getCardsData(inputValue);
+                data = await getCardsData(value);
             }
 
-            this.setState({ cardsData: data, isDataLoaded: true });
+            setCardsData(data);
+            setIsDataLoaded(true);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
 
-    componentDidMount(): void {
-        this.getCardsData();
-    }
+    useEffect(() => {
+        getDataFromApi(inputValue);
+    }, [inputValue]);
 
-    render(): ReactNode {
-        const { cardsData, isDataLoaded } = this.state;
-
-        return (
-            <div className="cards-page">
-                <SearchForm title="Pokémon" onValueChange={this.handleValueChange} />
-                <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
-            </div>
-        );
-    }
+    return (
+        <div className="cards-page">
+            <SearchForm title="Pokémon" onValueChange={handleValueChange} />
+            <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
+        </div>
+    );
 }
