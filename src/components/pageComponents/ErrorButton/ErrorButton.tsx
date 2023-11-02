@@ -1,13 +1,13 @@
 import { ErrorButtonState } from '../../../types/types';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import './ErrorButton.css';
 
 export function ErrorButton(): ReactNode {
     const [hasError, setHasError] = useState<ErrorButtonState['hasError']>(false);
 
-    const handleClick = () => {
+    const handleClick = useCallback((): void => {
         setHasError(true);
-    };
+    }, []);
 
     if (hasError) {
         throw new Error('Create Error');

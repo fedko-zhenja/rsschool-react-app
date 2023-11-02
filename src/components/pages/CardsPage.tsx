@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { SearchForm } from '../pageComponents/SearchForm/SearchForm';
 import { CardsField } from '../pageComponents/CardsField/CardsField';
 import { CardsPageState } from '../../types/types';
@@ -19,11 +19,11 @@ export function CardsPage(): ReactNode {
         totalCount: 0,
     });
 
-    const handleValueChange = (value: string): void => {
+    const handleValueChange = useCallback((value: string): void => {
         setInputValue(value);
-    };
+    }, []);
 
-    const getDataFromApi = async (value: string): Promise<void> => {
+    const getDataFromApi = useCallback(async (value: string): Promise<void> => {
         try {
             setIsDataLoaded(false);
 
@@ -40,11 +40,11 @@ export function CardsPage(): ReactNode {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    };
+    }, []);
 
     useEffect(() => {
         getDataFromApi(inputValue);
-    }, [inputValue]);
+    }, [getDataFromApi, inputValue]);
 
     return (
         <div className="cards-page">

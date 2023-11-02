@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useState, useEffect, useCallback } from 'react';
 import { SearchFormProps, SearchFormState } from '../../../types/types';
 import { ErrorButton } from '../ErrorButton/ErrorButton';
 import './SearchForm.css';
@@ -12,14 +12,17 @@ export function SearchForm({ title, onValueChange }: SearchFormProps): ReactNode
         localStorage.setItem('inputValue', inputValue);
     }, [inputValue]);
 
-    const handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
+    const handleChange = useCallback((event: React.FormEvent<HTMLInputElement>): void => {
         setInputValue((event.target as HTMLInputElement).value);
-    };
+    }, []);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-        event.preventDefault();
-        onValueChange(inputValue.trim());
-    };
+    const handleSubmit = useCallback(
+        (event: React.FormEvent<HTMLFormElement>): void => {
+            event.preventDefault();
+            onValueChange(inputValue.trim());
+        },
+        [onValueChange, inputValue]
+    );
 
     return (
         <div className="search-wrapper">
