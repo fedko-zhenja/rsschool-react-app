@@ -48,7 +48,7 @@ export function CardsPage(): ReactNode {
 
     return (
         <div className="cards-page">
-            <SearchForm title="Pokémon" onValueChange={handleValueChange} />
+            <SearchForm onValueChange={handleValueChange} />
             <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
         </div>
     );

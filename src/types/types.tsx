@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 export interface SearchFormProps {
-    title?: string;
     onValueChange: (value: string) => void;
 }
 

@@ -3,7 +3,7 @@ import { SearchFormProps, SearchFormState } from '../../../types/types';
 import { ErrorButton } from '../ErrorButton/ErrorButton';
 import './SearchForm.css';
 
-export function SearchForm({ title, onValueChange }: SearchFormProps): ReactNode {
+export function SearchForm({ onValueChange }: SearchFormProps): ReactNode {
     const localStorageInputValue = localStorage.getItem('inputValue') || '';
 
     const [inputValue, setInputValue] = useState<SearchFormState['inputValue']>(localStorageInputValue);
@@ -26,7 +26,6 @@ export function SearchForm({ title, onValueChange }: SearchFormProps): ReactNode
 
     return (
         <div className="search-wrapper">
-            <h1>{title}</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     <input className="search_input" type="text" value={inputValue} onChange={handleChange} />
