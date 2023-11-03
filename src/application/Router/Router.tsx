@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { CardsPage } from '../../components/pages/CardsPage/CardsPage';
-import { AboutPage } from '../../components/pages/AboutPage/AboutPage';
+import { CardsPage } from '../../pages/CardsPage/CardsPage';
+import { AboutPage } from '../../pages/AboutPage/AboutPage';
 import { Layout } from '../Layout/Layout';
 import { Path } from '../path';
 

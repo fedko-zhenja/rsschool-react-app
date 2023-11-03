@@ -1,10 +1,10 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react';
-import { SearchForm } from '../../pageComponents/SearchForm/SearchForm';
-import { CardsField } from '../../pageComponents/CardsField/CardsField';
-import { CardsPageState } from '../../../types/types';
+import { SearchForm } from './components/SearchForm/SearchForm';
+import { CardsField } from './components/CardsField/CardsField';
+import { CardsPageState } from './type';
 import './CardsPage.css';
 
-import { getCardsData } from '../../../api/PokemonApi';
+import { getCardsData } from '../../api/PokemonApi';
 
 export function CardsPage(): ReactNode {
     const localStorageInputValue = localStorage.getItem('inputValue') || '';

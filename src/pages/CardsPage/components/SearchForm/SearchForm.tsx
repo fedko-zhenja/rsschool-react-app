@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
-import { SearchFormProps, SearchFormState } from '../../../types/types';
-import { ErrorButton } from '../ErrorButton/ErrorButton';
+import { SearchFormProps, SearchFormState } from './type';
+import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
 import './SearchForm.css';
 
 export function SearchForm({ onValueChange }: SearchFormProps): ReactNode {

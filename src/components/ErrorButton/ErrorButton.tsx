@@ -1,4 +1,4 @@
-import { ErrorButtonState } from '../../../types/types';
+import { ErrorButtonState } from './type';
 import { ReactNode, useCallback, useState } from 'react';
 import './ErrorButton.css';
 

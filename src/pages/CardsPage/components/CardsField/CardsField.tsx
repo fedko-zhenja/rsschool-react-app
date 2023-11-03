@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { CardsFieldProps } from '../../../types/types';
+import { CardsFieldProps } from './type';
+// import { Pagination } from '../Pagination/Pagination';
 import './CardsField.css';
 
 export function CardsField({ isDataLoaded, cardsData }: CardsFieldProps): ReactNode {
@@ -29,6 +30,7 @@ export function CardsField({ isDataLoaded, cardsData }: CardsFieldProps): ReactN
                     <img width="250px" src={card.images.large}></img>
                 </div>
             ))}
+            {/* <Pagination /> */}
         </div>
     );
 }
