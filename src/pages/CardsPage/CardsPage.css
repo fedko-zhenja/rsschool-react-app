@@ -5,3 +5,14 @@
     align-items: center;
     gap: 50px;
 }
+
+.select_wrapper {
+    display: flex;
+    gap: 10px;
+    color: #213547;
+    font-weight: 500;
+}
+
+#select-cards {
+    cursor: pointer;
+}

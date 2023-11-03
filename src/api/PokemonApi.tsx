@@ -1,12 +1,12 @@
-import { PokemonCard } from '../types/types';
+import { PokemonCard, ApiRarameters } from '../types/types';
 
 const path = 'https://api.pokemontcg.io/v2/cards';
 const defaultHeaders = {
     'X-Api-Key': '160faf7f-a9ed-4d59-ba6e-8efe08144340',
 };
 
-export async function getCardsData(name?: string): Promise<PokemonCard> {
-    const paramString = 'page=1&pageSize=20&select=id,name,abilities,images,hp,attacks';
+export async function getCardsData({ name, pageSize }: ApiRarameters): Promise<PokemonCard> {
+    const paramString = `page=1&pageSize=${pageSize}&select=id,name,abilities,images,hp,attacks`;
 
     const urlWithSearch = name ? `?q=name:${name}*&${paramString}` : `?${paramString}`;
 

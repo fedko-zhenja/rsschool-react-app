@@ -29,3 +29,8 @@ interface Attacks {
     damage: string;
     text: string;
 }
+
+export interface ApiRarameters {
+    name: string;
+    pageSize: string;
+}

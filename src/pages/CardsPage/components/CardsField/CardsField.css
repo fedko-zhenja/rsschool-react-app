@@ -1,5 +1,11 @@
-.card-field {
+.card-field_wrapper {
     padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.card-field {
     max-width: 1400px;
     width: 100%;
     display: flex;
