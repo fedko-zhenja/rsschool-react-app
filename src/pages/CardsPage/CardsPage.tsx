@@ -3,6 +3,7 @@ import { SearchForm } from './components/SearchForm/SearchForm';
 import { CardsField } from './components/CardsField/CardsField';
 import { CardsPageState } from './type';
 import { ApiRarameters } from '../../types/types';
+import { Pagination } from './components/Pagination/Pagination';
 import './CardsPage.css';
 
 import { getCardsData } from '../../api/PokemonApi';
@@ -65,7 +66,7 @@ export function CardsPage(): ReactNode {
                 </select>
             </div>
             <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
-            <div>pagination</div>
+            <Pagination pageSize={pageSizeValue} totalCount={cardsData.totalCount} />
         </div>
     );
 }
