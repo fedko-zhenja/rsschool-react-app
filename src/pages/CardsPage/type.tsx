@@ -5,4 +5,5 @@ export interface CardsPageState {
     isDataLoaded: boolean;
     cardsData: PokemonCard;
     pageSizeValue: string;
+    pageNumberValue: string;
 }

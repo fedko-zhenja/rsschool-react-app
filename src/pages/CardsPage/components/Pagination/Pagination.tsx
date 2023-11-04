@@ -2,19 +2,24 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { PaginationProps, PaginationState } from './type';
 import './Pagination.css';
 
-export function Pagination({ pageSize, totalCount }: PaginationProps) {
+export function Pagination({ pageSize, totalCount, onPageNumberChange }: PaginationProps) {
     const [activePage, setActivePage] = useState<PaginationState['activePage']>(1);
 
     const totalPages = Math.ceil(totalCount / Number(pageSize));
     const numberBtnOnPage = 5;
 
-    const handlePageChange = useCallback((pageNumber: number) => {
-        setActivePage(pageNumber);
-    }, []);
+    const handlePageChange = useCallback(
+        (pageNumber: number) => {
+            setActivePage(pageNumber);
+            onPageNumberChange(String(pageNumber));
+        },
+        [onPageNumberChange]
+    );
 
     useEffect(() => {
         setActivePage(1);
-    }, [pageSize, totalCount]);
+        onPageNumberChange('1');
+    }, [pageSize, totalCount, onPageNumberChange]);
 
     const renderPageNumbers = () => {
         const pageNumbers = [];

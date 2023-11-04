@@ -33,4 +33,5 @@ interface Attacks {
 export interface ApiRarameters {
     name: string;
     pageSize: string;
+    pageNumber: string;
 }

@@ -22,9 +22,14 @@ export function CardsPage(): ReactNode {
     });
 
     const [pageSizeValue, setPageSizeValue] = useState<CardsPageState['pageSizeValue']>('5');
+    const [pageNumberValue, setPageNumberValue] = useState<CardsPageState['pageNumberValue']>('1');
 
     const handleValueChange = useCallback((value: string): void => {
         setSearchValue(value);
+    }, []);
+
+    const handlePageNumberValueChange = useCallback((value: string): void => {
+        setPageNumberValue(value);
     }, []);
 
     const handleSelectValueChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -48,10 +53,11 @@ export function CardsPage(): ReactNode {
         const params = {
             name: searchValue,
             pageSize: pageSizeValue,
+            pageNumber: pageNumberValue,
         };
 
         getDataFromApi(params);
-    }, [getDataFromApi, searchValue, pageSizeValue]);
+    }, [getDataFromApi, searchValue, pageSizeValue, pageNumberValue]);
 
     return (
         <div className="cards-page">
@@ -66,7 +72,11 @@ export function CardsPage(): ReactNode {
                 </select>
             </div>
             <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
-            <Pagination pageSize={pageSizeValue} totalCount={cardsData.totalCount} />
+            <Pagination
+                pageSize={pageSizeValue}
+                totalCount={cardsData.totalCount}
+                onPageNumberChange={handlePageNumberValueChange}
+            />
         </div>
     );
 }
