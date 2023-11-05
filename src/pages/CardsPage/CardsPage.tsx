@@ -1,4 +1,5 @@
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { SearchForm } from './components/SearchForm/SearchForm';
 import { CardsField } from './components/CardsField/CardsField';
 import { CardsPageState } from './type';
@@ -21,8 +22,12 @@ export function CardsPage(): ReactNode {
         totalCount: 0,
     });
 
-    const [pageSizeValue, setPageSizeValue] = useState<CardsPageState['pageSizeValue']>('5');
+    const [pageSizeValue, setPageSizeValue] = useState<CardsPageState['pageSizeValue']>('4');
     const [pageNumberValue, setPageNumberValue] = useState<CardsPageState['pageNumberValue']>('1');
+
+    //------
+    const [searchParams] = useSearchParams();
+    //------
 
     const handleValueChange = useCallback((value: string): void => {
         setSearchValue(value);
@@ -36,18 +41,25 @@ export function CardsPage(): ReactNode {
         setPageSizeValue(event.target.value);
     }, []);
 
-    const getDataFromApi = useCallback(async (apiData: ApiRarameters): Promise<void> => {
-        try {
-            setIsDataLoaded(false);
+    const getDataFromApi = useCallback(
+        async (apiData: ApiRarameters): Promise<void> => {
+            try {
+                setIsDataLoaded(false);
 
-            const data = await getCardsData(apiData);
+                const data = await getCardsData(apiData);
 
-            setCardsData(data);
-            setIsDataLoaded(true);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }, []);
+                setCardsData(data);
+                setIsDataLoaded(true);
+
+                const newSearchParams = new URLSearchParams(searchParams.toString());
+                newSearchParams.set('page', apiData.pageNumber);
+                window.history.replaceState(null, '', `?${newSearchParams.toString()}`);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        },
+        [searchParams]
+    );
 
     useEffect(() => {
         const params = {
@@ -65,10 +77,10 @@ export function CardsPage(): ReactNode {
             <div className="select_wrapper">
                 <span>Number of cards:</span>
                 <select name="select-cards" id="select-cards" onChange={handleSelectValueChange}>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="16">16</option>
                 </select>
             </div>
             <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
