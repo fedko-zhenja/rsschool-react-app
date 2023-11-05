@@ -7,6 +7,8 @@ import { ApiRarameters } from '../../types/types';
 import { Pagination } from './components/Pagination/Pagination';
 import './CardsPage.css';
 
+import { Outlet } from 'react-router-dom';
+
 import { getCardsData } from '../../api/PokemonApi';
 
 export function CardsPage(): ReactNode {
@@ -83,7 +85,12 @@ export function CardsPage(): ReactNode {
                     <option value="16">16</option>
                 </select>
             </div>
-            <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
+            <div className="wrap">
+                <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
+                <div>
+                    <Outlet />
+                </div>
+            </div>
             <Pagination
                 pageSize={pageSizeValue}
                 totalCount={cardsData.totalCount}

@@ -3,6 +3,8 @@ import { CardsPage } from '../../pages/CardsPage/CardsPage';
 import { AboutPage } from '../../pages/AboutPage/AboutPage';
 import { Layout } from '../Layout/Layout';
 import { Path } from '../path';
+import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
+import { getCardDataById } from '../../api/PokemonApi';
 
 const router = createBrowserRouter([
     {
@@ -10,8 +12,18 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             {
-                index: true,
+                path: Path.cardsPage,
                 element: <CardsPage />,
+                children: [
+                    {
+                        path: ':index',
+                        element: <AdditionalCardsInfo />,
+                        loader: async ({ params }) => {
+                            const cardData = await getCardDataById(params.index || '');
+                            return cardData;
+                        },
+                    },
+                ],
             },
             {
                 path: Path.about,

@@ -23,3 +23,23 @@ export async function getCardsData({ name, pageSize, pageNumber }: ApiRarameters
 
     return result;
 }
+
+export async function getCardDataById(id: string): Promise<PokemonCard> {
+    // const paramString = `page=${pageNumber}&pageSize=${pageSize}&select=id,name,abilities,images,hp,attacks`;
+    // https://api.pokemontcg.io/v2/cards?page=1&pageSize=4&select=id,name,abilities,images,hp,attacks
+
+    const urlWithSearch = `/${id}`;
+
+    const response = await fetch(path + urlWithSearch, {
+        method: 'GET',
+        headers: defaultHeaders,
+    });
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const result = response.json();
+
+    return result;
+}

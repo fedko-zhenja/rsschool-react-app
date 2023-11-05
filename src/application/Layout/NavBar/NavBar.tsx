@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Path } from '../../path';
 import './NavBar.css';
-// import { CardsPage } from '../../../components/pages/CardsPage/CardsPage';
 
 export const NavBar = () => {
     return (

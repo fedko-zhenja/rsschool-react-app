@@ -16,3 +16,7 @@
 #select-cards {
     cursor: pointer;
 }
+
+.wrap {
+    display: flex;
+}
