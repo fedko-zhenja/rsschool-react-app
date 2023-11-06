@@ -12,27 +12,12 @@ export function CardsField({ isDataLoaded, cardsData }: CardsFieldProps): ReactN
         return <h3>Not Found</h3>;
     }
 
-    const handleCardClick = (event: React.MouseEvent) => {
-        console.log(event.currentTarget.id);
-    };
-
     return (
         <div className="card-field">
             {cardsData.data.map((card, index) => (
                 <Link key={index} to={`${card.id}`}>
-                    <div className="card" key={index} id={String(index)} onClick={handleCardClick}>
-                        <span>
-                            Name: <span className="card-data">{card.name}</span>
-                        </span>
-                        <span>
-                            Health power:
-                            <span className="card-data"> {card.hp ? card.hp : 'none'}</span>
-                        </span>
-                        <span>
-                            Attacks:
-                            <span className="card-data"> {card.attacks?.[0] ? card.attacks?.[0].name : 'none'}</span>
-                        </span>
-                        <img width="250px" src={card.images.large}></img>
+                    <div className="card" key={index} id={String(index)}>
+                        <img width="300px" src={card.images.large}></img>
                     </div>
                 </Link>
             ))}

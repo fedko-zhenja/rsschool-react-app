@@ -27,9 +27,7 @@ export function CardsPage(): ReactNode {
     const [pageSizeValue, setPageSizeValue] = useState<CardsPageState['pageSizeValue']>('4');
     const [pageNumberValue, setPageNumberValue] = useState<CardsPageState['pageNumberValue']>('1');
 
-    //------
     const [searchParams] = useSearchParams();
-    //------
 
     const handleValueChange = useCallback((value: string): void => {
         setSearchValue(value);
@@ -76,26 +74,26 @@ export function CardsPage(): ReactNode {
     return (
         <div className="cards-page">
             <SearchForm onValueChange={handleValueChange} />
-            <div className="select_wrapper">
-                <span>Number of cards:</span>
-                <select name="select-cards" id="select-cards" onChange={handleSelectValueChange}>
-                    <option value="4">4</option>
-                    <option value="8">8</option>
-                    <option value="12">12</option>
-                    <option value="16">16</option>
-                </select>
-            </div>
-            <div className="wrap">
-                <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
-                <div>
-                    <Outlet />
+            <div className="page-content-wrapper">
+                <div className="page-content_card-wrapper">
+                    <div className="select_wrapper">
+                        <span>Number of cards:</span>
+                        <select name="select-cards" id="select-cards" onChange={handleSelectValueChange}>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="12">12</option>
+                            <option value="16">16</option>
+                        </select>
+                    </div>
+                    <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
+                    <Pagination
+                        pageSize={pageSizeValue}
+                        totalCount={cardsData.totalCount}
+                        onPageNumberChange={handlePageNumberValueChange}
+                    />
                 </div>
+                <Outlet />
             </div>
-            <Pagination
-                pageSize={pageSizeValue}
-                totalCount={cardsData.totalCount}
-                onPageNumberChange={handlePageNumberValueChange}
-            />
         </div>
     );
 }

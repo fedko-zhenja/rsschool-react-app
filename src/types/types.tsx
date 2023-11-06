@@ -35,3 +35,12 @@ export interface ApiRarameters {
     pageSize: string;
     pageNumber: string;
 }
+
+export interface CardData {
+    data: {
+        name: string;
+        hp: string;
+        level: string;
+        attacks: Attacks[];
+    };
+}

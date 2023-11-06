@@ -1,4 +1,5 @@
 import { PokemonCard, ApiRarameters } from '../types/types';
+import { CardData } from '../types/types';
 
 const path = 'https://api.pokemontcg.io/v2/cards';
 const defaultHeaders = {
@@ -24,10 +25,7 @@ export async function getCardsData({ name, pageSize, pageNumber }: ApiRarameters
     return result;
 }
 
-export async function getCardDataById(id: string): Promise<PokemonCard> {
-    // const paramString = `page=${pageNumber}&pageSize=${pageSize}&select=id,name,abilities,images,hp,attacks`;
-    // https://api.pokemontcg.io/v2/cards?page=1&pageSize=4&select=id,name,abilities,images,hp,attacks
-
+export async function getCardDataById(id: string): Promise<CardData> {
     const urlWithSearch = `/${id}`;
 
     const response = await fetch(path + urlWithSearch, {

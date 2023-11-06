@@ -4,7 +4,6 @@ import { AboutPage } from '../../pages/AboutPage/AboutPage';
 import { Layout } from '../Layout/Layout';
 import { Path } from '../path';
 import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
-import { getCardDataById } from '../../api/PokemonApi';
 
 const router = createBrowserRouter([
     {
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
                     {
                         path: ':index',
                         element: <AdditionalCardsInfo />,
-                        loader: async ({ params }) => {
-                            const cardData = await getCardDataById(params.index || '');
-                            return cardData;
-                        },
                     },
                 ],
             },
