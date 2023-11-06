@@ -5,6 +5,7 @@ import { getCardDataById } from '../../../../api/PokemonApi';
 import { AdditionalCardsInfoState } from './type';
 
 export function AdditionalCardsInfo() {
+    const [isCardWindowOpen, setIsCardWindowOpen] = useState<AdditionalCardsInfoState['isCardWindowOpen']>(false);
     const [isDataLoaded, setIsDataLoaded] = useState<AdditionalCardsInfoState['isDataLoaded']>(false);
     const [cardData, setCardData] = useState<AdditionalCardsInfoState['cardData']>({
         data: {
@@ -19,6 +20,7 @@ export function AdditionalCardsInfo() {
 
     const getDataFromApi = useCallback(async (index: string): Promise<void> => {
         try {
+            setIsCardWindowOpen(true);
             setIsDataLoaded(false);
 
             const data = await getCardDataById(index);
@@ -35,8 +37,16 @@ export function AdditionalCardsInfo() {
     }, [params, getDataFromApi]);
 
     const handleCloseWindow = () => {
-        window.location.href = '/';
+        const currentURL = window.location.href;
+        const updatedURL = currentURL.replace(`${params.index}`, '');
+        window.history.pushState({}, '', updatedURL);
+
+        setIsCardWindowOpen(false);
     };
+
+    if (isCardWindowOpen === false) {
+        return null;
+    }
 
     if (isDataLoaded === false) {
         return (
