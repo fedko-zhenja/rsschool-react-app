@@ -1,37 +1,40 @@
-import React, { ReactNode } from 'react';
-import { ErrorBoundaryState, ErrorBoundaryProps } from './type';
+import React, { ReactNode, useState, useEffect } from 'react';
 import './ErrorBoundary.css';
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-    constructor(props: ErrorBoundaryProps) {
-        super(props);
-        this.state = { hasError: false };
-    }
+interface ErrorBoundaryProps {
+    children?: ReactNode;
+}
 
-    static getDerivedStateFromError(): ErrorBoundaryState {
-        return { hasError: true };
-    }
+export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
+    const [hasError, setHasError] = useState(false);
 
-    reloadPage = (): void => {
+    const reloadPage = (): void => {
         location.reload();
     };
 
-    render(): ReactNode {
-        const { hasError } = this.state;
-        const { children } = this.props;
+    useEffect(() => {
+        const handleError = () => {
+            setHasError(true);
+        };
 
-        if (hasError) {
-            return (
-                <div className="error-wrapper">
-                    <h3>Something went wrong... Reload the page!</h3>
-                    <button className="reload-page_btn" onClick={this.reloadPage}>
-                        Reload page
-                    </button>
-                    <div className="error-image" />
-                </div>
-            );
-        }
+        window.addEventListener('error', handleError);
 
-        return children;
+        return () => {
+            window.removeEventListener('error', handleError);
+        };
+    }, []);
+
+    if (hasError) {
+        return (
+            <div className="error-wrapper">
+                <h3>Something went wrong... Reload the page!</h3>
+                <button className="reload-page_btn" onClick={reloadPage}>
+                    Reload page
+                </button>
+                <div className="error-image" />
+            </div>
+        );
     }
-}
+
+    return <div>{children}</div>;
+};

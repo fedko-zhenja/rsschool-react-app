@@ -4,11 +4,13 @@ import { AboutPage } from '../../pages/AboutPage/AboutPage';
 import { Layout } from '../Layout/Layout';
 import { Path } from '../path';
 import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
+import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
+        errorElement: <ErrorBoundary />,
         children: [
             {
                 path: Path.cardsPage,
