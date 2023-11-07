@@ -1,5 +1,5 @@
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { SearchForm } from './components/SearchForm/SearchForm';
 import { CardsField } from './components/CardsField/CardsField';
 import { CardsPageState } from './type';
@@ -12,6 +12,9 @@ import { Outlet } from 'react-router-dom';
 import { getCardsData } from '../../api/PokemonApi';
 
 export function CardsPage(): ReactNode {
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+
     const localStorageInputValue = localStorage.getItem('inputValue') || '';
 
     const [searchValue, setSearchValue] = useState<CardsPageState['searchValue']>(localStorageInputValue);
@@ -25,9 +28,9 @@ export function CardsPage(): ReactNode {
     });
 
     const [pageSizeValue, setPageSizeValue] = useState<CardsPageState['pageSizeValue']>('4');
-    const [pageNumberValue, setPageNumberValue] = useState<CardsPageState['pageNumberValue']>('1');
-
-    const [searchParams] = useSearchParams();
+    const [pageNumberValue, setPageNumberValue] = useState<CardsPageState['pageNumberValue']>(
+        searchParams.get('page') || '1'
+    );
 
     const handleValueChange = useCallback((value: string): void => {
         setSearchValue(value);
@@ -39,6 +42,7 @@ export function CardsPage(): ReactNode {
 
     const handleSelectValueChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>): void => {
         setPageSizeValue(event.target.value);
+        setPageNumberValue('1');
     }, []);
 
     const getDataFromApi = useCallback(
@@ -51,14 +55,15 @@ export function CardsPage(): ReactNode {
                 setCardsData(data);
                 setIsDataLoaded(true);
 
-                const newSearchParams = new URLSearchParams(searchParams.toString());
+                // NOTE: I don't use searchParams because it has a bug https://github.com/remix-run/react-router/issues/9991
+                const newSearchParams = new URLSearchParams(window.location.search);
                 newSearchParams.set('page', apiData.pageNumber);
-                window.history.replaceState(null, '', `?${newSearchParams.toString()}`);
+                navigate(`${window.location.pathname}?${newSearchParams.toString()}`);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         },
-        [searchParams]
+        [navigate]
     );
 
     useEffect(() => {
@@ -69,7 +74,7 @@ export function CardsPage(): ReactNode {
         };
 
         getDataFromApi(params);
-    }, [getDataFromApi, searchValue, pageSizeValue, pageNumberValue]);
+    }, [searchValue, pageSizeValue, pageNumberValue, getDataFromApi]);
 
     return (
         <div className="cards-page">
@@ -87,8 +92,8 @@ export function CardsPage(): ReactNode {
                     </div>
                     <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
                     <Pagination
-                        pageSize={pageSizeValue}
-                        totalCount={cardsData.totalCount}
+                        pageNumber={Number(pageNumberValue)}
+                        totalPages={Math.ceil(cardsData.totalCount / Number(pageSizeValue))}
                         onPageNumberChange={handlePageNumberValueChange}
                     />
                 </div>
