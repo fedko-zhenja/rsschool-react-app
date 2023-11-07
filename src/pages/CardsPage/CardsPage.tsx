@@ -92,6 +92,7 @@ export function CardsPage(): ReactNode {
                     </div>
                     <CardsField cardsData={cardsData} isDataLoaded={isDataLoaded} />
                     <Pagination
+                        isDataLoaded={isDataLoaded}
                         pageNumber={Number(pageNumberValue)}
                         totalPages={Math.ceil(cardsData.totalCount / Number(pageSizeValue))}
                         onPageNumberChange={handlePageNumberValueChange}

@@ -4,7 +4,7 @@ import './Pagination.css';
 
 const numberBtnOnPage = 5;
 
-export function Pagination({ pageNumber, totalPages, onPageNumberChange }: PaginationProps) {
+export function Pagination({ isDataLoaded, pageNumber, totalPages, onPageNumberChange }: PaginationProps) {
     const handlePageChange = useCallback(
         (pageNumber: number) => {
             onPageNumberChange(String(pageNumber));
@@ -31,6 +31,10 @@ export function Pagination({ pageNumber, totalPages, onPageNumberChange }: Pagin
 
         return pageNumbers;
     };
+
+    if (isDataLoaded === false) {
+        return null;
+    }
 
     return (
         <div className="pagination-wrapper">

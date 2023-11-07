@@ -1,4 +1,5 @@
 export interface PaginationProps {
+    isDataLoaded: boolean;
     pageNumber: number;
     totalPages: number;
     onPageNumberChange: (value: string) => void;
