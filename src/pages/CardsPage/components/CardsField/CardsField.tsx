@@ -1,0 +1,29 @@
+import React, { ReactNode } from 'react';
+import { CardsFieldProps } from './type';
+import './CardsField.css';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+export function CardsField({ isDataLoaded, cardsData }: CardsFieldProps): ReactNode {
+    const location = useLocation();
+
+    if (isDataLoaded === false) {
+        return <h3>Loading...</h3>;
+    }
+
+    if (cardsData.data.length === 0) {
+        return <h3>Not Found</h3>;
+    }
+
+    return (
+        <div className="card-field">
+            {cardsData.data.map((card, index) => (
+                <Link key={index} to={`${card.id}${location.search}`}>
+                    <div className="card" key={index} id={String(index)}>
+                        <img width="300px" src={card.images.large}></img>
+                    </div>
+                </Link>
+            ))}
+        </div>
+    );
+}
