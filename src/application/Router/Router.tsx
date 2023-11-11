@@ -5,6 +5,7 @@ import { Layout } from '../Layout/Layout';
 import { Path } from '../path';
 import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
 import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
+import { CardsProvider } from '../../context/context';
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: Path.cardsPage,
-                element: <CardsPage />,
+                element: (
+                    <CardsProvider>
+                        <CardsPage />
+                    </CardsProvider>
+                ),
                 children: [
                     {
                         path: ':index',

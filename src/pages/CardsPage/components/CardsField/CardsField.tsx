@@ -1,11 +1,13 @@
-import React, { ReactNode } from 'react';
-import { CardsFieldProps } from './type';
+import { ReactNode } from 'react';
 import './CardsField.css';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useCardsContext } from '../../../../context/context';
 
-export function CardsField({ isDataLoaded, cardsData }: CardsFieldProps): ReactNode {
+export function CardsField(): ReactNode {
     const location = useLocation();
+
+    const { isDataLoaded, cardsData } = useCardsContext()!;
 
     if (isDataLoaded === false) {
         return <h3>Loading...</h3>;

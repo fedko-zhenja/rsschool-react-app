@@ -1,15 +1,20 @@
-import React, { useCallback } from 'react';
-import { PaginationProps } from './type';
+import { useCallback } from 'react';
+import { useCardsContext } from '../../../../context/context';
 import './Pagination.css';
 
 const numberBtnOnPage = 5;
 
-export function Pagination({ isDataLoaded, pageNumber, totalPages, onPageNumberChange }: PaginationProps) {
+export function Pagination() {
+    const { isDataLoaded, pageNumberValue, cardsData, pageSizeValue, setPageNumberValue } = useCardsContext()!;
+
+    const pageNumber = Number(pageNumberValue);
+    const totalPages = Math.ceil(cardsData.totalCount / Number(pageSizeValue));
+
     const handlePageChange = useCallback(
         (pageNumber: number) => {
-            onPageNumberChange(String(pageNumber));
+            setPageNumberValue(String(pageNumber));
         },
-        [onPageNumberChange]
+        [setPageNumberValue]
     );
 
     const renderPageNumbers = () => {

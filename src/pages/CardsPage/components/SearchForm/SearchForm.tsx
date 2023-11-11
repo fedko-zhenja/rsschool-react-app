@@ -1,9 +1,12 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
-import { SearchFormProps, SearchFormState } from './type';
+import { SearchFormState } from './type';
 import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
+import { useCardsContext } from '../../../../context/context';
 import './SearchForm.css';
 
-export function SearchForm({ onValueChange }: SearchFormProps): ReactNode {
+export function SearchForm(): ReactNode {
+    const { setSearchValue } = useCardsContext()!;
+
     const localStorageInputValue = localStorage.getItem('inputValue') || '';
 
     const [inputValue, setInputValue] = useState<SearchFormState['inputValue']>(localStorageInputValue);
@@ -19,9 +22,9 @@ export function SearchForm({ onValueChange }: SearchFormProps): ReactNode {
     const handleSubmit = useCallback(
         (event: React.FormEvent<HTMLFormElement>): void => {
             event.preventDefault();
-            onValueChange(inputValue.trim());
+            setSearchValue(inputValue.trim());
         },
-        [onValueChange, inputValue]
+        [setSearchValue, inputValue]
     );
 
     return (
