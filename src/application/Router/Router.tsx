@@ -6,6 +6,7 @@ import { Path } from '../path';
 import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
 import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
 import { CardsProvider } from '../../context/context';
+import { NotFound } from '../../components/NotFound/NotFound';
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: Path.about,
                 element: <AboutPage />,
+            },
+            {
+                path: '*',
+                element: <NotFound />,
             },
         ],
     },

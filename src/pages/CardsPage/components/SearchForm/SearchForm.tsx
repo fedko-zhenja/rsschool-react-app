@@ -5,7 +5,9 @@ import { useCardsContext } from '../../../../context/context';
 import './SearchForm.css';
 
 export function SearchForm(): ReactNode {
-    const { setSearchValue } = useCardsContext()!;
+    // const { setSearchValue } = useCardsContext()!;
+    const context = useCardsContext();
+    const setSearchValue = context ? context.setSearchValue : () => {};
 
     const localStorageInputValue = localStorage.getItem('inputValue') || '';
 
