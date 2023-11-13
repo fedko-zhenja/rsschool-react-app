@@ -38,7 +38,7 @@ export function AdditionalCardsInfo() {
 
     const handleCloseWindow = () => {
         const currentURL = window.location.href;
-        const updatedURL = currentURL.replace(`${params.index}`, '');
+        const updatedURL = currentURL.replace(`/details/${params.index}`, '');
         window.history.pushState({}, '', updatedURL);
 
         setIsCardWindowOpen(false);

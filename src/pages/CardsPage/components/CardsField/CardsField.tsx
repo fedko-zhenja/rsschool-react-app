@@ -20,7 +20,7 @@ export function CardsField(): ReactNode {
     return (
         <div className="card-field">
             {cardsData.data.map((card, index) => (
-                <Link key={index} to={`${card.id}${location.search}`}>
+                <Link key={index} to={`/details/${card.id}${location.search}`}>
                     <div className="card" key={index} id={String(index)}>
                         <img width="300px" src={card.images.large}></img>
                     </div>
