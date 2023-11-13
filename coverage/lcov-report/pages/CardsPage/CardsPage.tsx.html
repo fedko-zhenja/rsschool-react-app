@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/CardsPage/components/SearchForm/SearchForm.tsx</title>
+    <title>Code coverage report for pages/CardsPage/CardsPage.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../../prettify.css" />
-    <link rel="stylesheet" href="../../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">pages/CardsPage/components/SearchForm</a> SearchForm.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">pages/CardsPage</a> CardsPage.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,37 +107,27 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,46 +139,56 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ReactNode, useState, useEffect, useCallback } from 'react';
-import { SearchFormState } from './type';
-import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
-import { useCardsContext } from '../../../../context/context';
-import './SearchForm.css';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ReactNode, useCallback } from 'react';
+import { SearchForm } from './components/SearchForm/SearchForm';
+import { CardsField } from './components/CardsField/CardsField';
+import { Pagination } from './components/Pagination/Pagination';
+import './CardsPage.css';
 &nbsp;
-export function SearchForm(): ReactNode {
-    // const { setSearchValue } = useCardsContext()!;
-    const context = useCardsContext();
-    const setSearchValue = context ? <span class="branch-0 cbranch-no" title="branch not covered" >context.setSearchValue </span>: () =&gt; {};
+import { Outlet } from 'react-router-dom';
 &nbsp;
-    const localStorageInputValue = localStorage.getItem('inputValue') || '';
+import { useCardsContext } from '../../context/context';
 &nbsp;
-    const [inputValue, setInputValue] = useState&lt;SearchFormState['inputValue']&gt;(localStorageInputValue);
+export function <span class="fstat-no" title="function not covered" >CardsPage(</span>): ReactNode {
+    const { setPageSizeValue, setPageNumberValue } = <span class="cstat-no" title="statement not covered" >useCardsContext()!;</span>
 &nbsp;
-    useEffect(() =&gt; {
-        localStorage.setItem('inputValue', inputValue);
-    }, [inputValue]);
-&nbsp;
-    const handleChange = useCallback((event: React.FormEvent&lt;HTMLInputElement&gt;): void =&gt; {
-        setInputValue((event.target as HTMLInputElement).value);
-    }, []);
-&nbsp;
-    const handleSubmit = useCallback(
-        (event: React.FormEvent&lt;HTMLFormElement&gt;): void =&gt; {
-            event.preventDefault();
-            setSearchValue(inputValue.trim());
+    const handleSelectValueChange = <span class="cstat-no" title="statement not covered" >useCallback(</span>
+<span class="fstat-no" title="function not covered" >        (e</span>vent: React.ChangeEvent&lt;HTMLSelectElement&gt;) =&gt; {
+<span class="cstat-no" title="statement not covered" >            setPageSizeValue(event.target.value);</span>
+<span class="cstat-no" title="statement not covered" >            setPageNumberValue('1');</span>
         },
-        [setSearchValue, inputValue]
+        [setPageSizeValue, setPageNumberValue]
     );
 &nbsp;
-    return (
-        &lt;div className="search-wrapper"&gt;
-            &lt;form onSubmit={handleSubmit}&gt;
-                &lt;label&gt;
-                    &lt;input className="search_input" type="text" value={inputValue} onChange={handleChange} /&gt;
-                &lt;/label&gt;
-                &lt;input className="search_btn" type="submit" value="Search" /&gt;
-            &lt;/form&gt;
-            &lt;ErrorButton /&gt;
+<span class="cstat-no" title="statement not covered" >    return (</span>
+        &lt;div className="cards-page"&gt;
+            &lt;SearchForm /&gt;
+            &lt;div className="page-content-wrapper"&gt;
+                &lt;div className="page-content_card-wrapper"&gt;
+                    &lt;div className="select_wrapper"&gt;
+                        &lt;span&gt;Number of cards:&lt;/span&gt;
+                        &lt;select name="select-cards" id="select-cards" onChange={handleSelectValueChange}&gt;
+                            &lt;option value="4"&gt;4&lt;/option&gt;
+                            &lt;option value="8"&gt;8&lt;/option&gt;
+                            &lt;option value="12"&gt;12&lt;/option&gt;
+                            &lt;option value="16"&gt;16&lt;/option&gt;
+                        &lt;/select&gt;
+                    &lt;/div&gt;
+                    &lt;CardsField /&gt;
+                    &lt;Pagination /&gt;
+                &lt;/div&gt;
+                &lt;Outlet /&gt;
+            &lt;/div&gt;
         &lt;/div&gt;
     );
 }
@@ -199,16 +199,16 @@ export function SearchForm(): ReactNode {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-13T19:57:46.772Z
+                at 2023-11-13T19:47:28.881Z
             </div>
-        <script src="../../../../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../../sorter.js"></script>
-        <script src="../../../../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

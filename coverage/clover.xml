@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699829854056" clover="3.2.0">
-  <project timestamp="1699829854056" name="All files">
-    <metrics statements="104" coveredstatements="63" conditionals="25" coveredconditionals="10" methods="19" coveredmethods="11" elements="148" coveredelements="84" complexity="0" loc="104" ncloc="104" packages="5" files="5" classes="5"/>
+<coverage generated="1699905466842" clover="3.2.0">
+  <project timestamp="1699905466842" name="All files">
+    <metrics statements="107" coveredstatements="66" conditionals="25" coveredconditionals="10" methods="20" coveredmethods="12" elements="152" coveredelements="88" complexity="0" loc="107" ncloc="107" packages="6" files="6" classes="6"/>
     <package name="api">
       <metrics statements="17" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="PokemonApi.tsx" path="D:\repositories\RSS-REACT\rsschool-react-app\src\api\PokemonApi.tsx">
@@ -38,6 +38,15 @@
         <line num="12" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="13" count="0" type="stmt"/>
         <line num="16" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.NotFound">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="NotFound.tsx" path="D:\repositories\RSS-REACT\rsschool-react-app\src\components\NotFound\NotFound.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
       </file>
     </package>
     <package name="context">
