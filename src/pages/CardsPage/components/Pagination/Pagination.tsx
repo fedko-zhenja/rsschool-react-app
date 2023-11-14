@@ -28,6 +28,7 @@ export function Pagination() {
                     key={i}
                     className={i === pageNumber ? 'active-btn pagination-btn' : 'pagination-btn'}
                     onClick={() => handlePageChange(i)}
+                    data-testid="pagination-btn"
                 >
                     {i}
                 </button>
