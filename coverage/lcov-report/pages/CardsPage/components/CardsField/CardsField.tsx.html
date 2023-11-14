@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/15</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/15</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -99,32 +99,32 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,9 +144,9 @@ export function CardsField(): ReactNode {
 &nbsp;
     const context = useCardsContext();
 &nbsp;
-    const isDataLoaded = context ? <span class="branch-0 cbranch-no" title="branch not covered" >context.isDataLoaded </span>: <span class="fstat-no" title="function not covered" >() =</span>&gt; {};
+    const isDataLoaded = context ? context.isDataLoaded : <span class="fstat-no" title="function not covered" >() =</span>&gt; {};
 &nbsp;
-    const cardsData = context ? <span class="branch-0 cbranch-no" title="branch not covered" >context.cardsData </span>: { data: [] };
+    const cardsData = context ? context.cardsData : { data: [] };
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (isDataLoaded === false) {
 <span class="cstat-no" title="statement not covered" >        return &lt;h3&gt;Loading...&lt;/h3&gt;;</span>
@@ -156,10 +156,10 @@ export function CardsField(): ReactNode {
         return &lt;h3&gt;Not Found&lt;/h3&gt;;
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
         &lt;div className="card-field"&gt;
-            {cardsData.data.map(<span class="fstat-no" title="function not covered" >(c</span>ard, index) =&gt; (
-<span class="cstat-no" title="statement not covered" >                &lt;Link key={index} t</span>o={`/details/${card.id}${location.search}`}&gt;
+            {cardsData.data.map((card, index) =&gt; (
+                &lt;Link key={index} to={`/details/${card.id}${location.search}`}&gt;
                     &lt;div className="card" key={index} id={String(index)} data-testid="card"&gt;
                         &lt;img width="300px" src={card.images.large} data-testid="card-img"&gt;&lt;/img&gt;
                     &lt;/div&gt;
@@ -175,7 +175,7 @@ export function CardsField(): ReactNode {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-14T19:01:20.728Z
+                at 2023-11-14T21:28:32.959Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

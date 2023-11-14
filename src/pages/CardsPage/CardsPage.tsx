@@ -9,7 +9,13 @@ import { Outlet } from 'react-router-dom';
 import { useCardsContext } from '../../context/context';
 
 export function CardsPage(): ReactNode {
-    const { setPageSizeValue, setPageNumberValue } = useCardsContext()!;
+    // const { setPageSizeValue, setPageNumberValue } = useCardsContext()!;
+
+    const context = useCardsContext();
+
+    const setPageSizeValue = context ? context.setPageSizeValue : () => {};
+
+    const setPageNumberValue = context ? context.setPageNumberValue : () => {};
 
     const handleSelectValueChange = useCallback(
         (event: React.ChangeEvent<HTMLSelectElement>) => {
