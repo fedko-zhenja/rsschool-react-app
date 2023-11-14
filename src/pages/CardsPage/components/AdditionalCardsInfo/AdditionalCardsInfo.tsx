@@ -50,7 +50,7 @@ export function AdditionalCardsInfo() {
 
     if (isDataLoaded === false) {
         return (
-            <div className="additional-data_wrapper">
+            <div className="additional-data_wrapper" data-testid="additional-data">
                 <div className="additional-data_content">
                     <button className="close-btn" onClick={handleCloseWindow}>
                         X
@@ -62,7 +62,7 @@ export function AdditionalCardsInfo() {
     }
 
     return (
-        <div className="additional-data_wrapper">
+        <div className="additional-data_wrapper" data-testid="additional-data">
             <div className="additional-data_content">
                 <button className="close-btn" onClick={handleCloseWindow}>
                     X

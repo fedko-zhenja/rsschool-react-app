@@ -26,7 +26,7 @@ export function CardsField(): ReactNode {
             {cardsData.data.map((card, index) => (
                 <Link key={index} to={`/details/${card.id}${location.search}`}>
                     <div className="card" key={index} id={String(index)} data-testid="card">
-                        <img width="300px" src={card.images.large}></img>
+                        <img width="300px" src={card.images.large} data-testid="card-img"></img>
                     </div>
                 </Link>
             ))}
