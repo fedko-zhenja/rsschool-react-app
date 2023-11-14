@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { CardsField } from '../pages/CardsPage/components/CardsField/CardsField';
 import { CardsProvider } from '../context/context';
@@ -43,7 +43,7 @@ test('renders the correct number of cards when data is loaded', async () => {
     await require('../context/context').useCardsContext.mockImplementation(() => mockCardsData);
 
     setTimeout(() => {
-        const { container } = render(
+        render(
             <MemoryRouter>
                 <CardsProvider>
                     <CardsField />
@@ -51,7 +51,7 @@ test('renders the correct number of cards when data is loaded', async () => {
             </MemoryRouter>
         );
 
-        const cards = container.querySelectorAll('.card');
+        const cards = screen.getAllByTestId('card');
         expect(cards.length).toBe(mockCardsData.cardsData.data.length);
     }, 1000);
 });

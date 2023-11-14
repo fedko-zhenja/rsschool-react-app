@@ -8,7 +8,6 @@ export function CardsField(): ReactNode {
     const location = useLocation();
 
     const context = useCardsContext();
-    console.log('5555', context);
 
     const isDataLoaded = context ? context.isDataLoaded : () => {};
 
@@ -26,7 +25,7 @@ export function CardsField(): ReactNode {
         <div className="card-field">
             {cardsData.data.map((card, index) => (
                 <Link key={index} to={`/details/${card.id}${location.search}`}>
-                    <div className="card" key={index} id={String(index)}>
+                    <div className="card" key={index} id={String(index)} data-testid="card">
                         <img width="300px" src={card.images.large}></img>
                     </div>
                 </Link>
