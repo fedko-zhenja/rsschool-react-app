@@ -7,7 +7,12 @@ import { useCardsContext } from '../../../../context/context';
 export function CardsField(): ReactNode {
     const location = useLocation();
 
-    const { isDataLoaded, cardsData } = useCardsContext()!;
+    const context = useCardsContext();
+    console.log('5555', context);
+
+    const isDataLoaded = context ? context.isDataLoaded : () => {};
+
+    const cardsData = context ? context.cardsData : { data: [] };
 
     if (isDataLoaded === false) {
         return <h3>Loading...</h3>;

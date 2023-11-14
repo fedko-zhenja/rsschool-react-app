@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699905466842" clover="3.2.0">
-  <project timestamp="1699905466842" name="All files">
-    <metrics statements="107" coveredstatements="66" conditionals="25" coveredconditionals="10" methods="20" coveredmethods="12" elements="152" coveredelements="88" complexity="0" loc="107" ncloc="107" packages="6" files="6" classes="6"/>
+<coverage generated="1699921485793" clover="3.2.0">
+  <project timestamp="1699921485793" name="All files">
+    <metrics statements="123" coveredstatements="79" conditionals="31" coveredconditionals="13" methods="23" coveredmethods="13" elements="177" coveredelements="105" complexity="0" loc="123" ncloc="123" packages="7" files="7" classes="7"/>
     <package name="api">
       <metrics statements="17" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="PokemonApi.tsx" path="D:\repositories\RSS-REACT\rsschool-react-app\src\api\PokemonApi.tsx">
         <metrics statements="17" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="14" count="0" type="stmt"/>
@@ -16,7 +16,7 @@
         <line num="20" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="36" count="0" type="cond" truecount="0" falsecount="1"/>
@@ -53,13 +53,13 @@
       <metrics statements="32" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="1"/>
       <file name="context.tsx" path="D:\repositories\RSS-REACT\rsschool-react-app\src\context\context.tsx">
         <metrics statements="32" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
         <line num="11" count="3" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -120,6 +120,28 @@
         <line num="51" count="6" type="cond" truecount="1" falsecount="0"/>
         <line num="52" count="3" type="stmt"/>
         <line num="64" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="pages.CardsPage.components.CardsField">
+      <metrics statements="16" coveredstatements="13" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="1"/>
+      <file name="CardsField.tsx" path="D:\repositories\RSS-REACT\rsschool-react-app\src\pages\CardsPage\components\CardsField\CardsField.tsx">
+        <metrics statements="16" coveredstatements="13" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
       </file>
     </package>
     <package name="pages.CardsPage.components.SearchForm">
