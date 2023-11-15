@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { NavBar } from '../application/Layout/NavBar/NavBar';
@@ -6,10 +6,14 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { AboutPage } from '../pages/AboutPage/AboutPage';
 import { CardsPage } from '../pages/CardsPage/CardsPage';
 
-jest.mock('../context/context');
+const CardsContext = React.createContext({});
+
+jest.mock('../context/context', () => ({
+    useCardsContext: jest.fn(() => useContext(CardsContext)),
+}));
 
 describe('NavBar Component', () => {
-    test('renders NavBar component', () => {
+    test('should be shown on the display', () => {
         render(
             <Router>
                 <NavBar />
@@ -26,7 +30,7 @@ describe('NavBar Component', () => {
         expect(aboutLink).toBeInTheDocument();
     });
 
-    test('navigates to About page when About link is clicked', () => {
+    test('should go to the “About” page', () => {
         render(
             <MemoryRouter initialEntries={['/']}>
                 <Routes>
@@ -43,7 +47,7 @@ describe('NavBar Component', () => {
         expect(aboutText).toBeInTheDocument();
     });
 
-    test('navigates to Cards page when Cards link is clicked', async () => {
+    test('should go to the “Cards” page', async () => {
         const mockCardsData = {
             searchValue: '',
             setSearchValue: jest.fn(),
@@ -66,14 +70,11 @@ describe('NavBar Component', () => {
             setPageNumberValue: jest.fn(),
         };
 
-        await require('../context/context').useCardsContext.mockImplementation(() => mockCardsData);
-
         render(
-            <MemoryRouter initialEntries={['/']}>
-                <Routes>
-                    <Route path="/" element={<CardsPage />} />
-                    <Route path="/" element={<NavBar />} />
-                </Routes>
+            <MemoryRouter>
+                <CardsContext.Provider value={mockCardsData}>
+                    <CardsPage />
+                </CardsContext.Provider>
             </MemoryRouter>
         );
 

@@ -1,57 +1,79 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { CardsField } from '../pages/CardsPage/components/CardsField/CardsField';
-import { CardsProvider } from '../context/context';
 
-jest.mock('../context/context');
+const CardsContext = React.createContext({});
 
-test('renders "Not Found" when cardsData.data.length is 0', () => {
-    const { getByText } = render(
-        <MemoryRouter>
-            <CardsField />
-        </MemoryRouter>
-    );
+jest.mock('../context/context', () => ({
+    useCardsContext: jest.fn(() => useContext(CardsContext)),
+}));
 
-    const notFoundElement = getByText(/Not Found/i);
-    expect(notFoundElement).toBeInTheDocument();
-});
+describe('CardsField', () => {
+    test('should display "Not Found" when cardData.data.length is 0', () => {
+        const mockCardsData = {
+            searchValue: '',
+            setSearchValue: jest.fn(),
+            isDataLoaded: true,
+            setIsDataLoaded: jest.fn(),
+            cardsData: {
+                data: [],
+                page: 1,
+                pageSize: 4,
+                count: 1,
+                totalCount: 10,
+            },
+            setCardsData: jest.fn(),
+            pageSizeValue: '4',
+            setPageSizeValue: jest.fn(),
+            pageNumberValue: '1',
+            setPageNumberValue: jest.fn(),
+        };
 
-test('renders the correct number of cards when data is loaded', async () => {
-    const mockCardsData = {
-        searchValue: '',
-        setSearchValue: jest.fn(),
-        isDataLoaded: true,
-        setIsDataLoaded: jest.fn(),
-        cardsData: {
-            data: [
-                { id: 1, images: { large: 'image1.jpg' } },
-                { id: 2, images: { large: 'image2.jpg' } },
-            ],
-            page: 0,
-            pageSize: 0,
-            count: 0,
-            totalCount: 0,
-        },
-        setCardsData: jest.fn(),
-        pageSizeValue: '4',
-        setPageSizeValue: jest.fn(),
-        pageNumberValue: '1',
-        setPageNumberValue: jest.fn(),
-    };
+        const { getByText } = render(
+            <MemoryRouter>
+                <CardsContext.Provider value={mockCardsData}>
+                    <CardsField />
+                </CardsContext.Provider>
+            </MemoryRouter>
+        );
 
-    await require('../context/context').useCardsContext.mockImplementation(() => mockCardsData);
+        const notFoundElement = getByText(/Not Found/i);
+        expect(notFoundElement).toBeInTheDocument();
+    });
 
-    setTimeout(() => {
+    test('should display the correct number of cards when loading data', () => {
+        const mockCardsData = {
+            searchValue: '',
+            setSearchValue: jest.fn(),
+            isDataLoaded: true,
+            setIsDataLoaded: jest.fn(),
+            cardsData: {
+                data: [
+                    { id: 1, images: { large: 'image1.jpg' } },
+                    { id: 2, images: { large: 'image1.jpg' } },
+                ],
+                page: 1,
+                pageSize: 4,
+                count: 1,
+                totalCount: 10,
+            },
+            setCardsData: jest.fn(),
+            pageSizeValue: '4',
+            setPageSizeValue: jest.fn(),
+            pageNumberValue: '1',
+            setPageNumberValue: jest.fn(),
+        };
+
         render(
             <MemoryRouter>
-                <CardsProvider>
+                <CardsContext.Provider value={mockCardsData}>
                     <CardsField />
-                </CardsProvider>
+                </CardsContext.Provider>
             </MemoryRouter>
         );
 
         const cards = screen.getAllByTestId('card');
         expect(cards.length).toBe(mockCardsData.cardsData.data.length);
-    }, 1000);
+    });
 });

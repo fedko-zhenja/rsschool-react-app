@@ -9,7 +9,7 @@ const mockGetCardDataById = jest.spyOn(PokemonApiModule, 'getCardDataById');
 jest.mock('../api/PokemonApi');
 
 describe('AdditionalCardsInfo', () => {
-    it('displays a loading indicator while fetching data', async () => {
+    test('should display a loading indicator when receiving data', async () => {
         const mockCardData: CardData = {
             data: {
                 name: 'Test Card',
@@ -45,7 +45,7 @@ describe('AdditionalCardsInfo', () => {
         });
     });
 
-    it('displays detailed card data correctly', async () => {
+    test('should display card details correctly', async () => {
         const mockCardData: CardData = {
             data: {
                 name: 'Test Card',
@@ -81,7 +81,7 @@ describe('AdditionalCardsInfo', () => {
         });
     });
 
-    it('hides the component when close button is clicked', async () => {
+    test('should hide the component when the close button is clicked', async () => {
         const mockCardData: CardData = {
             data: {
                 name: 'Test Card',

@@ -1,8 +1,7 @@
-import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import React, { useContext } from 'react';
+import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { CardsField } from '../pages/CardsPage/components/CardsField/CardsField';
-import { CardsProvider } from '../context/context';
 
 global.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
@@ -10,127 +9,122 @@ global.fetch = jest.fn().mockImplementation(() =>
     })
 );
 
-jest.mock('../context/context');
+const CardsContext = React.createContext({});
 
-test('displays relevant card data', async () => {
-    const mockCardsData = {
-        searchValue: '',
-        setSearchValue: jest.fn(),
-        isDataLoaded: true,
-        setIsDataLoaded: jest.fn(),
-        cardsData: {
-            data: [
-                { id: 1, images: { large: 'image1.jpg' } },
-                { id: 2, images: { large: 'image2.jpg' } },
-            ],
-            page: 0,
-            pageSize: 0,
-            count: 0,
-            totalCount: 0,
-        },
-        setCardsData: jest.fn(),
-        pageSizeValue: '4',
-        setPageSizeValue: jest.fn(),
-        pageNumberValue: '1',
-        setPageNumberValue: jest.fn(),
-    };
+jest.mock('../context/context', () => ({
+    useCardsContext: jest.fn(() => useContext(CardsContext)),
+}));
 
-    await require('../context/context').useCardsContext.mockImplementation(() => mockCardsData);
+describe('Card', () => {
+    test('should display relevant card details', async () => {
+        const mockCardsData = {
+            searchValue: '',
+            setSearchValue: jest.fn(),
+            isDataLoaded: true,
+            setIsDataLoaded: jest.fn(),
+            cardsData: {
+                data: [
+                    { id: 1, images: { large: 'image1.jpg' } },
+                    { id: 2, images: { large: 'image2.jpg' } },
+                ],
+                page: 0,
+                pageSize: 0,
+                count: 0,
+                totalCount: 0,
+            },
+            setCardsData: jest.fn(),
+            pageSizeValue: '4',
+            setPageSizeValue: jest.fn(),
+            pageNumberValue: '1',
+            setPageNumberValue: jest.fn(),
+        };
 
-    setTimeout(() => {
         render(
             <MemoryRouter>
-                <CardsProvider>
+                <CardsContext.Provider value={mockCardsData}>
                     <CardsField />
-                </CardsProvider>
+                </CardsContext.Provider>
             </MemoryRouter>
         );
 
         const cards = screen.getAllByTestId('card-img');
         expect(cards.length).toBe(mockCardsData.cardsData.data.length);
-    }, 1000);
-});
+    });
 
-test('clicking on a map opens the detailed map component', async () => {
-    const mockCardsData = {
-        searchValue: '',
-        setSearchValue: jest.fn(),
-        isDataLoaded: true,
-        setIsDataLoaded: jest.fn(),
-        cardsData: {
-            data: [{ id: 1, images: { large: 'image1.jpg' } }],
-            page: 0,
-            pageSize: 0,
-            count: 0,
-            totalCount: 0,
-        },
-        setCardsData: jest.fn(),
-        pageSizeValue: '4',
-        setPageSizeValue: jest.fn(),
-        pageNumberValue: '1',
-        setPageNumberValue: jest.fn(),
-    };
+    test('should open the detailed card component by clicking on the card', async () => {
+        const mockCardsData = {
+            searchValue: '',
+            setSearchValue: jest.fn(),
+            isDataLoaded: true,
+            setIsDataLoaded: jest.fn(),
+            cardsData: {
+                data: [{ id: 1, images: { large: 'image1.jpg' } }],
+                page: 0,
+                pageSize: 0,
+                count: 0,
+                totalCount: 0,
+            },
+            setCardsData: jest.fn(),
+            pageSizeValue: '4',
+            setPageSizeValue: jest.fn(),
+            pageNumberValue: '1',
+            setPageNumberValue: jest.fn(),
+        };
 
-    await require('../context/context').useCardsContext.mockImplementation(() => mockCardsData);
-
-    setTimeout(() => {
         render(
             <MemoryRouter>
-                <CardsProvider>
+                <CardsContext.Provider value={mockCardsData}>
                     <CardsField />
-                </CardsProvider>
+                </CardsContext.Provider>
             </MemoryRouter>
         );
 
         const cards = screen.getByTestId('card');
-        expect(cards).toBe(HTMLElement);
 
-        fireEvent.click(cards);
+        const cardsElements = screen.getAllByRole('link');
+        fireEvent.click(cardsElements[0]);
 
-        const additionalCardInfoComponent = screen.getByTestId('additional-data');
-        expect(additionalCardInfoComponent).toBe(HTMLElement);
-    }, 1000);
-});
+        waitForElementToBeRemoved(cards).then(() => {
+            const additionalCardInfoComponent = screen.queryByTestId(/additional-data/i);
+            expect(additionalCardInfoComponent).toBeInTheDocument();
+        });
+    });
 
-test('clicking on a map opens the detailed map component', async () => {
-    const mockCardsData = {
-        searchValue: '',
-        setSearchValue: jest.fn(),
-        isDataLoaded: true,
-        setIsDataLoaded: jest.fn(),
-        cardsData: {
-            data: [{ id: 1, images: { large: 'image1.jpg' } }],
-            page: 0,
-            pageSize: 0,
-            count: 0,
-            totalCount: 0,
-        },
-        setCardsData: jest.fn(),
-        pageSizeValue: '4',
-        setPageSizeValue: jest.fn(),
-        pageNumberValue: '1',
-        setPageNumberValue: jest.fn(),
-    };
+    test('should make an additional API call to get detailed information when the card is clicked', async () => {
+        const mockCardsData = {
+            searchValue: '',
+            setSearchValue: jest.fn(),
+            isDataLoaded: true,
+            setIsDataLoaded: jest.fn(),
+            cardsData: {
+                data: [{ id: 1, images: { large: 'image1.jpg' } }],
+                page: 0,
+                pageSize: 0,
+                count: 0,
+                totalCount: 0,
+            },
+            setCardsData: jest.fn(),
+            pageSizeValue: '4',
+            setPageSizeValue: jest.fn(),
+            pageNumberValue: '1',
+            setPageNumberValue: jest.fn(),
+        };
 
-    await require('../context/context').useCardsContext.mockImplementation(() => mockCardsData);
-
-    setTimeout(() => {
         render(
             <MemoryRouter>
-                <CardsProvider>
+                <CardsContext.Provider value={mockCardsData}>
                     <CardsField />
-                </CardsProvider>
+                </CardsContext.Provider>
             </MemoryRouter>
         );
 
         const cards = screen.getByTestId('card');
-        expect(cards).toBe(HTMLElement);
 
-        fireEvent.click(cards);
+        const cardsElements = screen.getAllByRole('link');
+        fireEvent.click(cardsElements[0]);
 
-        const additionalCardInfoComponent = screen.getByTestId('additional-data');
-        expect(additionalCardInfoComponent).toBe(HTMLElement);
-
-        expect(global.fetch).toHaveBeenCalledTimes(1);
-    }, 1000);
+        waitForElementToBeRemoved(cards).then(() => {
+            expect(global.fetch).toHaveBeenCalledTimes(1);
+        });
+    });
 });

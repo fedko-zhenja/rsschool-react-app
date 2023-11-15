@@ -5,7 +5,24 @@ import './Pagination.css';
 const numberBtnOnPage = 5;
 
 export function Pagination() {
-    const { isDataLoaded, pageNumberValue, cardsData, pageSizeValue, setPageNumberValue } = useCardsContext()!;
+    const context = useCardsContext();
+    const isDataLoaded = context ? context.isDataLoaded : false;
+
+    const pageNumberValue = context ? context.pageNumberValue : '1';
+
+    const cardsData = context
+        ? context.cardsData
+        : {
+              data: [],
+              page: 0,
+              pageSize: 0,
+              count: 0,
+              totalCount: 0,
+          };
+
+    const pageSizeValue = context ? context.pageSizeValue : '4';
+
+    const setPageNumberValue = context ? context.setPageNumberValue : () => {};
 
     const pageNumber = Number(pageNumberValue);
     const totalPages = Math.ceil(cardsData.totalCount / Number(pageSizeValue));
