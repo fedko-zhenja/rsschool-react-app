@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { CardsField } from '../pages/CardsPage/components/CardsField/CardsField';
+import { AdditionalCardsInfo } from '../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
 
 global.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
@@ -72,22 +73,26 @@ describe('Card', () => {
         };
 
         render(
-            <MemoryRouter>
-                <CardsContext.Provider value={mockCardsData}>
-                    <CardsField />
-                </CardsContext.Provider>
+            <MemoryRouter initialEntries={['/']}>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <CardsContext.Provider value={mockCardsData}>
+                                <CardsField />
+                            </CardsContext.Provider>
+                        }
+                    />
+                    <Route path="/details/:index" element={<AdditionalCardsInfo />} />
+                </Routes>
             </MemoryRouter>
         );
-
-        const cards = screen.getByTestId('card');
 
         const cardsElements = screen.getAllByRole('link');
         fireEvent.click(cardsElements[0]);
 
-        waitForElementToBeRemoved(cards).then(() => {
-            const additionalCardInfoComponent = screen.queryByTestId(/additional-data/i);
-            expect(additionalCardInfoComponent).toBeInTheDocument();
-        });
+        const additionalCardInfoComponent = screen.queryByTestId(/additional-data/i);
+        expect(additionalCardInfoComponent).toBeInTheDocument();
     });
 
     test('should make an additional API call to get detailed information when the card is clicked', async () => {
@@ -111,20 +116,24 @@ describe('Card', () => {
         };
 
         render(
-            <MemoryRouter>
-                <CardsContext.Provider value={mockCardsData}>
-                    <CardsField />
-                </CardsContext.Provider>
+            <MemoryRouter initialEntries={['/']}>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <CardsContext.Provider value={mockCardsData}>
+                                <CardsField />
+                            </CardsContext.Provider>
+                        }
+                    />
+                    <Route path="/details/:index" element={<AdditionalCardsInfo />} />
+                </Routes>
             </MemoryRouter>
         );
-
-        const cards = screen.getByTestId('card');
 
         const cardsElements = screen.getAllByRole('link');
         fireEvent.click(cardsElements[0]);
 
-        waitForElementToBeRemoved(cards).then(() => {
-            expect(global.fetch).toHaveBeenCalledTimes(1);
-        });
+        expect(global.fetch).toHaveBeenCalledTimes(2);
     });
 });
