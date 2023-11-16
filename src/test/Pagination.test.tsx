@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Pagination } from '../pages/CardsPage/components/Pagination/Pagination';
+import { mockCardsData, mockCardsDataIsNotLoaded } from './mockData';
 
 const CardsContext = React.createContext({});
 
@@ -11,25 +12,6 @@ jest.mock('../context/context', () => ({
 
 describe('Pagination', () => {
     test('should do snapshot check', async () => {
-        const mockCardsData = {
-            searchValue: '',
-            setSearchValue: jest.fn(),
-            isDataLoaded: true,
-            setIsDataLoaded: jest.fn(),
-            cardsData: {
-                data: [{ id: 1, images: { large: 'image1.jpg' } }],
-                page: 1,
-                pageSize: 4,
-                count: 1,
-                totalCount: 10,
-            },
-            setCardsData: jest.fn(),
-            pageSizeValue: '4',
-            setPageSizeValue: jest.fn(),
-            pageNumberValue: '1',
-            setPageNumberValue: jest.fn(),
-        };
-
         const { asFragment } = render(
             <MemoryRouter>
                 <CardsContext.Provider value={mockCardsData}>
@@ -42,25 +24,6 @@ describe('Pagination', () => {
     });
 
     test('should update URL query parameter when page changes', async () => {
-        const mockCardsData = {
-            searchValue: '',
-            setSearchValue: jest.fn(),
-            isDataLoaded: true,
-            setIsDataLoaded: jest.fn(),
-            cardsData: {
-                data: [{ id: 1, images: { large: 'image1.jpg' } }],
-                page: 1,
-                pageSize: 4,
-                count: 1,
-                totalCount: 10,
-            },
-            setCardsData: jest.fn(),
-            pageSizeValue: '4',
-            setPageSizeValue: jest.fn(),
-            pageNumberValue: '1',
-            setPageNumberValue: jest.fn(),
-        };
-
         render(
             <MemoryRouter>
                 <CardsContext.Provider value={mockCardsData}>
@@ -78,28 +41,9 @@ describe('Pagination', () => {
     });
 
     test('should not display buttons if data is not loaded', async () => {
-        const mockCardsData = {
-            searchValue: '',
-            setSearchValue: jest.fn(),
-            isDataLoaded: false,
-            setIsDataLoaded: jest.fn(),
-            cardsData: {
-                data: [{ id: 1, images: { large: 'image1.jpg' } }],
-                page: 1,
-                pageSize: 4,
-                count: 1,
-                totalCount: 10,
-            },
-            setCardsData: jest.fn(),
-            pageSizeValue: '4',
-            setPageSizeValue: jest.fn(),
-            pageNumberValue: '1',
-            setPageNumberValue: jest.fn(),
-        };
-
         const { container } = render(
             <MemoryRouter>
-                <CardsContext.Provider value={mockCardsData}>
+                <CardsContext.Provider value={mockCardsDataIsNotLoaded}>
                     <Pagination />
                 </CardsContext.Provider>
             </MemoryRouter>

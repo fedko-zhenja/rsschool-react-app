@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { CardsField } from '../pages/CardsPage/components/CardsField/CardsField';
 import { AdditionalCardsInfo } from '../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
+import { mockCardsData } from './mockData';
 
 global.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
@@ -18,28 +19,6 @@ jest.mock('../context/context', () => ({
 
 describe('Card', () => {
     test('should display relevant card details', async () => {
-        const mockCardsData = {
-            searchValue: '',
-            setSearchValue: jest.fn(),
-            isDataLoaded: true,
-            setIsDataLoaded: jest.fn(),
-            cardsData: {
-                data: [
-                    { id: 1, images: { large: 'image1.jpg' } },
-                    { id: 2, images: { large: 'image2.jpg' } },
-                ],
-                page: 0,
-                pageSize: 0,
-                count: 0,
-                totalCount: 0,
-            },
-            setCardsData: jest.fn(),
-            pageSizeValue: '4',
-            setPageSizeValue: jest.fn(),
-            pageNumberValue: '1',
-            setPageNumberValue: jest.fn(),
-        };
-
         render(
             <MemoryRouter>
                 <CardsContext.Provider value={mockCardsData}>
@@ -53,25 +32,6 @@ describe('Card', () => {
     });
 
     test('should open the detailed card component by clicking on the card', async () => {
-        const mockCardsData = {
-            searchValue: '',
-            setSearchValue: jest.fn(),
-            isDataLoaded: true,
-            setIsDataLoaded: jest.fn(),
-            cardsData: {
-                data: [{ id: 1, images: { large: 'image1.jpg' } }],
-                page: 0,
-                pageSize: 0,
-                count: 0,
-                totalCount: 0,
-            },
-            setCardsData: jest.fn(),
-            pageSizeValue: '4',
-            setPageSizeValue: jest.fn(),
-            pageNumberValue: '1',
-            setPageNumberValue: jest.fn(),
-        };
-
         render(
             <MemoryRouter initialEntries={['/']}>
                 <Routes>
@@ -96,25 +56,6 @@ describe('Card', () => {
     });
 
     test('should make an additional API call to get detailed information when the card is clicked', async () => {
-        const mockCardsData = {
-            searchValue: '',
-            setSearchValue: jest.fn(),
-            isDataLoaded: true,
-            setIsDataLoaded: jest.fn(),
-            cardsData: {
-                data: [{ id: 1, images: { large: 'image1.jpg' } }],
-                page: 0,
-                pageSize: 0,
-                count: 0,
-                totalCount: 0,
-            },
-            setCardsData: jest.fn(),
-            pageSizeValue: '4',
-            setPageSizeValue: jest.fn(),
-            pageNumberValue: '1',
-            setPageNumberValue: jest.fn(),
-        };
-
         render(
             <MemoryRouter initialEntries={['/']}>
                 <Routes>

@@ -3,30 +3,13 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { AdditionalCardsInfo } from '../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
 import * as PokemonApiModule from '../api/PokemonApi';
-import { CardData } from '../types/types';
+import { mockCardData } from './mockData';
 
 const mockGetCardDataById = jest.spyOn(PokemonApiModule, 'getCardDataById');
 jest.mock('../api/PokemonApi');
 
 describe('AdditionalCardsInfo', () => {
     test('should display a loading indicator when receiving data', async () => {
-        const mockCardData: CardData = {
-            data: {
-                name: 'Test Card',
-                hp: '100',
-                level: '50',
-                attacks: [
-                    {
-                        name: 'Test Attack',
-                        cost: ['Colorless'],
-                        convertedEnergyCost: 1,
-                        damage: '20',
-                        text: 'This is a test attack.',
-                    },
-                ],
-            },
-        };
-
         mockGetCardDataById.mockResolvedValueOnce(mockCardData);
 
         render(
@@ -46,23 +29,6 @@ describe('AdditionalCardsInfo', () => {
     });
 
     test('should display card details correctly', async () => {
-        const mockCardData: CardData = {
-            data: {
-                name: 'Test Card',
-                hp: '100',
-                level: '50',
-                attacks: [
-                    {
-                        name: 'Test Attack',
-                        cost: ['Colorless'],
-                        convertedEnergyCost: 1,
-                        damage: '20',
-                        text: 'This is a test attack.',
-                    },
-                ],
-            },
-        };
-
         mockGetCardDataById.mockResolvedValueOnce(mockCardData);
 
         render(
@@ -82,23 +48,6 @@ describe('AdditionalCardsInfo', () => {
     });
 
     test('should hide the component when the close button is clicked', async () => {
-        const mockCardData: CardData = {
-            data: {
-                name: 'Test Card',
-                hp: '100',
-                level: '50',
-                attacks: [
-                    {
-                        name: 'Test Attack',
-                        cost: ['Colorless'],
-                        convertedEnergyCost: 1,
-                        damage: '20',
-                        text: 'This is a test attack.',
-                    },
-                ],
-            },
-        };
-
         mockGetCardDataById.mockResolvedValueOnce(mockCardData);
 
         render(
