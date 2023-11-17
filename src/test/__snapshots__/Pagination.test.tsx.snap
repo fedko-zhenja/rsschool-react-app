@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination should do snapshot check 1`] = `
+<DocumentFragment>
+  <div
+    class="pagination-wrapper"
+  >
+    <button
+      class="pagination-btn"
+      disabled=""
+    >
+      First
+    </button>
+    <button
+      class="pagination-btn"
+      disabled=""
+    >
+      <div
+        class="prev-btn"
+      />
+    </button>
+    <button
+      class="active-btn pagination-btn"
+      data-testid="pagination-btn"
+    >
+      1
+    </button>
+    <button
+      class="pagination-btn"
+      data-testid="pagination-btn"
+    >
+      2
+    </button>
+    <button
+      class="pagination-btn"
+      data-testid="pagination-btn"
+    >
+      3
+    </button>
+    <button
+      class="pagination-btn"
+    >
+      <div
+        class="next-btn"
+      />
+    </button>
+    <button
+      class="pagination-btn"
+    >
+      Last
+    </button>
+  </div>
+</DocumentFragment>
+`;
