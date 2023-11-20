@@ -1,38 +1,44 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
-import { SearchFormState } from './type';
 import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
-import { useCardsContext } from '../../../../context/context';
+import { setSearchValue } from '../../../../store/cardsReducer';
+import { useDispatch, useSelector } from 'react-redux';
 import './SearchForm.css';
+import { CardsPageState } from '../../type';
 
+interface StoreState {
+    cards: CardsPageState;
+}
+import { store } from '../../../../store/store';
 export function SearchForm(): ReactNode {
-    const context = useCardsContext();
-    const setSearchValue = context ? context.setSearchValue : () => {};
+    const dispatch = useDispatch();
+    const reduxInputValue = useSelector((state: StoreState) => state.cards.searchValue);
 
-    const localStorageInputValue = localStorage.getItem('inputValue') || '';
-
-    const [inputValue, setInputValue] = useState<SearchFormState['inputValue']>(localStorageInputValue);
+    const [localInputValue, setLocalInputValue] = useState(reduxInputValue || '');
 
     useEffect(() => {
-        localStorage.setItem('inputValue', inputValue);
-    }, [inputValue]);
+        localStorage.setItem('inputValue', localInputValue);
+    }, [localInputValue]);
 
     const handleChange = useCallback((event: React.FormEvent<HTMLInputElement>): void => {
-        setInputValue((event.target as HTMLInputElement).value);
+        const value = (event.target as HTMLInputElement).value;
+        setLocalInputValue(value);
     }, []);
 
     const handleSubmit = useCallback(
         (event: React.FormEvent<HTMLFormElement>): void => {
             event.preventDefault();
-            setSearchValue(inputValue.trim());
+            const inputValueToSubmit = localInputValue.trim();
+            dispatch(setSearchValue(inputValueToSubmit));
+            console.log(2, store.getState());
         },
-        [setSearchValue, inputValue]
+        [dispatch, localInputValue]
     );
 
     return (
         <div className="search-wrapper">
             <form onSubmit={handleSubmit}>
                 <label>
-                    <input className="search_input" type="text" value={inputValue} onChange={handleChange} />
+                    <input className="search_input" type="text" value={localInputValue} onChange={handleChange} />
                 </label>
                 <input className="search_btn" type="submit" value="Search" />
             </form>
