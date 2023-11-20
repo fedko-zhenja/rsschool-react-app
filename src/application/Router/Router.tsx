@@ -3,7 +3,7 @@ import { CardsPage } from '../../pages/CardsPage/CardsPage';
 import { AboutPage } from '../../pages/AboutPage/AboutPage';
 import { Layout } from '../Layout/Layout';
 import { Path } from '../path';
-// import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
+import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
 import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
 // import { CardsProvider } from '../../context/context';
 import { NotFound } from '../../components/NotFound/NotFound';
@@ -23,12 +23,12 @@ const router = createBrowserRouter([
                         <CardsPage />
                     </Provider>
                 ),
-                // children: [
-                //     {
-                //         path: '/details/:index',
-                //         element: <AdditionalCardsInfo />,
-                //     },
-                // ],
+                children: [
+                    {
+                        path: '/details/:index',
+                        element: <AdditionalCardsInfo />,
+                    },
+                ],
             },
             {
                 path: Path.about,
