@@ -24,3 +24,7 @@ export interface SetPageNumberValueAction {
     type: 'SET_PAGE_NUMBER_VALUE';
     payload: string;
 }
+
+export interface StoreState {
+    cards: CardsPageState;
+}

@@ -3,11 +3,9 @@ import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
 import { setSearchValue } from '../../../../store/cardsReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import './SearchForm.css';
-import { CardsPageState } from '../../type';
+// import { CardsPageState } from '../../type';
+import { StoreState } from '../../../../store/type';
 
-interface StoreState {
-    cards: CardsPageState;
-}
 import { store } from '../../../../store/store';
 export function SearchForm(): ReactNode {
     const dispatch = useDispatch();
