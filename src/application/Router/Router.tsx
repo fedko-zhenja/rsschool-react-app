@@ -5,7 +5,6 @@ import { Layout } from '../Layout/Layout';
 import { Path } from '../path';
 import { AdditionalCardsInfo } from '../../pages/CardsPage/components/AdditionalCardsInfo/AdditionalCardsInfo';
 import { ErrorBoundary } from '../../components/ErrorBoundary/ErrorBoundary';
-// import { CardsProvider } from '../../context/context';
 import { NotFound } from '../../components/NotFound/NotFound';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';

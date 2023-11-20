@@ -26,16 +26,18 @@ export function CardsPage(): ReactNode {
         [dispatch]
     );
 
-    const { data } = useGetCardsQuery({
+    const { data, isFetching } = useGetCardsQuery({
         name: reduxInputValue,
         pageSize: reduxPageSizeValue,
         pageNumber: reduxPageNumberValue,
     });
 
     useEffect(() => {
-        dispatch(setCardsData(data));
-        dispatch(setIsDataLoaded(true));
-    }, [data, dispatch, navigate]);
+        if (data && !isFetching) {
+            dispatch(setCardsData(data));
+            dispatch(setIsDataLoaded(true));
+        }
+    }, [data, dispatch, navigate, isFetching]);
 
     const getDataFromApi = useCallback(
         (apiData: ApiRarameters) => {
