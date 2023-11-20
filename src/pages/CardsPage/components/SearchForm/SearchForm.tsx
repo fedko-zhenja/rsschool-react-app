@@ -2,11 +2,9 @@ import { ReactNode, useState, useEffect, useCallback } from 'react';
 import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
 import { setSearchValue } from '../../../../store/cardsReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import './SearchForm.css';
-// import { CardsPageState } from '../../type';
 import { StoreState } from '../../../../store/type';
+import './SearchForm.css';
 
-import { store } from '../../../../store/store';
 export function SearchForm(): ReactNode {
     const dispatch = useDispatch();
     const reduxInputValue = useSelector((state: StoreState) => state.cards.searchValue);
@@ -27,7 +25,6 @@ export function SearchForm(): ReactNode {
             event.preventDefault();
             const inputValueToSubmit = localInputValue.trim();
             dispatch(setSearchValue(inputValueToSubmit));
-            console.log(2, store.getState());
         },
         [dispatch, localInputValue]
     );
