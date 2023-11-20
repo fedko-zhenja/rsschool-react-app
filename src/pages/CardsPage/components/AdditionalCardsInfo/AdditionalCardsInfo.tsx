@@ -17,7 +17,7 @@ export function AdditionalCardsInfo() {
 
     const params = useParams();
 
-    const { data, isLoading } = useGetCardByIdQuery(params.index || '');
+    const { data, isFetching } = useGetCardByIdQuery(params.index || '');
 
     const getDataFromApi = useCallback(() => {
         try {
@@ -47,7 +47,7 @@ export function AdditionalCardsInfo() {
         return null;
     }
 
-    if (isLoading) {
+    if (isFetching) {
         return (
             <div className="additional-data_wrapper" data-testid="additional-data">
                 <div className="additional-data_content">
