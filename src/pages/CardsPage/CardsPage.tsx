@@ -1,29 +1,66 @@
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useEffect } from 'react';
 import { SearchForm } from './components/SearchForm/SearchForm';
 import { CardsField } from './components/CardsField/CardsField';
 import { Pagination } from './components/Pagination/Pagination';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPageSizeValue, setPageNumberValue, setIsDataLoaded, setCardsData } from '../../store/cardsReducer';
+import { ApiRarameters } from '../../types/types';
+import { StoreState } from '../../store/type';
+import { useGetCardsQuery } from '../../api/PokemonApi';
 import './CardsPage.css';
 
-import { Outlet } from 'react-router-dom';
-
-import { useCardsContext } from '../../context/context';
-
 export function CardsPage(): ReactNode {
-    // const { setPageSizeValue, setPageNumberValue } = useCardsContext()!;
+    const navigate = useNavigate();
 
-    const context = useCardsContext();
-
-    const setPageSizeValue = context ? context.setPageSizeValue : () => {};
-
-    const setPageNumberValue = context ? context.setPageNumberValue : () => {};
+    const dispatch = useDispatch();
+    const reduxPageSizeValue = useSelector((state: StoreState) => state.cards.pageSizeValue);
+    const reduxPageNumberValue = useSelector((state: StoreState) => state.cards.pageNumberValue);
+    const reduxInputValue = useSelector((state: StoreState) => state.cards.searchValue);
 
     const handleSelectValueChange = useCallback(
         (event: React.ChangeEvent<HTMLSelectElement>) => {
-            setPageSizeValue(event.target.value);
-            setPageNumberValue('1');
+            dispatch(setPageSizeValue(event.target.value));
+            dispatch(setPageNumberValue('1'));
         },
-        [setPageSizeValue, setPageNumberValue]
+        [dispatch]
     );
+
+    const { data } = useGetCardsQuery({
+        name: reduxInputValue,
+        pageSize: reduxPageSizeValue,
+        pageNumber: reduxPageNumberValue,
+    });
+
+    useEffect(() => {
+        dispatch(setCardsData(data));
+        dispatch(setIsDataLoaded(true));
+    }, [data, dispatch, navigate]);
+
+    const getDataFromApi = useCallback(
+        (apiData: ApiRarameters) => {
+            dispatch(setIsDataLoaded(false));
+
+            const newSearchParams = new URLSearchParams(window.location.search);
+            newSearchParams.set('page', apiData.pageNumber);
+            navigate(`${window.location.pathname}?${newSearchParams.toString()}`);
+        },
+        [navigate, dispatch]
+    );
+
+    useEffect(() => {
+        const params = {
+            name: reduxInputValue,
+            pageSize: reduxPageSizeValue,
+            pageNumber: reduxPageNumberValue,
+        };
+
+        getDataFromApi(params);
+    }, [reduxInputValue, reduxPageSizeValue, reduxPageNumberValue, getDataFromApi]);
+
+    useEffect(() => {
+        localStorage.setItem('inputValue', reduxInputValue);
+    }, [reduxInputValue]);
 
     return (
         <div className="cards-page">

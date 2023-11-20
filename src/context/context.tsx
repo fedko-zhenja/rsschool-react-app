@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useCallback, useEffect, useMemo, R
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ApiRarameters } from '../types/types';
 import { CardsPageState } from '../pages/CardsPage/type';
-import { getCardsData } from '../api/PokemonApi';
+// import { getCardsData } from '../api/PokemonApi';
 import { ContextType } from './type';
 
 const CardsContext = createContext<ContextType | null>(null);
@@ -34,9 +34,9 @@ export const CardsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             try {
                 setIsDataLoaded(false);
 
-                const data = await getCardsData(apiData);
+                // const data = await getCardsData(apiData);
 
-                setCardsData(data);
+                // setCardsData(data);
                 setIsDataLoaded(true);
 
                 const newSearchParams = new URLSearchParams(window.location.search);
