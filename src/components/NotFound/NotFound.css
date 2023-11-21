@@ -1,0 +1,16 @@
+.not-found-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.not-found-image {
+    width: 300px;
+    height: 300px;
+    background-image: url('../../assets/image/pikachu-error.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
