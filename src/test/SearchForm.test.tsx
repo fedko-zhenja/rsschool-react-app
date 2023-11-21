@@ -1,39 +1,63 @@
-// import React from 'react';
-// import { render, fireEvent, screen } from '@testing-library/react';
-// import '@testing-library/jest-dom';
-// import { SearchForm } from '../pages/CardsPage/components/SearchForm/SearchForm';
+import { render, fireEvent, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { SearchForm } from '../pages/CardsPage/components/SearchForm/SearchForm';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { mockCardsData } from './mockData';
 
-// describe.skip('SearchForm', () => {
-//     const localStorageMock = {
-//         getItem: jest.fn(),
-//         setItem: jest.fn(),
-//     };
+const mockStore = configureMockStore([thunk]);
+const store = mockStore({
+    cards: {
+        cardsData: mockCardsData.cardsData,
+        isDataLoaded: true,
+    },
+});
 
-//     beforeAll(() => {
-//         Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-//     });
+describe('SearchForm', () => {
+    const localStorageMock = {
+        getItem: jest.fn(),
+        setItem: jest.fn(),
+    };
 
-//     afterEach(() => {
-//         jest.clearAllMocks();
-//     });
+    beforeAll(() => {
+        Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+    });
 
-//     test('should save the entered value in local storage', () => {
-//         render(<SearchForm />);
-//         const inputValue = 'TestValue';
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
 
-//         fireEvent.change(screen.getByRole('textbox'), { target: { value: inputValue } });
-//         fireEvent.click(screen.getByRole('button', { name: 'Search' }));
+    test('should save the entered value in local storage', () => {
+        render(
+            <Provider store={store}>
+                <SearchForm />
+            </Provider>
+        );
+        const inputValue = 'TestValue';
 
-//         expect(localStorage.setItem).toHaveBeenCalledWith('inputValue', inputValue);
-//     });
+        fireEvent.change(screen.getByRole('textbox'), { target: { value: inputValue } });
+        fireEvent.click(screen.getByRole('button', { name: 'Search' }));
 
-//     test('should get the value from local storage', () => {
-//         const storedValue = 'StoredValue';
-//         localStorageMock.getItem.mockReturnValueOnce(storedValue);
+        expect(localStorage.setItem).toHaveBeenCalledWith('inputValue', inputValue);
+    });
 
-//         render(<SearchForm />);
+    test('should get the value from local storage', async () => {
+        const storedValue = 'mockedValue';
 
-//         expect(localStorage.getItem).toHaveBeenCalledWith('inputValue');
-//         expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe(storedValue);
-//     });
-// });
+        const store = mockStore({
+            cards: {
+                searchValue: localStorageMock.getItem.mockReturnValueOnce(storedValue),
+            },
+        });
+
+        render(
+            <Provider store={store}>
+                <SearchForm />
+            </Provider>
+        );
+
+        const input = screen.getByRole('textbox');
+        expect((input as HTMLInputElement).value).toBe(storedValue);
+    });
+});
