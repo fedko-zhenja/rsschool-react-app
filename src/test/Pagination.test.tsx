@@ -1,54 +1,57 @@
-// import React, { useContext } from 'react';
-// import { fireEvent, render, screen } from '@testing-library/react';
-// import { MemoryRouter } from 'react-router-dom';
-// import { Pagination } from '../pages/CardsPage/components/Pagination/Pagination';
-// import { mockCardsData, mockCardsDataIsNotLoaded } from './mockData';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { Pagination } from '../pages/CardsPage/components/Pagination/Pagination';
+import { mockCardsData, mockCardsDataIsNotLoaded } from './mockData';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
-// const CardsContext = React.createContext({});
+const mockStore = configureMockStore([thunk]);
+const store = mockStore({
+    cards: {
+        cardsData: mockCardsData.cardsData,
+        isDataLoaded: true,
+        pageSizeValue: '4',
+        pageNumberValue: '2',
+    },
+});
 
-// jest.mock('../context/context', () => ({
-//     useCardsContext: jest.fn(() => useContext(CardsContext)),
-// }));
+const storeIsNotLoaded = mockStore({
+    cards: {
+        cardsData: mockCardsDataIsNotLoaded.cardsData,
+        isDataLoaded: false,
+        pageSizeValue: '0',
+        pageNumberValue: '0',
+    },
+});
 
-// describe.skip('Pagination', () => {
-//     test('should do snapshot check', async () => {
-//         const { asFragment } = render(
-//             <MemoryRouter>
-//                 <CardsContext.Provider value={mockCardsData}>
-//                     <Pagination />
-//                 </CardsContext.Provider>
-//             </MemoryRouter>
-//         );
+describe('Pagination', () => {
+    test('should update URL query parameter when page changes', async () => {
+        render(
+            <MemoryRouter>
+                <Provider store={store}>
+                    <Pagination />
+                </Provider>
+            </MemoryRouter>
+        );
 
-//         expect(asFragment()).toMatchSnapshot();
-//     });
+        const paginationBtn = screen.getByText('1');
+        expect(paginationBtn).toBeInstanceOf(HTMLElement);
 
-//     test('should update URL query parameter when page changes', async () => {
-//         render(
-//             <MemoryRouter>
-//                 <CardsContext.Provider value={mockCardsData}>
-//                     <Pagination />
-//                 </CardsContext.Provider>
-//             </MemoryRouter>
-//         );
+        fireEvent.click(paginationBtn);
 
-//         const paginationBtn = screen.getByText('1');
-//         expect(paginationBtn).toBeInstanceOf(HTMLElement);
+        expect(mockCardsData.pageNumberValue).toBe('1');
+    });
 
-//         fireEvent.click(paginationBtn);
+    test('should not display buttons if data is not loaded', async () => {
+        const { container } = render(
+            <MemoryRouter>
+                <Provider store={storeIsNotLoaded}>
+                    <Pagination />
+                </Provider>
+            </MemoryRouter>
+        );
 
-//         expect(mockCardsData.setPageNumberValue).toHaveBeenCalledTimes(1);
-//     });
-
-//     test('should not display buttons if data is not loaded', async () => {
-//         const { container } = render(
-//             <MemoryRouter>
-//                 <CardsContext.Provider value={mockCardsDataIsNotLoaded}>
-//                     <Pagination />
-//                 </CardsContext.Provider>
-//             </MemoryRouter>
-//         );
-
-//         expect(container.firstChild).toBeNull();
-//     });
-// });
+        expect(container.firstChild).toBeNull();
+    });
+});
