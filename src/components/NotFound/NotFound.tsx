@@ -1,10 +1,10 @@
-import './NotFound.css';
+import styles from './NotFound.module.css';
 
 export function NotFound() {
     return (
-        <div className="not-found-wrapper">
+        <div className={styles.notFoundWrapper}>
             <h3>Not Found!</h3>
-            <div className="not-found-image" />
+            <div className={styles.notFoundImage} />
         </div>
     );
 }

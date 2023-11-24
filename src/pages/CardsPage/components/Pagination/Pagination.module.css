@@ -1,10 +1,10 @@
-.pagination-wrapper {
+.paginationWrapper {
     display: flex;
     gap: 5px;
     padding-bottom: 50px;
 }
 
-.pagination-btn {
+.paginationBtn {
     width: fit-content;
     height: 45px;
     color: black;
@@ -14,16 +14,16 @@
     transition: 0.2s;
 }
 
-.pagination-btn:hover {
+.paginationBtn:hover {
     border-color: #fbdb32 !important;
     background-color: #fbdb32;
 }
 
-.pagination-btn:active {
+.paginationBtn:active {
     background-color: #fbdb32;
 }
 
-.next-btn {
+.nextBtn {
     width: 20px;
     height: 20px;
     background-image: url('../../../../assets/icon/next.png');
@@ -31,7 +31,7 @@
     background-repeat: no-repeat;
 }
 
-.prev-btn {
+.prevBtn {
     width: 20px;
     height: 20px;
     background-image: url('../../../../assets/icon/next.png');
@@ -40,7 +40,13 @@
     transform: rotate(180deg);
 }
 
-.active-btn {
+.activeBtn {
     background-color: #fbdb32;
     border-color: #fbdb32;
+
+    width: fit-content;
+    height: 45px;
+    color: black;
+    cursor: pointer;
+    transition: 0.2s;
 }

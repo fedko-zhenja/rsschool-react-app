@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    searchValue: localStorage.getItem('inputValue') || '',
+    searchValue: '',
+    // searchValue: localStorage.getItem('inputValue') || '',
     isDataLoaded: false,
     cardsData: {
         data: [],

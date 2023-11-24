@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useCallback, useState } from 'react';
 import { AdditionalCardsInfoState } from './type';
 import { useGetCardByIdQuery } from '../../../../api/PokemonApi';
-import './AdditionalCardsInfo.css';
+import styles from './AdditionalCardsInfo.module.css';
 
 export function AdditionalCardsInfo() {
     const [isCardWindowOpen, setIsCardWindowOpen] = useState<AdditionalCardsInfoState['isCardWindowOpen']>(false);
@@ -49,41 +49,45 @@ export function AdditionalCardsInfo() {
 
     if (isFetching) {
         return (
-            <div className="additional-data_wrapper" data-testid="additional-data">
-                <div className="additional-data_content">
-                    <button className="close-btn" onClick={handleCloseWindow}>
+            <div className={styles.additionalDataWrapper} data-testid="additional-data">
+                <div className={styles.additionalDataContent}>
+                    <button className={styles.closeBtn} onClick={handleCloseWindow}>
                         X
                     </button>
-                    <h4>Loading...</h4>
+                    <div className={styles.pokemonData}>
+                        <h4>Loading...</h4>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="additional-data_wrapper" data-testid="additional-data">
-            <div className="additional-data_content">
-                <button className="close-btn" onClick={handleCloseWindow}>
+        <div className={styles.additionalDataWrapper} data-testid="additional-data">
+            <div className={styles.additionalDataContent}>
+                <button className={styles.closeBtn} onClick={handleCloseWindow}>
                     X
                 </button>
-                <p>
-                    Name:
-                    <span className="field-value"> {cardData.data.name}</span>
-                </p>
-                <p>
-                    Health power:
-                    <span className="field-value"> {cardData.data.hp ? cardData.data.hp : 'none'}</span>
-                </p>
-                <p>
-                    Level:
-                    <span className="field-value"> {cardData.data.level ? cardData.data.level : 'none'}</span>
-                </p>
-                <p>
-                    Attacks:&nbsp;
-                    <span className="field-value">
-                        {cardData.data.attacks?.[0] ? cardData.data.attacks?.[0].name : 'none'}
-                    </span>
-                </p>
+                <div className={styles.pokemonData}>
+                    <p>
+                        Name:
+                        <span className={styles.fieldValue}> {cardData.data.name}</span>
+                    </p>
+                    <p>
+                        Health power:
+                        <span className={styles.fieldValue}> {cardData.data.hp ? cardData.data.hp : 'none'}</span>
+                    </p>
+                    <p>
+                        Level:
+                        <span className={styles.fieldValue}> {cardData.data.level ? cardData.data.level : 'none'}</span>
+                    </p>
+                    <p>
+                        Attacks:&nbsp;
+                        <span className={styles.fieldValue}>
+                            {cardData.data.attacks?.[0] ? cardData.data.attacks?.[0].name : 'none'}
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import { ErrorButtonState } from './type';
 import { ReactNode, useCallback, useState } from 'react';
-import './ErrorButton.css';
+import styles from './ErrorButton.module.css';
 
 export function ErrorButton(): ReactNode {
     const [hasError, setHasError] = useState<ErrorButtonState['hasError']>(false);
@@ -15,7 +15,7 @@ export function ErrorButton(): ReactNode {
 
     return (
         <div>
-            <input className="error_btn" type="button" value="Error" onClick={handleClick} />
+            <input className={styles.errorBtn} type="button" value="Error" onClick={handleClick} />
         </div>
     );
 }

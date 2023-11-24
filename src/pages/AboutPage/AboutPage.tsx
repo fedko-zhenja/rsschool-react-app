@@ -1,9 +1,9 @@
-import './AboutPage.css';
+import styles from './AboutPage.module.css';
 
 export const AboutPage = () => {
     return (
-        <div className="about-wrapper">
-            <div className="about-info">
+        <div className={styles.aboutWrapper}>
+            <div className={styles.aboutInfo}>
                 <h3>Welcome to our application!</h3>
                 <p>
                     We are pleased to welcome you to the wonderful world of Pokemon. Our app is designed to help you
@@ -19,7 +19,7 @@ export const AboutPage = () => {
                     exploring the world of Pokemon!
                 </p>
             </div>
-            <div className="about-img" />
+            <div className={styles.aboutImg} />
         </div>
     );
 };

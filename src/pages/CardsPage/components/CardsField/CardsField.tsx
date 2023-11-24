@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../../../../store/type';
-import './CardsField.css';
+import styles from './CardsField.module.css';
 
 export function CardsField(): ReactNode {
     const location = useLocation();
@@ -20,7 +20,7 @@ export function CardsField(): ReactNode {
     }
 
     return (
-        <div className="card-field">
+        <div className={styles.cardField}>
             {reduxCardsData.data.map((card, index) => (
                 <Link key={index} to={`/details/${card.id}${location.search}`}>
                     <div className="card" key={index} id={String(index)} data-testid="card">

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreState } from '../../../../store/type';
 import { setPageNumberValue } from '../../../../store/cardsReducer';
-import './Pagination.css';
+import styles from './Pagination.module.css';
 
 const numberBtnOnPage = 5;
 
@@ -33,7 +33,7 @@ export function Pagination() {
             pageNumbers.push(
                 <button
                     key={i}
-                    className={i === pageNumber ? 'active-btn pagination-btn' : 'pagination-btn'}
+                    className={i === pageNumber ? styles.activeBtn : styles.paginationBtn}
                     onClick={() => handlePageChange(i)}
                     data-testid="pagination-btn"
                 >
@@ -50,31 +50,31 @@ export function Pagination() {
     }
 
     return (
-        <div className="pagination-wrapper">
-            <button className="pagination-btn" onClick={() => handlePageChange(1)} disabled={pageNumber === 1}>
+        <div className={styles.paginationWrapper}>
+            <button className={styles.paginationBtn} onClick={() => handlePageChange(1)} disabled={pageNumber === 1}>
                 First
             </button>
 
             <button
-                className="pagination-btn"
+                className={styles.paginationBtn}
                 onClick={() => handlePageChange(Math.max(1, pageNumber - 1))}
                 disabled={pageNumber === 1}
             >
-                <div className="prev-btn" />
+                <div className={styles.prevBtn} />
             </button>
 
             {renderPageNumbers()}
 
             <button
-                className="pagination-btn"
+                className={styles.paginationBtn}
                 onClick={() => handlePageChange(Math.min(totalPages, pageNumber + 1))}
                 disabled={pageNumber === totalPages}
             >
-                <div className="next-btn" />
+                <div className={styles.nextBtn} />
             </button>
 
             <button
-                className="pagination-btn"
+                className={styles.paginationBtn}
                 onClick={() => handlePageChange(totalPages)}
                 disabled={pageNumber === totalPages}
             >

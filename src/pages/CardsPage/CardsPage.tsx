@@ -8,7 +8,7 @@ import { setPageSizeValue, setPageNumberValue, setIsDataLoaded, setCardsData } f
 import { ApiRarameters } from '../../types/types';
 import { StoreState } from '../../store/type';
 import { useGetCardsQuery } from '../../api/PokemonApi';
-import './CardsPage.css';
+import styles from './CardsPage.module.css';
 
 export function CardsPage(): ReactNode {
     const navigate = useNavigate();
@@ -65,11 +65,11 @@ export function CardsPage(): ReactNode {
     }, [reduxInputValue]);
 
     return (
-        <div className="cards-page">
+        <div className={styles.cardsPage}>
             <SearchForm />
-            <div className="page-content-wrapper">
-                <div className="page-content_card-wrapper">
-                    <div className="select_wrapper">
+            <div className={styles.pageContentWrapper}>
+                <div className={styles.pageContentCardWrapper}>
+                    <div className={styles.selectWrapper}>
                         <span>Number of cards:</span>
                         <select name="select-cards" id="select-cards" onChange={handleSelectValueChange}>
                             <option value="4">4</option>

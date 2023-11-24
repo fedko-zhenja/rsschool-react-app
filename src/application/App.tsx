@@ -1,5 +1,5 @@
 import { Router } from './Router/Router';
-import './App.css';
+// import './App.css';
 
 export default function App() {
     return <Router />;

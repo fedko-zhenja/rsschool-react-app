@@ -1,5 +1,5 @@
 import React, { ReactNode, useState, useEffect } from 'react';
-import './ErrorBoundary.css';
+import styles from './ErrorBoundary.module.css';
 
 interface ErrorBoundaryProps {
     children?: ReactNode;
@@ -26,12 +26,12 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
 
     if (hasError) {
         return (
-            <div className="error-wrapper">
+            <div className={styles.errorWrapper}>
                 <h3>Something went wrong... Reload the page!</h3>
-                <button className="reload-page_btn" onClick={reloadPage}>
+                <button className={styles.reloadPageBtn} onClick={reloadPage}>
                     Reload page
                 </button>
-                <div className="error-image" />
+                <div className={styles.errorImage} />
             </div>
         );
     }

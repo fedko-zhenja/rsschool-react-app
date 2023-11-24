@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "tsc && vite build",
-    "lint": "eslint src",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "prettier": "prettier --check src",
     "format:fix": "prettier --write src",
     "fix": "eslint src --fix && prettier --write src",

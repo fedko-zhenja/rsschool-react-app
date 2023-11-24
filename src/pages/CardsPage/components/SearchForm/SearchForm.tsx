@@ -3,7 +3,7 @@ import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
 import { setSearchValue } from '../../../../store/cardsReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreState } from '../../../../store/type';
-import './SearchForm.css';
+import styles from './SearchForm.module.css';
 
 export function SearchForm(): ReactNode {
     const dispatch = useDispatch();
@@ -30,12 +30,12 @@ export function SearchForm(): ReactNode {
     );
 
     return (
-        <div className="search-wrapper">
+        <div className={styles.searchFormWrapper}>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <input className="search_input" type="text" value={localInputValue} onChange={handleChange} />
+                    <input className={styles.searchInput} type="text" value={localInputValue} onChange={handleChange} />
                 </label>
-                <input className="search_btn" type="submit" value="Search" />
+                <input className={styles.searchBtn} type="submit" value="Search" />
             </form>
             <ErrorButton />
         </div>

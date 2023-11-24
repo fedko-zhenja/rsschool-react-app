@@ -1,4 +1,4 @@
-.error_btn {
+.errorBtn {
     width: 60px;
     height: 36px;
     color: white;
@@ -8,12 +8,12 @@
     transition: 0.2s;
 }
 
-.error_btn:hover {
+.errorBtn:hover {
     border-color: red;
     color: black;
     background-color: white;
 }
 
-.error_btn:active {
+.errorBtn:active {
     background-color: red;
 }

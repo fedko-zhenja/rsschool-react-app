@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { Path } from '../../path';
-import './NavBar.css';
+import styles from './NavBar.module.css';
+// import './NavBar.css';
 
 export const NavBar = () => {
     return (
-        <div className="navigation-wrapper">
-            <h1 className="title">Pokémon</h1>
-            <ul className="navigation-list">
+        <div className={styles.navigationWrapper}>
+            <h1 className={styles.title}>Pokémon</h1>
+            <ul className={styles.navigationList}>
                 <li>
                     <NavLink to={Path.cardsPage}>Cards</NavLink>
                 </li>
