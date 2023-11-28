@@ -1,0 +1,33 @@
+.cardsPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selectWrapper {
+    display: flex;
+    gap: 10px;
+    color: #213547;
+    font-weight: 500;
+}
+
+#selectCards {
+    cursor: pointer;
+}
+
+.pageContentWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.pageContentCardWrapper {
+    padding-top: 50px;
+    width: calc(100% - 200px);
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+}

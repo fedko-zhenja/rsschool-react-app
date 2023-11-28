@@ -1,0 +1,24 @@
+.aboutWrapper {
+    padding: 30px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+}
+
+.aboutInfo {
+    max-width: 800px;
+    color: #213547;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.aboutImg {
+    width: 300px;
+    height: 300px;
+    background-image: url('../../public/pikachy.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
