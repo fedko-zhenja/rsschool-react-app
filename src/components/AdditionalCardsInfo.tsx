@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useCallback, useState } from 'react';
-import { AdditionalCardsInfoState } from './type';
-import { useGetCardByIdQuery } from '../../../../api/PokemonApi';
-import styles from './AdditionalCardsInfo.module.css';
+import { AdditionalCardsInfoState } from '../types/types';
+import { useGetCardByIdQuery } from '../lib/PokemonApi';
+import { useRouter } from 'next/router';
+import styles from '../styles/AdditionalCardsInfo.module.css';
 
 export function AdditionalCardsInfo() {
     const [isCardWindowOpen, setIsCardWindowOpen] = useState<AdditionalCardsInfoState['isCardWindowOpen']>(false);
@@ -15,9 +16,12 @@ export function AdditionalCardsInfo() {
         },
     });
 
+    const router = useRouter();
+    const { page, details } = router.query;
+
     const params = useParams();
 
-    const { data, isFetching } = useGetCardByIdQuery(params.index || '');
+    const { data, isFetching } = useGetCardByIdQuery(String(details) || '');
 
     const getDataFromApi = useCallback(() => {
         try {
@@ -36,10 +40,14 @@ export function AdditionalCardsInfo() {
     }, [params, getDataFromApi]);
 
     const handleCloseWindow = () => {
-        const currentURL = window.location.href;
-        const updatedURL = currentURL.replace(`/details/${params.index}`, '');
-        window.history.pushState({}, '', updatedURL);
-
+        router.push(
+            {
+                pathname: router.pathname,
+                query: { page },
+            },
+            undefined,
+            { shallow: true }
+        );
         setIsCardWindowOpen(false);
     };
 

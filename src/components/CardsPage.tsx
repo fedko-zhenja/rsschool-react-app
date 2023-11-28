@@ -1,22 +1,33 @@
 import { ReactNode, useCallback, useEffect } from 'react';
-import { SearchForm } from './components/SearchForm/SearchForm';
-import { CardsField } from './components/CardsField/CardsField';
-import { Pagination } from './components/Pagination/Pagination';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { SearchForm } from '../components/SearchForm';
+import { CardsField } from './CardsField';
+import { Pagination } from './Pagination';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPageSizeValue, setPageNumberValue, setIsDataLoaded, setCardsData } from '../../store/cardsReducer';
-import { ApiRarameters } from '../../types/types';
-import { StoreState } from '../../store/type';
-import { useGetCardsQuery } from '../../api/PokemonApi';
-import styles from './CardsPage.module.css';
+import { setPageSizeValue, setPageNumberValue, setIsDataLoaded, setCardsData } from '../lib/cardsReducer';
+import { ApiRarameters } from '../types/types';
+import { StoreState } from '../types/types';
+import { useGetCardsQuery } from '../lib/PokemonApi';
+import styles from '../styles/CardsPage.module.css';
+import { CardsPageProps } from '../types/types';
+import { AdditionalCardsInfo } from './AdditionalCardsInfo';
+import { useSearchParams } from 'next/navigation';
 
-export function CardsPage(): ReactNode {
-    const navigate = useNavigate();
+function CardsPage({ initialData }: CardsPageProps): ReactNode {
+    const searchParams = useSearchParams();
 
+    const router = useRouter();
     const dispatch = useDispatch();
     const reduxPageSizeValue = useSelector((state: StoreState) => state.cards.pageSizeValue);
     const reduxPageNumberValue = useSelector((state: StoreState) => state.cards.pageNumberValue);
     const reduxInputValue = useSelector((state: StoreState) => state.cards.searchValue);
+
+    useEffect(() => {
+        if (initialData) {
+            dispatch(setCardsData(initialData));
+            dispatch(setIsDataLoaded(true));
+        }
+    }, [initialData, dispatch]);
 
     const handleSelectValueChange = useCallback(
         (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -26,7 +37,7 @@ export function CardsPage(): ReactNode {
         [dispatch]
     );
 
-    const { data, isFetching } = useGetCardsQuery({
+    const { data, isFetching, refetch } = useGetCardsQuery({
         name: reduxInputValue,
         pageSize: reduxPageSizeValue,
         pageNumber: reduxPageNumberValue,
@@ -37,17 +48,28 @@ export function CardsPage(): ReactNode {
             dispatch(setCardsData(data));
             dispatch(setIsDataLoaded(true));
         }
-    }, [data, dispatch, navigate, isFetching]);
+    }, [data, dispatch, isFetching]);
 
     const getDataFromApi = useCallback(
         (apiData: ApiRarameters) => {
             dispatch(setIsDataLoaded(false));
 
-            const newSearchParams = new URLSearchParams(window.location.search);
-            newSearchParams.set('page', apiData.pageNumber);
-            navigate(`${window.location.pathname}?${newSearchParams.toString()}`);
+            const currentPageNumber = Number(router.query.page) || 1;
+            const newPageNumber = Number(apiData.pageNumber);
+
+            if (currentPageNumber !== newPageNumber) {
+                router.push(
+                    {
+                        pathname: router.pathname,
+                        query: { ...router.query, page: newPageNumber },
+                    },
+                    undefined,
+                    { shallow: true }
+                );
+            }
+            refetch();
         },
-        [navigate, dispatch]
+        [dispatch, router, refetch]
     );
 
     useEffect(() => {
@@ -81,8 +103,10 @@ export function CardsPage(): ReactNode {
                     <CardsField />
                     <Pagination />
                 </div>
-                <Outlet />
+                {searchParams.get('details') && <AdditionalCardsInfo />}
             </div>
         </div>
     );
 }
+
+export default CardsPage;

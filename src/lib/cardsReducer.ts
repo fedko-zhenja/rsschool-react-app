@@ -32,6 +32,7 @@ const cardsSlice = createSlice({
             state.pageSizeValue = action.payload;
         },
         setPageNumberValue: (state, action) => {
+            console.log(2, action.payload);
             state.pageNumberValue = action.payload;
         },
     },

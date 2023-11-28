@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreState } from '../../../../store/type';
-import { setPageNumberValue } from '../../../../store/cardsReducer';
-import styles from './Pagination.module.css';
+import { StoreState } from '../types/types';
+import { setPageNumberValue } from '../lib/cardsReducer';
+import styles from '../styles/Pagination.module.css';
 
 const numberBtnOnPage = 5;
 
@@ -19,6 +19,7 @@ export function Pagination() {
 
     const handlePageChange = useCallback(
         (pageNumber: number) => {
+            console.log(1, pageNumber);
             dispatch(setPageNumberValue(String(pageNumber)));
         },
         [dispatch]

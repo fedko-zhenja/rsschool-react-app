@@ -1,9 +1,8 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react';
-import { ErrorButton } from '../../../../components/ErrorButton/ErrorButton';
-import { setSearchValue } from '../../../../store/cardsReducer';
+import { setSearchValue } from '../lib/cardsReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreState } from '../../../../store/type';
-import styles from './SearchForm.module.css';
+import { StoreState } from '../types/types';
+import styles from '../styles/SearchForm.module.css';
 
 export function SearchForm(): ReactNode {
     const dispatch = useDispatch();
@@ -37,7 +36,6 @@ export function SearchForm(): ReactNode {
                 </label>
                 <input className={styles.searchBtn} type="submit" value="Search" />
             </form>
-            <ErrorButton />
         </div>
     );
 }
