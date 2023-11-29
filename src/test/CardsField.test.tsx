@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { CardsField } from '../components/CardsField';
-import { mockEmptyCardsData, mockCardsData } from './mockData';
+import { mockEmptyCardsData, mockCardsData, mockCardsDataIsNotLoaded } from './mockData';
 import { createMockRouter } from './mockData';
+import { MemoryRouterProvider } from 'next-router-mock/dist/MemoryRouterProvider';
 
 const mockStore = configureMockStore([thunk]);
 const store = mockStore({
@@ -22,6 +22,13 @@ const emptyStore = mockStore({
     },
 });
 
+const isNotLadedStore = mockStore({
+    cards: {
+        cardsData: mockCardsDataIsNotLoaded.cardsData,
+        isDataLoaded: false,
+    },
+});
+
 jest.mock('next/router', () => ({
     ...jest.requireActual('next/router'),
     useRouter: () => createMockRouter({}),
@@ -30,11 +37,10 @@ jest.mock('next/router', () => ({
 describe('CardsField', () => {
     test('should display "Not Found" when cardData.data.length is 0', async () => {
         render(
-            <MemoryRouter>
-                <Provider store={emptyStore}>
-                    <CardsField />
-                </Provider>
-            </MemoryRouter>
+            <Provider store={emptyStore}>
+                <CardsField />
+            </Provider>,
+            { wrapper: MemoryRouterProvider }
         );
 
         const notFoundElement = screen.queryByText(/Not Found/i);
@@ -43,14 +49,25 @@ describe('CardsField', () => {
 
     test('should display the correct number of cards when loading data', async () => {
         render(
-            <MemoryRouter>
-                <Provider store={store}>
-                    <CardsField />
-                </Provider>
-            </MemoryRouter>
+            <Provider store={store}>
+                <CardsField />
+            </Provider>,
+            { wrapper: MemoryRouterProvider }
         );
 
         const cards = screen.queryAllByTestId('card');
         expect(cards.length).toBe(mockCardsData.cardsData.data.length);
+    });
+
+    test('should display loading when data has not yet been loaded', async () => {
+        render(
+            <Provider store={isNotLadedStore}>
+                <CardsField />
+            </Provider>,
+            { wrapper: MemoryRouterProvider }
+        );
+
+        const loadingElement = screen.queryByText(/Loading.../i);
+        expect(loadingElement).toBeInTheDocument();
     });
 });
