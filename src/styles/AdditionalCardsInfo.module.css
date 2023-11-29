@@ -1,0 +1,38 @@
+.additionalDataWrapper {
+    width: 200px;
+    height: 100%;
+    border-left: 2px solid black;
+}
+
+.additionalDataContent {
+    position: sticky;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.pokemonData {
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.closeBtn {
+    padding: 5px;
+    width: fit-content;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    transition: 0.2s;
+    border-radius: 0;
+}
+
+.closeBtn:hover {
+    background-color: red;
+    border-color: black;
+}
+
+.fieldValue {
+    color: blue;
+}
