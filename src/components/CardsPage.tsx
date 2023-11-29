@@ -93,7 +93,12 @@ function CardsPage({ initialData }: CardsPageProps): ReactNode {
                 <div className={styles.pageContentCardWrapper}>
                     <div className={styles.selectWrapper}>
                         <span>Number of cards:</span>
-                        <select name="select-cards" id="select-cards" onChange={handleSelectValueChange}>
+                        <select
+                            name="select-cards"
+                            id="select-cards"
+                            data-testid="select"
+                            onChange={handleSelectValueChange}
+                        >
                             <option value="4">4</option>
                             <option value="8">8</option>
                             <option value="12">12</option>

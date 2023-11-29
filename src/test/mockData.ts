@@ -1,4 +1,4 @@
-import { CardData } from '../types/types';
+import { CardData, PokemonCard } from '../types/types';
 
 export const mockCardsData = {
     searchValue: '',
@@ -105,3 +105,23 @@ export function createMockRouter(router: Partial<NextRouter>): NextRouter {
         ...router,
     };
 }
+
+export const mockCardsPageProps: PokemonCard = {
+    count: 1,
+    data: [
+        {
+            id: '1',
+            name: 'test name',
+            abilities: [],
+            attacks: [],
+            hp: 1,
+            images: {
+                small: 'test-img',
+                large: 'test-img',
+            },
+        },
+    ],
+    totalCount: 1,
+    pageSize: 1,
+    page: 1,
+};
