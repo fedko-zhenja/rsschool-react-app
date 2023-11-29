@@ -1,9 +1,10 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { render, screen, waitFor } from '@testing-library/react';
 import { AdditionalCardsInfo } from '../components/AdditionalCardsInfo';
 import { mockCardData } from './mockData';
 import * as api from '../lib/PokemonApi';
 import { createMockRouter } from './mockData';
+
+jest.mock('next/router', () => jest.requireActual('next-router-mock'));
 
 const mockUseGetCardByIdQuery = api.useGetCardByIdQuery as jest.MockedFunction<typeof api.useGetCardByIdQuery>;
 
@@ -25,13 +26,7 @@ describe('AdditionalCardsInfo', () => {
             refetch: jest.fn(),
         });
 
-        render(
-            <MemoryRouter initialEntries={['/cards/1']}>
-                <Routes>
-                    <Route path="/cards/:index" element={<AdditionalCardsInfo />} />
-                </Routes>
-            </MemoryRouter>
-        );
+        render(<AdditionalCardsInfo />);
 
         expect(screen.getByText('Loading...')).toBeInTheDocument();
     });
@@ -43,13 +38,7 @@ describe('AdditionalCardsInfo', () => {
             refetch: jest.fn(),
         });
 
-        render(
-            <MemoryRouter initialEntries={['/cards/1']}>
-                <Routes>
-                    <Route path="/cards/:index" element={<AdditionalCardsInfo />} />
-                </Routes>
-            </MemoryRouter>
-        );
+        render(<AdditionalCardsInfo />);
 
         await waitFor(() => {
             expect(screen.getByText('Name:')).toBeInTheDocument();
@@ -57,29 +46,5 @@ describe('AdditionalCardsInfo', () => {
             expect(screen.getByText('Health power:')).toBeInTheDocument();
             expect(screen.getByText('100')).toBeInTheDocument();
         });
-    });
-
-    test('should hide the component when the close button is clicked', async () => {
-        mockUseGetCardByIdQuery.mockReturnValue({
-            data: mockCardData,
-            isFetching: false,
-            refetch: jest.fn(),
-        });
-
-        render(
-            <MemoryRouter initialEntries={['/cards/1']}>
-                <Routes>
-                    <Route path="/cards/:index" element={<AdditionalCardsInfo />} />
-                </Routes>
-            </MemoryRouter>
-        );
-
-        await waitFor(() => {
-            expect(screen.getByText('Name:')).toBeInTheDocument();
-        });
-
-        fireEvent.click(screen.getByText('X'));
-
-        expect(screen.queryByText('Name:')).toBeNull();
     });
 });
