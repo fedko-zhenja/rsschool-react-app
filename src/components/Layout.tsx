@@ -1,6 +1,7 @@
 import NavBar from './NavBar';
+import { LayoutProps } from '../types/types';
 
-function Layout({ children }) {
+function Layout({ children }: LayoutProps) {
     return (
         <div>
             <NavBar />

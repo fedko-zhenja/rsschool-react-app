@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface PokemonCard {
     data: Array<Pokemon>;
     page: number;
@@ -74,4 +76,8 @@ export interface AdditionalCardsInfoState {
     isDataLoaded: boolean;
     isCardWindowOpen: boolean;
     cardData: CardData;
+}
+
+export interface LayoutProps {
+    children: ReactNode;
 }

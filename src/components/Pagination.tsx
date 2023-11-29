@@ -19,7 +19,6 @@ export function Pagination() {
 
     const handlePageChange = useCallback(
         (pageNumber: number) => {
-            console.log(1, pageNumber);
             dispatch(setPageNumberValue(String(pageNumber)));
         },
         [dispatch]

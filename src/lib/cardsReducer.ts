@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     searchValue: '',
-    // searchValue: localStorage.getItem('inputValue') || '',
     isDataLoaded: false,
     cardsData: {
         data: [],
@@ -32,7 +31,6 @@ const cardsSlice = createSlice({
             state.pageSizeValue = action.payload;
         },
         setPageNumberValue: (state, action) => {
-            console.log(2, action.payload);
             state.pageNumberValue = action.payload;
         },
     },

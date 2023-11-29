@@ -8,7 +8,6 @@ export const pokemonApi = createApi({
     endpoints: (buider) => ({
         getCards: buider.query({
             query: ({ name, pageSize, pageNumber }: ApiRarameters) => {
-                console.log(4, name, pageSize, pageNumber);
                 const paramString = `page=${pageNumber}&pageSize=${pageSize}&select=id,name,abilities,images,hp,attacks`;
 
                 const urlWithSearch = name ? `?q=name:${name}*&${paramString}` : `?${paramString}`;

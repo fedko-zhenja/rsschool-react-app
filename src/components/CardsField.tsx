@@ -1,20 +1,12 @@
 import { ReactNode } from 'react';
-// import { Link } from 'react-router-dom';
-// import Link from 'next/link';
-// import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../types/types';
 import styles from '../styles/CardsField.module.css';
 import { useRouter } from 'next/router';
-// import { usePathname } from 'next/navigation';
-// import { useRouter } from 'next/router';
 
 export function CardsField(): ReactNode {
-    // const location = useLocation();
-    // const pathname = useRouter();
     const router = useRouter();
     const { page } = router.query;
-    // console.log(pathname);
 
     const reduxCardsData = useSelector((state: StoreState) => state.cards.cardsData);
     const reduxIsDataLoaded = useSelector((state: StoreState) => state.cards.isDataLoaded);
@@ -28,7 +20,6 @@ export function CardsField(): ReactNode {
     }
 
     function cardClick(event: React.MouseEvent<HTMLDivElement>) {
-        console.log('clickkkkkkkkkkkkkkkkkkk');
         router.push(
             {
                 pathname: router.pathname,
@@ -42,7 +33,7 @@ export function CardsField(): ReactNode {
     return (
         <div className={styles.cardField}>
             {reduxCardsData.data.map((card, index) => (
-                <div className="card" key={index} data-testid="card">
+                <div className={styles.card} key={index} data-testid="card">
                     <img
                         width="300px"
                         src={card.images.large}
