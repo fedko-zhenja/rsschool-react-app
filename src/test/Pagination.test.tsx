@@ -1,11 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { Pagination } from '../components/Pagination';
 import { mockCardsData, mockCardsDataIsNotLoaded } from './mockData';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { createMockRouter } from './mockData';
+import { MemoryRouterProvider } from 'next-router-mock/dist/MemoryRouterProvider';
+
+jest.mock('next/router', () => jest.requireActual('next-router-mock'));
 
 const mockStore = configureMockStore([thunk]);
 const store = mockStore({
@@ -16,11 +17,6 @@ const store = mockStore({
         pageNumberValue: '2',
     },
 });
-
-jest.mock('next/router', () => ({
-    ...jest.requireActual('next/router'),
-    useRouter: () => createMockRouter({}),
-}));
 
 const storeIsNotLoaded = mockStore({
     cards: {
@@ -34,11 +30,10 @@ const storeIsNotLoaded = mockStore({
 describe('Pagination', () => {
     test('should update URL query parameter when page changes', async () => {
         render(
-            <MemoryRouter>
-                <Provider store={store}>
-                    <Pagination />
-                </Provider>
-            </MemoryRouter>
+            <Provider store={store}>
+                <Pagination />
+            </Provider>,
+            { wrapper: MemoryRouterProvider }
         );
 
         const paginationBtn = screen.getByText('1');
@@ -51,11 +46,10 @@ describe('Pagination', () => {
 
     test('should not display buttons if data is not loaded', async () => {
         const { container } = render(
-            <MemoryRouter>
-                <Provider store={storeIsNotLoaded}>
-                    <Pagination />
-                </Provider>
-            </MemoryRouter>
+            <Provider store={storeIsNotLoaded}>
+                <Pagination />
+            </Provider>,
+            { wrapper: MemoryRouterProvider }
         );
 
         expect(container.firstChild).toBeNull();
