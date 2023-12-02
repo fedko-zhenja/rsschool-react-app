@@ -37,6 +37,18 @@ h1 {
     line-height: 1.1;
 }
 
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+}
+
 button {
     border-radius: 8px;
     border: 1px solid transparent;
@@ -50,12 +62,9 @@ button {
 }
 
 button:hover {
-    border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
+    color: rgb(213, 249, 255);
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
 }
 
 @media (prefers-color-scheme: light) {
