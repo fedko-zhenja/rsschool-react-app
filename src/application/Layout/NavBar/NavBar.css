@@ -1,8 +1,9 @@
 .navigation-wrapper {
+    padding: 10px calc(30px - (100vw - 100%)) 10px 10px;
     flex: 1;
     display: flex;
     justify-content: right;
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
     background-color: cornflowerblue;
     align-items: center;
     border-bottom: 2px solid midnightblue;

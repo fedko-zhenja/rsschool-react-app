@@ -67,6 +67,35 @@ button:hover {
     border-color: cornflowerblue;
 }
 
+.input {
+    display: block;
+    width: 300px;
+    height: 20px;
+    padding: 0.375rem 0.75rem;
+    margin: 5px 5px 5px 0;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: midnightblue;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid midnightblue;
+    border-radius: 0.25rem;
+    transition:
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.form-wrapper {
+    padding: 0px calc(20px - (100vw - 100%)) 0px 20px;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: midnightblue;
