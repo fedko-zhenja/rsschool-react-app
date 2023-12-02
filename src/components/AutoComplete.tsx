@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { AutoCompleteProps } from './types';
+import { useSelector } from 'react-redux';
 import './AutoComplete.css';
+import { FirstFormState } from '../store/types';
 
-export function AutoComplete({ options }: AutoCompleteProps) {
+export function AutoComplete() {
+    const countryNamesArray = useSelector((state: FirstFormState) => state.firstForm.countryNames);
+
     const [value, setValue] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const suggestions = options.filter((option) => option.toLowerCase().includes(value.toLowerCase()));
+    const suggestions = countryNamesArray.filter((option) => option.toLowerCase().includes(value.toLowerCase()));
     const autocompleteRef = useRef<HTMLDivElement | null>(null);
 
     const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         setValue(event.currentTarget.value);
+
+        event.currentTarget.value ? setShowSuggestions(true) : setShowSuggestions(false);
     };
 
     const handleSuggestionClick = (suggetion: string) => {
@@ -34,7 +39,7 @@ export function AutoComplete({ options }: AutoCompleteProps) {
     return (
         <div className="container" ref={autocompleteRef}>
             <label className="label">Country</label>
-            <input className="input" value={value} onChange={handleChange} onFocus={() => setShowSuggestions(true)} />
+            <input className="input" value={value} onChange={handleChange} />
 
             {showSuggestions && (
                 <ul className="suggestions">

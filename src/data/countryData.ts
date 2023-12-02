@@ -1,4 +1,4 @@
-export const countryNames = [
+export const countryData = [
     'Australia',
     'Azerbaijan',
     'Armenia',

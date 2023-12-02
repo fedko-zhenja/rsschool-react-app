@@ -2,8 +2,6 @@ import React, { useRef } from 'react';
 import { AutoComplete } from '../../components/AutoComplete';
 import './FirstForm.css';
 
-import { countryNames } from '../../data/countryNames';
-
 export function FirstForm() {
     const inputRef = useRef(null);
     console.log(inputRef);
@@ -44,7 +42,7 @@ export function FirstForm() {
                         <input className="input" type="email" />
                     </li>
 
-                    <AutoComplete options={countryNames} />
+                    <AutoComplete />
 
                     <li>
                         <label className="label">Password</label>

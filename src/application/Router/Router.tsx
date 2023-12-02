@@ -4,6 +4,8 @@ import { Layout } from '../Layout/Layout';
 import { Home } from '../../pages/Home/Home';
 import { FirstForm } from '../../pages/FirstForm/FirstForm';
 import { SecondForm } from '../../pages/SecondForm/SecondForm';
+import { Provider } from 'react-redux';
+import { firstFormStore } from '../../store/store';
 
 const router = createBrowserRouter([
     {
@@ -16,7 +18,11 @@ const router = createBrowserRouter([
             },
             {
                 path: Path.firstForm,
-                element: <FirstForm />,
+                element: (
+                    <Provider store={firstFormStore}>
+                        <FirstForm />
+                    </Provider>
+                ),
             },
             {
                 path: Path.secondForm,
