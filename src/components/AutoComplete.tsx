@@ -5,11 +5,12 @@ import { FirstFormState } from '../store/types';
 
 export function AutoComplete() {
     const countryNamesArray = useSelector((state: FirstFormState) => state.firstForm.countryNames);
+    const contryRef = useRef(null);
+    const autocompleteRef = useRef<HTMLDivElement | null>(null);
 
     const [value, setValue] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false);
     const suggestions = countryNamesArray.filter((option) => option.toLowerCase().includes(value.toLowerCase()));
-    const autocompleteRef = useRef<HTMLDivElement | null>(null);
 
     const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         setValue(event.currentTarget.value);
@@ -39,7 +40,7 @@ export function AutoComplete() {
     return (
         <div className="container" ref={autocompleteRef}>
             <label className="label">Country</label>
-            <input className="input" value={value} onChange={handleChange} />
+            <input className="input" value={value} onChange={handleChange} ref={contryRef} />
 
             {showSuggestions && (
                 <ul className="suggestions">

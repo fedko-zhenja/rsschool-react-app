@@ -1,3 +1,7 @@
+.form-wrapper {
+    padding: 0 10px 10px 10px;
+}
+
 .list {
     display: flex;
     flex-direction: column;
@@ -16,16 +20,28 @@ input[type='checkbox'] {
     align-items: center;
 }
 
-input[type='radio'] {
+/* input[type='radio'] {
     display: inline;
     width: 15px;
-}
+} */
 
-.item_radio {
+.item_select {
     width: 330px;
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 15px;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.select {
+    padding: 5px;
+    height: 30px;
+    border-color: midnightblue;
+    font-size: 15px;
+    border-radius: 0.25rem;
+    color: midnightblue;
+    /* font-size: 17px; */
 }
 
 .item_radio span {
