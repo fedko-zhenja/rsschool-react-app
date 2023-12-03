@@ -10,7 +10,7 @@ const initialState = {
     email: '',
     password: '',
     confirmPassword: '',
-    isAgreeTerms: false,
+    isAcceptTCRef: false,
 };
 
 export const firstFormSlice = createSlice({
@@ -39,7 +39,7 @@ export const firstFormSlice = createSlice({
             state.confirmPassword = action.payload;
         },
         setIsAgreeTerms: (state, action) => {
-            state.isAgreeTerms = action.payload;
+            state.isAcceptTCRef = action.payload;
         },
     },
 });

@@ -10,8 +10,9 @@ export function FirstForm() {
     const emailRef = useRef<HTMLInputElement | null>(null);
     const passwordRef = useRef<HTMLInputElement | null>(null);
     const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
-    const pictureRef = useRef(null);
-    const acceptTCRef = useRef(null);
+    const pictureRef = useRef<HTMLInputElement | null>(null);
+    const acceptTCRef = useRef<HTMLInputElement | null>(null);
+    let currentCountry = '';
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -21,8 +22,11 @@ export function FirstForm() {
             age: ageRef.current?.value,
             gender: genderRef.current?.value,
             email: emailRef.current?.value,
+            country: currentCountry,
             password: passwordRef.current?.value,
             confirmPassword: confirmPasswordRef.current?.value,
+            picture: pictureRef.current?.value,
+            acceptTCRef: acceptTCRef.current?.checked,
         };
 
         userSchema
@@ -34,6 +38,15 @@ export function FirstForm() {
                 console.error(errors.errors);
             });
     };
+
+    const handleCountryValue = (country: string) => {
+        currentCountry = country;
+    };
+
+    // const ch = () => {
+    //     console.log(pictureRef.current.value);
+    // onChange={ch}
+    // };
 
     return (
         <div className="form-wrapper">
@@ -66,7 +79,7 @@ export function FirstForm() {
                         <input className="input" type="email" ref={emailRef} />
                     </li>
 
-                    <AutoComplete />
+                    <AutoComplete handleCountryValue={handleCountryValue} />
 
                     <li>
                         <label className="label">Password</label>
