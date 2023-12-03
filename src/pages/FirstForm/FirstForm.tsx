@@ -1,11 +1,20 @@
 import React, { useRef } from 'react';
-import { AutoComplete } from '../../components/AutoComplete';
+import { AutoComplete } from '../../components/AutoComplete/AutoComplete';
 import './FirstForm.css';
 import { userSchema } from '../../validations/userValidation';
 import { ValidData } from './types';
 import { useDispatch } from 'react-redux';
 
-import { setCountry, setName, setAge, setGender, setEmail, setPassword, setIsAgreeTerms } from '../../store/reducer';
+import {
+    setCountry,
+    setName,
+    setAge,
+    setGender,
+    setEmail,
+    setPassword,
+    setIsAgreeTerms,
+    setIsDataLoaded,
+} from '../../store/reducer';
 import { useNavigate } from 'react-router-dom';
 // import { Navigate } from 'react-router-dom';
 
@@ -31,6 +40,7 @@ export function FirstForm() {
         dispatch(setEmail(data.email));
         dispatch(setPassword(data.password));
         dispatch(setIsAgreeTerms(data.acceptTCRef));
+        dispatch(setIsDataLoaded(true));
         // dispatch(setName(data.name));
         navigate('/');
     };

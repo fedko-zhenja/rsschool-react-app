@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import './AutoComplete.css';
-import { FirstFormState } from '../store/types';
+import { FirstFormState } from '../../store/types';
 
 interface AutoCompleteProps {
     handleCountryValue: (country: string) => void;

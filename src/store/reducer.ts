@@ -11,6 +11,7 @@ const initialState = {
     password: '',
     confirmPassword: '',
     isAcceptTCRef: false,
+    isDataLoaded: false,
 };
 
 export const firstFormSlice = createSlice({
@@ -42,8 +43,11 @@ export const firstFormSlice = createSlice({
         setIsAgreeTerms: (state, action) => {
             state.isAcceptTCRef = action.payload;
         },
+        setIsDataLoaded: (state, action) => {
+            state.isDataLoaded = action.payload;
+        },
     },
 });
 
-export const { setCountry, setName, setAge, setGender, setEmail, setPassword, setIsAgreeTerms } =
+export const { setCountry, setName, setAge, setGender, setEmail, setPassword, setIsAgreeTerms, setIsDataLoaded } =
     firstFormSlice.actions;

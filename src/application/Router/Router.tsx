@@ -14,7 +14,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: Path.home,
-                element: <Home />,
+                element: (
+                    <Provider store={firstFormStore}>
+                        <Home />
+                    </Provider>
+                ),
             },
             {
                 path: Path.firstForm,
