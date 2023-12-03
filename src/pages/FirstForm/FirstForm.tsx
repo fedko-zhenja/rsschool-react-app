@@ -1,20 +1,38 @@
 import React, { useRef } from 'react';
 import { AutoComplete } from '../../components/AutoComplete';
 import './FirstForm.css';
+import { userSchema } from '../../validations/userValidation';
 
 export function FirstForm() {
-    const nameRef = useRef(null);
-    const ageRef = useRef(null);
-    const genderRef = useRef(null);
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
-    const confirmPasswordRef = useRef(null);
+    const nameRef = useRef<HTMLInputElement | null>(null);
+    const ageRef = useRef<HTMLInputElement | null>(null);
+    const genderRef = useRef<HTMLSelectElement | null>(null);
+    const emailRef = useRef<HTMLInputElement | null>(null);
+    const passwordRef = useRef<HTMLInputElement | null>(null);
+    const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
     const pictureRef = useRef(null);
     const acceptTCRef = useRef(null);
-    console.log(nameRef);
 
-    const handleSubmit = () => {
-        alert(`Name: ${nameRef}`);
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+
+        const formData = {
+            name: nameRef.current?.value,
+            age: ageRef.current?.value,
+            gender: genderRef.current?.value,
+            email: emailRef.current?.value,
+            password: passwordRef.current?.value,
+            confirmPassword: confirmPasswordRef.current?.value,
+        };
+
+        userSchema
+            .validate(formData)
+            .then((validData) => {
+                console.log(validData);
+            })
+            .catch((errors) => {
+                console.error(errors.errors);
+            });
     };
 
     return (
@@ -34,15 +52,6 @@ export function FirstForm() {
 
                     <li className="item_select">
                         Gender
-                        {/* <span>
-                            <input className="input" type="radio" name="gender" value="Man" />
-                            <label className="label">Man</label>
-                        </span>
-
-                        <span>
-                            <input className="input" type="radio" name="gender" value="Woman" />
-                            <label className="label">Woman</label>
-                        </span> */}
                         <select name="gender" defaultValue={'default'} id="gender" className="select" ref={genderRef}>
                             <option value="default" disabled>
                                 ---
