@@ -21,6 +21,7 @@ export const firstFormSlice = createSlice({
             state.country = action.payload;
         },
         setName: (state, action) => {
+            console.log('store', action.payload);
             state.name = action.payload;
         },
         setAge: (state, action) => {
@@ -44,4 +45,5 @@ export const firstFormSlice = createSlice({
     },
 });
 
-export const { setCountry } = firstFormSlice.actions;
+export const { setCountry, setName, setAge, setGender, setEmail, setPassword, setIsAgreeTerms } =
+    firstFormSlice.actions;

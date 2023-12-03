@@ -2,6 +2,12 @@ import React, { useRef } from 'react';
 import { AutoComplete } from '../../components/AutoComplete';
 import './FirstForm.css';
 import { userSchema } from '../../validations/userValidation';
+import { ValidData } from './types';
+import { useDispatch } from 'react-redux';
+
+import { setCountry, setName, setAge, setGender, setEmail, setPassword, setIsAgreeTerms } from '../../store/reducer';
+import { useNavigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 
 export function FirstForm() {
     const nameRef = useRef<HTMLInputElement | null>(null);
@@ -13,6 +19,21 @@ export function FirstForm() {
     const pictureRef = useRef<HTMLInputElement | null>(null);
     const acceptTCRef = useRef<HTMLInputElement | null>(null);
     let currentCountry = '';
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const addDataToStor = (data: ValidData) => {
+        console.log(data);
+        dispatch(setName(data.name));
+        dispatch(setCountry(data.country));
+        dispatch(setAge(data.age));
+        dispatch(setGender(data.gender));
+        dispatch(setEmail(data.email));
+        dispatch(setPassword(data.password));
+        dispatch(setIsAgreeTerms(data.acceptTCRef));
+        // dispatch(setName(data.name));
+        navigate('/');
+    };
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -32,7 +53,8 @@ export function FirstForm() {
         userSchema
             .validate(formData)
             .then((validData) => {
-                console.log(validData);
+                // console.log(validData);
+                addDataToStor(validData);
             })
             .catch((errors) => {
                 console.error(errors.errors);
@@ -44,8 +66,8 @@ export function FirstForm() {
     };
 
     // const ch = () => {
-    //     console.log(pictureRef.current.value);
-    // onChange={ch}
+    //     console.log(pictureRef.current?.files);
+    //     onChange={ch}
     // };
 
     return (
