@@ -9,15 +9,19 @@ export function FirstCard() {
     const genderData = useSelector((state: FirstFormState) => state.firstForm.gender);
     const emailData = useSelector((state: FirstFormState) => state.firstForm.email);
     const countryData = useSelector((state: FirstFormState) => state.firstForm.country);
-    const passwordData = useSelector((state: FirstFormState) => state.firstForm.name);
+    const passwordData = useSelector((state: FirstFormState) => state.firstForm.password);
+    const pictureData = useSelector((state: FirstFormState) => state.firstForm.picture);
 
     if (isDataLoaded === false) {
-        return <div>Fill out the first form</div>;
+        return <div>Fill out the form</div>;
     }
 
     return (
         <div className="card-content">
             <ul className="list-data">
+                <li>
+                    <img width={250} height={250} src={`data:image/png;base64,${pictureData}`} alt="" />
+                </li>
                 <li>
                     Name: <span>{nameData}</span>
                 </li>

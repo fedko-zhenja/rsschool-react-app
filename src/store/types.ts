@@ -10,5 +10,6 @@ export interface FirstFormState {
         confirmPassword: string;
         isAgreeTerms: boolean;
         isDataLoaded: boolean;
+        picture: string;
     };
 }

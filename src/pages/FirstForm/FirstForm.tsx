@@ -12,11 +12,12 @@ import {
     setGender,
     setEmail,
     setPassword,
-    setIsAgreeTerms,
+    setIsAcceptTCRef,
     setIsDataLoaded,
+    setPicture,
 } from '../../store/reducer';
+
 import { useNavigate } from 'react-router-dom';
-// import { Navigate } from 'react-router-dom';
 
 export function FirstForm() {
     const nameRef = useRef<HTMLInputElement | null>(null);
@@ -29,9 +30,38 @@ export function FirstForm() {
     const acceptTCRef = useRef<HTMLInputElement | null>(null);
     let currentCountry = '';
 
+    const encodeFile = () => {
+        const fileInput = pictureRef.current;
+        if (fileInput?.files) {
+            const file = fileInput.files[0];
+            if (file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+
+                    reader.onloadend = () => {
+                        const result = reader.result as string;
+                        if (result) {
+                            const base64String = result.split(',')[1];
+                            resolve(base64String);
+                        } else {
+                            reject(new Error('Failed to read file'));
+                        }
+                    };
+
+                    reader.onerror = reject;
+
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                return Promise.reject(new Error('No file selected'));
+            }
+        }
+    };
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const addDataToStor = (data: ValidData) => {
+
+    const addDataToStor = async (data: ValidData) => {
         console.log(data);
         dispatch(setName(data.name));
         dispatch(setCountry(data.country));
@@ -39,9 +69,15 @@ export function FirstForm() {
         dispatch(setGender(data.gender));
         dispatch(setEmail(data.email));
         dispatch(setPassword(data.password));
-        dispatch(setIsAgreeTerms(data.acceptTCRef));
+        dispatch(setIsAcceptTCRef(data.acceptTCRef));
         dispatch(setIsDataLoaded(true));
-        // dispatch(setName(data.name));
+
+        try {
+            const base64String = await encodeFile();
+            dispatch(setPicture(base64String));
+        } catch (error) {
+            console.error(error);
+        }
         navigate('/');
     };
 
@@ -63,7 +99,6 @@ export function FirstForm() {
         userSchema
             .validate(formData)
             .then((validData) => {
-                // console.log(validData);
                 addDataToStor(validData);
             })
             .catch((errors) => {
@@ -74,11 +109,6 @@ export function FirstForm() {
     const handleCountryValue = (country: string) => {
         currentCountry = country;
     };
-
-    // const ch = () => {
-    //     console.log(pictureRef.current?.files);
-    //     onChange={ch}
-    // };
 
     return (
         <div className="form-wrapper">
