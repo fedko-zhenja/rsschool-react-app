@@ -20,11 +20,6 @@ input[type='checkbox'] {
     flex-direction: column;
 }
 
-/* input[type='radio'] {
-    display: inline;
-    width: 15px;
-} */
-
 .item_select {
     width: 330px;
     flex-direction: column;
@@ -42,7 +37,6 @@ input[type='checkbox'] {
     font-size: 15px;
     border-radius: 0.25rem;
     color: midnightblue;
-    /* font-size: 17px; */
 }
 
 .item_radio span {
@@ -79,4 +73,9 @@ input[type='file'] {
 
 .form-list li {
     width: 330px;
+}
+
+.item-password {
+    display: flex;
+    flex-direction: column;
 }

@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function FirstForm() {
     const [errorMessage, setErrorMessage] = useState('');
+    const [passwordStrength, setPasswordStrength] = useState(['', '']);
 
     const nameRef = useRef<HTMLInputElement | null>(null);
     const ageRef = useRef<HTMLInputElement | null>(null);
@@ -85,6 +86,7 @@ export function FirstForm() {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        setPasswordStrength(['', '']);
 
         const formData = {
             name: nameRef.current?.value,
@@ -112,6 +114,24 @@ export function FirstForm() {
     const checkError = (value: string) => {
         if (errorMessage.includes(value)) {
             return errorMessage;
+        }
+    };
+
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.value.length === 0) {
+            setPasswordStrength(['', '']);
+        }
+
+        if (event.target.value.length > 0 && event.target.value.length <= 4) {
+            setPasswordStrength(['weak password', 'red']);
+        }
+
+        if (event.target.value.length > 4 && event.target.value.length <= 7) {
+            setPasswordStrength(['medium password', 'orange']);
+        }
+
+        if (event.target.value.length > 7 && event.target.value.length <= 10) {
+            setPasswordStrength(['strong password', 'green']);
         }
     };
 
@@ -152,10 +172,11 @@ export function FirstForm() {
 
                     <AutoComplete errorMessage={errorMessage} ref={countryRef} />
 
-                    <li>
+                    <li className="item-password">
                         <label className="label">Password</label>
-                        <input className="input" type="password" ref={passwordRef} />
+                        <input className="input" type="password" ref={passwordRef} onChange={handlePasswordChange} />
                         <span className="error-message">{checkError('password')}</span>
+                        <span style={{ color: passwordStrength[1] }}>{passwordStrength[0]}</span>
                     </li>
 
                     <li>
