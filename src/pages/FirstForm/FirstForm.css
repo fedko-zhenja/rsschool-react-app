@@ -17,7 +17,7 @@ input[type='checkbox'] {
 .item_checkbox {
     width: 330px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 /* input[type='radio'] {
@@ -27,8 +27,9 @@ input[type='checkbox'] {
 
 .item_select {
     width: 330px;
+    flex-direction: column;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 15px;
     font-weight: 500;
     font-size: 17px;
@@ -69,4 +70,13 @@ input[type='file'] {
     background-color: white;
     border-color: midnightblue;
     box-shadow: 0 7px 45px 0 cornflowerblue;
+}
+
+.error-message {
+    color: red;
+    font-weight: 400;
+}
+
+.list li {
+    width: 330px;
 }

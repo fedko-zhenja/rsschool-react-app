@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { AutoComplete } from '../../components/AutoComplete/AutoComplete';
 import './FirstForm.css';
 import { userSchema } from '../../validations/userValidation';
@@ -20,6 +20,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 export function FirstForm() {
+    const [errorMessage, setErrorMessage] = useState('');
+
     const nameRef = useRef<HTMLInputElement | null>(null);
     const ageRef = useRef<HTMLInputElement | null>(null);
     const genderRef = useRef<HTMLSelectElement | null>(null);
@@ -102,12 +104,19 @@ export function FirstForm() {
                 addDataToStor(validData);
             })
             .catch((errors) => {
-                console.error(errors.errors);
+                console.error(errors.message);
+                setErrorMessage(errors.message);
             });
     };
 
     const handleCountryValue = (country: string) => {
         currentCountry = country;
+    };
+
+    const checkError = (value: string) => {
+        if (errorMessage.includes(value)) {
+            return errorMessage;
+        }
     };
 
     return (
@@ -118,11 +127,13 @@ export function FirstForm() {
                     <li>
                         <label className="label">Name</label>
                         <input className="input" type="text" ref={nameRef} />
+                        <span className="error-message">{checkError('name')}</span>
                     </li>
 
                     <li>
                         <label className="label">Age</label>
                         <input className="input" type="number" min="0" max="100" ref={ageRef} />
+                        <span className="error-message">{checkError('age')}</span>
                     </li>
 
                     <li className="item_select">
@@ -134,11 +145,13 @@ export function FirstForm() {
                             <option value="man">Man</option>
                             <option value="woman">Woman</option>
                         </select>
+                        <span className="error-message">{checkError('gender')}</span>
                     </li>
 
                     <li>
                         <label className="label">Email</label>
                         <input className="input" type="email" ref={emailRef} />
+                        <span className="error-message">{checkError('email')}</span>
                     </li>
 
                     <AutoComplete handleCountryValue={handleCountryValue} />
@@ -146,21 +159,25 @@ export function FirstForm() {
                     <li>
                         <label className="label">Password</label>
                         <input className="input" type="password" ref={passwordRef} />
+                        <span className="error-message">{checkError('password')}</span>
                     </li>
 
                     <li>
                         <label className="label">Confirm the password</label>
                         <input className="input" type="password" ref={confirmPasswordRef} />
+                        <span className="error-message">{checkError('match')}</span>
                     </li>
 
                     <li>
                         <label className="label">Picture</label>
                         <input className="input" type="file" ref={pictureRef} />
+                        <span className="error-message">{checkError('picture')}</span>
                     </li>
 
                     <li className="item_checkbox">
                         <input className="input" type="checkbox" ref={acceptTCRef} />
                         <label className="label">Accept the terms and conditions</label>
+                        <span className="error-message">{checkError('terms')}</span>
                     </li>
                     <li>
                         <button className="submit-btn" type="submit">

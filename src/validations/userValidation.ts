@@ -18,7 +18,7 @@ export const userSchema = yup.object().shape({
 
     picture: yup
         .string()
-        .required('Picture is required')
+        .required('picture is required')
         .matches(/\.(png|jpeg|jpg)$/, 'Invalid picture format, the format should have been .pgn or .jpeg(.jpg)'),
 
     confirmPassword: yup
