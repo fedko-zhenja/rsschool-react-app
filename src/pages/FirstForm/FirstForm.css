@@ -2,7 +2,7 @@
     padding: 0 10px 10px 10px;
 }
 
-.list {
+.form-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,6 +77,6 @@ input[type='file'] {
     font-weight: 400;
 }
 
-.list li {
+.form-list li {
     width: 330px;
 }

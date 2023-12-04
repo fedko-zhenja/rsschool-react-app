@@ -4,11 +4,12 @@ import './AutoComplete.css';
 import { FirstFormState } from '../../store/types';
 import { forwardRef } from 'react';
 
-// interface AutoCompleteProps {
-//     handleCountryValue: (country: string) => void;
-// }
+interface AutoCompleteProps {
+    errorMessage: string;
+}
 
-export const AutoComplete = forwardRef((props, ref) => {
+export const AutoComplete = forwardRef((props: AutoCompleteProps, ref) => {
+    // console.log(props.errorMessage);
     const countryNamesArray = useSelector((state: FirstFormState) => state.firstForm.countryNames);
     const contryRef = ref;
     const autocompleteRef = useRef<HTMLDivElement | null>(null);
@@ -43,10 +44,17 @@ export const AutoComplete = forwardRef((props, ref) => {
         };
     }, []);
 
+    const checkError = (value: string) => {
+        if (props.errorMessage.includes(value)) {
+            return props.errorMessage;
+        }
+    };
+
     return (
         <div className="container" ref={autocompleteRef}>
             <label className="label">Country</label>
             <input className="input" value={value} onChange={handleChange} ref={contryRef} />
+            <span className="error-message">{checkError('country')}</span>
 
             {showSuggestions && (
                 <ul className="suggestions">

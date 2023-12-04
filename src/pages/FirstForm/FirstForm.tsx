@@ -128,7 +128,7 @@ export function FirstForm() {
         <div className="form-wrapper">
             <h2>First Form</h2>
             <form onSubmit={handleSubmit}>
-                <ul className="list">
+                <ul className="form-list">
                     <li>
                         <label className="label">Name</label>
                         <input className="input" type="text" ref={nameRef} />
@@ -159,7 +159,7 @@ export function FirstForm() {
                         <span className="error-message">{checkError('email')}</span>
                     </li>
 
-                    <AutoComplete ref={countryRef} />
+                    <AutoComplete errorMessage={errorMessage} ref={countryRef} />
 
                     <li>
                         <label className="label">Password</label>
