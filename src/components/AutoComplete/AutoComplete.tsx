@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import './AutoComplete.css';
 import { FirstFormState } from '../../store/types';
+import { forwardRef } from 'react';
 
-interface AutoCompleteProps {
-    handleCountryValue: (country: string) => void;
-}
+// interface AutoCompleteProps {
+//     handleCountryValue: (country: string) => void;
+// }
 
-export function AutoComplete({ handleCountryValue }: AutoCompleteProps) {
+export const AutoComplete = forwardRef((props, ref) => {
     const countryNamesArray = useSelector((state: FirstFormState) => state.firstForm.countryNames);
-    const contryRef = useRef(null);
+    const contryRef = ref;
     const autocompleteRef = useRef<HTMLDivElement | null>(null);
 
     const [value, setValue] = useState('');
@@ -25,7 +26,7 @@ export function AutoComplete({ handleCountryValue }: AutoCompleteProps) {
     const handleSuggestionClick = (suggetion: string) => {
         setValue(suggetion);
         setShowSuggestions(false);
-        handleCountryValue(suggetion);
+        // handleCountryValue(suggetion);
     };
 
     useEffect(() => {
@@ -58,4 +59,4 @@ export function AutoComplete({ handleCountryValue }: AutoCompleteProps) {
             )}
         </div>
     );
-}
+});

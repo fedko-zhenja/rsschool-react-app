@@ -30,7 +30,11 @@ export function FirstForm() {
     const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
     const pictureRef = useRef<HTMLInputElement | null>(null);
     const acceptTCRef = useRef<HTMLInputElement | null>(null);
-    let currentCountry = '';
+
+    const countryRef = useRef<HTMLInputElement | null>(null);
+
+    // const [currentCountry, setCurrentCountry] = useState();
+    // let currentCountry = '';
 
     const encodeFile = () => {
         const fileInput = pictureRef.current;
@@ -91,7 +95,7 @@ export function FirstForm() {
             age: ageRef.current?.value,
             gender: genderRef.current?.value,
             email: emailRef.current?.value,
-            country: currentCountry,
+            country: countryRef.current?.value,
             password: passwordRef.current?.value,
             confirmPassword: confirmPasswordRef.current?.value,
             picture: pictureRef.current?.value,
@@ -109,9 +113,10 @@ export function FirstForm() {
             });
     };
 
-    const handleCountryValue = (country: string) => {
-        currentCountry = country;
-    };
+    // const handleCountryValue = (country: string) => {
+    //     console.log('страна', country);
+    //     currentCountry = country;
+    // };
 
     const checkError = (value: string) => {
         if (errorMessage.includes(value)) {
@@ -154,7 +159,7 @@ export function FirstForm() {
                         <span className="error-message">{checkError('email')}</span>
                     </li>
 
-                    <AutoComplete handleCountryValue={handleCountryValue} />
+                    <AutoComplete ref={countryRef} />
 
                     <li>
                         <label className="label">Password</label>
