@@ -66,7 +66,6 @@ export const {
     setPicture,
 } = firstFormSlice.actions;
 
-// Новый слайс для хранения истории изменений
 export const historySlice = createSlice({
     name: 'history',
     initialState: [] as Array<FirstFormState>,
@@ -77,5 +76,4 @@ export const historySlice = createSlice({
     },
 });
 
-// Экспорт экшена для добавления данных в историю
 export const { setDataToHistory } = historySlice.actions;

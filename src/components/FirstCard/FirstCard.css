@@ -12,6 +12,63 @@
     transition: 0.2s;
 }
 
+.animated {
+    animation-duration: 7s;
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    0% {
+        border: 2px solid lime;
+        box-shadow: 0 7px 45px 0 lime;
+    }
+
+    10% {
+        border: 2px solid midnightblue;
+        box-shadow: none;
+    }
+
+    20% {
+        border: 2px solid lime;
+        box-shadow: 0 7px 45px 0 lime;
+    }
+
+    30% {
+        border: 2px solid midnightblue;
+        box-shadow: none;
+    }
+
+    40% {
+        border: 2px solid lime;
+        box-shadow: 0 7px 45px 0 lime;
+    }
+
+    50% {
+        border: 2px solid midnightblue;
+        box-shadow: none;
+    }
+
+    60% {
+        border: 2px solid lime;
+        box-shadow: 0 7px 45px 0 lime;
+    }
+
+    70% {
+        border: 2px solid midnightblue;
+        box-shadow: none;
+    }
+
+    80% {
+        border: 2px solid lime;
+        box-shadow: 0 7px 45px 0 lime;
+    }
+
+    90% {
+        border: 2px solid midnightblue;
+        box-shadow: none;
+    }
+}
+
 .card-content:hover {
     box-shadow: 0 7px 45px 0 cornflowerblue;
 }
