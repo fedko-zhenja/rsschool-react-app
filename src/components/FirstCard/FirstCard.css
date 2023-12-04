@@ -1,0 +1,23 @@
+.card-content {
+    width: 250px;
+    padding: 10px;
+    border: 2px solid midnightblue;
+    border-radius: 0.25em;
+    transition: 0.2s;
+}
+
+.card-content:hover {
+    box-shadow: 0 7px 45px 0 cornflowerblue;
+}
+
+.list-data {
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.list-data span {
+    word-break: break-all;
+    font-weight: 400;
+}

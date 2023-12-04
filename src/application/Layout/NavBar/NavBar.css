@@ -1,0 +1,28 @@
+.navigation-wrapper {
+    /* padding: 10px calc(30px - (100vw - 100%)) 10px 10px; */
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    padding: 10px 15px;
+    background-color: cornflowerblue;
+    align-items: center;
+    border-bottom: 2px solid midnightblue;
+}
+
+.navigation-list {
+    list-style: none;
+    display: inline-flex;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+}
+
+.title {
+    font-family: cursive;
+}
+
+.link_home.active,
+.link_first-form.active,
+.link_second-form.active {
+    color: powderblue;
+}

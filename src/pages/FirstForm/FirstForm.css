@@ -1,0 +1,82 @@
+.form-wrapper {
+    padding: 0 10px 10px 10px;
+}
+
+.form-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+input[type='checkbox'] {
+    display: inline;
+    width: 15px;
+}
+
+.item_checkbox {
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* input[type='radio'] {
+    display: inline;
+    width: 15px;
+} */
+
+.item_select {
+    width: 330px;
+    flex-direction: column;
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.select {
+    padding: 5px;
+    height: 30px;
+    border-color: midnightblue;
+    font-size: 15px;
+    border-radius: 0.25rem;
+    color: midnightblue;
+    /* font-size: 17px; */
+}
+
+.item_radio span {
+    display: flex;
+    align-items: center;
+}
+
+input[type='file'] {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.submit-btn {
+    padding: 0.5em 1.3em;
+    font-size: 18px;
+    color: rgb(213, 249, 255);
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
+    border-radius: 0.25rem;
+    transition: 0.2s;
+}
+
+.submit-btn:hover {
+    color: midnightblue;
+    background-color: white;
+    border-color: midnightblue;
+    box-shadow: 0 7px 45px 0 cornflowerblue;
+}
+
+.error-message {
+    color: red;
+    font-weight: 400;
+}
+
+.form-list li {
+    width: 330px;
+}
