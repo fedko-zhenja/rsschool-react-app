@@ -30,11 +30,7 @@ export function FirstForm() {
     const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
     const pictureRef = useRef<HTMLInputElement | null>(null);
     const acceptTCRef = useRef<HTMLInputElement | null>(null);
-
     const countryRef = useRef<HTMLInputElement | null>(null);
-
-    // const [currentCountry, setCurrentCountry] = useState();
-    // let currentCountry = '';
 
     const encodeFile = () => {
         const fileInput = pictureRef.current;
@@ -112,11 +108,6 @@ export function FirstForm() {
                 setErrorMessage(errors.message);
             });
     };
-
-    // const handleCountryValue = (country: string) => {
-    //     console.log('страна', country);
-    //     currentCountry = country;
-    // };
 
     const checkError = (value: string) => {
         if (errorMessage.includes(value)) {

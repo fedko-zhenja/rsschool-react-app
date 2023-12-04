@@ -59,6 +59,7 @@ export const userSchema = yup.object().shape({
 
     age: yup
         .number()
+        .typeError('enter your age')
         .required('enter your age')
         .test('is-valid-age', 'Age must be from 0 to 100', (value) => {
             return value >= 0 && value <= 100;

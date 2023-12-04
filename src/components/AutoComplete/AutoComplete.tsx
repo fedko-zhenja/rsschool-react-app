@@ -9,7 +9,6 @@ interface AutoCompleteProps {
 }
 
 export const AutoComplete = forwardRef((props: AutoCompleteProps, ref) => {
-    // console.log(props.errorMessage);
     const countryNamesArray = useSelector((state: FirstFormState) => state.firstForm.countryNames);
     const contryRef = ref;
     const autocompleteRef = useRef<HTMLDivElement | null>(null);
@@ -27,7 +26,6 @@ export const AutoComplete = forwardRef((props: AutoCompleteProps, ref) => {
     const handleSuggestionClick = (suggetion: string) => {
         setValue(suggetion);
         setShowSuggestions(false);
-        // handleCountryValue(suggetion);
     };
 
     useEffect(() => {
