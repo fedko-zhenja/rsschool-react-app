@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { countryData } from '../data/countryData';
+import { FirstFormState } from './types';
 
 const initialState = {
     countryNames: countryData,
@@ -64,3 +65,17 @@ export const {
     setIsDataLoaded,
     setPicture,
 } = firstFormSlice.actions;
+
+// Новый слайс для хранения истории изменений
+export const historySlice = createSlice({
+    name: 'history',
+    initialState: [] as Array<FirstFormState>,
+    reducers: {
+        setDataToHistory: (state, action) => {
+            state.push(action.payload);
+        },
+    },
+});
+
+// Экспорт экшена для добавления данных в историю
+export const { setDataToHistory } = historySlice.actions;

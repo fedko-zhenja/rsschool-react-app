@@ -6,15 +6,16 @@ import { ValidData } from './types';
 import { useDispatch } from 'react-redux';
 
 import {
-    setCountry,
-    setName,
-    setAge,
-    setGender,
-    setEmail,
-    setPassword,
-    setIsAcceptTCRef,
+    // setCountry,
+    // setName,
+    // setAge,
+    // setGender,
+    // setEmail,
+    // setPassword,
+    // setIsAcceptTCRef,
     setIsDataLoaded,
-    setPicture,
+    // setPicture,
+    setDataToHistory,
 } from '../../store/reducer';
 
 import { useNavigate } from 'react-router-dom';
@@ -65,19 +66,25 @@ export function FirstForm() {
     const navigate = useNavigate();
 
     const addDataToStor = async (data: ValidData) => {
-        console.log(data);
-        dispatch(setName(data.name));
-        dispatch(setCountry(data.country));
-        dispatch(setAge(data.age));
-        dispatch(setGender(data.gender));
-        dispatch(setEmail(data.email));
-        dispatch(setPassword(data.password));
-        dispatch(setIsAcceptTCRef(data.acceptTCRef));
-        dispatch(setIsDataLoaded(true));
+        // console.log(data);
+        // dispatch(setName(data.name));
+        // dispatch(setCountry(data.country));
+        // dispatch(setAge(data.age));
+        // dispatch(setGender(data.gender));
+        // dispatch(setEmail(data.email));
+        // dispatch(setPassword(data.password));
+        // dispatch(setIsAcceptTCRef(data.acceptTCRef));
+
+        // dispatch(setIsDataLoaded(true));
+        // dispatch(setDataToHistory(data));
 
         try {
             const base64String = await encodeFile();
-            dispatch(setPicture(base64String));
+            // dispatch(setPicture(base64String));
+
+            data.picture = base64String as string;
+            dispatch(setIsDataLoaded(true));
+            dispatch(setDataToHistory(data));
         } catch (error) {
             console.error(error);
         }

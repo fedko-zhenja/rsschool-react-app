@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { firstFormSlice } from './reducer';
+import { firstFormSlice, historySlice } from './reducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const firstFormStore = configureStore({
     reducer: {
         firstForm: firstFormSlice.reducer,
+        history: historySlice.reducer,
     },
 });
 
