@@ -1,5 +1,4 @@
 import * as yup from 'yup';
-import { countryData } from '../data/countryData';
 
 export const userSchema = yup.object().shape({
     acceptTCRef: yup
@@ -9,16 +8,21 @@ export const userSchema = yup.object().shape({
             return value;
         }),
 
-    // picture: yup
-    //     .string()
-    //     .required('add a picture')
-    //     .test('is-valid-picture', 'The image must have a PNG or JPEG extension', (value) => {
-    //         return;
-    //     }),
     picture: yup
-        .string()
-        .required('picture is required')
-        .matches(/\.(png|jpeg|jpg)$/, 'Invalid picture format, the format should have been .pgn or .jpeg(.jpg)'),
+        .mixed<FileList>()
+        .required('Picture is required')
+        .test(
+            'is-valid-picture',
+            'Invalid picture format, the format should have been .pgn or .jpeg(.jpg)',
+            (value) => {
+                const fileName = value[0].name.toLocaleLowerCase() || '';
+
+                if (fileName.includes('.png') || fileName.includes('.jpeg') || fileName.includes('.jpg')) {
+                    return true;
+                }
+                return false;
+            }
+        ),
 
     confirmPassword: yup
         .string()
@@ -40,12 +44,12 @@ export const userSchema = yup.object().shape({
             }
         ),
 
-    country: yup
-        .string()
-        .required('choose the country')
-        .test('is-valid-country', 'choose the country', (value) => {
-            return countryData.includes(value);
-        }),
+    // country: yup
+    //     .string()
+    //     .required('choose the country')
+    //     .test('is-valid-country', 'choose the country', (value) => {
+    //         return countryData.includes(value);
+    //     }),
 
     email: yup.string().email().required(),
 
