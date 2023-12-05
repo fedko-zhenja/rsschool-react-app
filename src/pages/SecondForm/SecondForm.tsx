@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { userSchema } from '../../validations/userValidationSecondForm';
 import { ValidData } from './types';
 import { AutoComplete } from '../../components/AutoComplete/AutoCompleteSecondForm';
+import { useState } from 'react';
 
 export function SecondForm() {
     const {
@@ -13,9 +14,29 @@ export function SecondForm() {
         // reset,
     } = useForm<ValidData>({ mode: 'onTouched', resolver: yupResolver(userSchema) });
 
+    const [passwordStrength, setPasswordStrength] = useState(['', '']);
+
     const onSubmitHandler: SubmitHandler<ValidData> = (data) => {
         console.log({ data });
         // reset();
+    };
+
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.value.length === 0) {
+            setPasswordStrength(['', '']);
+        }
+
+        if (event.target.value.length > 0 && event.target.value.length <= 4) {
+            setPasswordStrength(['weak password', 'red']);
+        }
+
+        if (event.target.value.length > 4 && event.target.value.length <= 7) {
+            setPasswordStrength(['medium password', 'orange']);
+        }
+
+        if (event.target.value.length > 7 && event.target.value.length <= 10) {
+            setPasswordStrength(['strong password', 'green']);
+        }
     };
 
     return (
@@ -61,9 +82,14 @@ export function SecondForm() {
 
                     <li className="item-password">
                         <label className="label">Password</label>
-                        <input {...register('password')} className="input" type="password" />
+                        <input
+                            {...register('password')}
+                            className="input"
+                            type="password"
+                            onChange={handlePasswordChange}
+                        />
                         <span className="error-message">{errors.password?.message}</span>
-                        {/* <span style={{ color: passwordStrength[1] }}>{passwordStrength[0]}</span> */}
+                        <span style={{ color: passwordStrength[1] }}>{passwordStrength[0]}</span>
                     </li>
 
                     <li>
