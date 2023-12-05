@@ -31,20 +31,6 @@ export const AutoComplete = (props: AutoCompleteProps) => {
         setShowSuggestions(false);
     };
 
-    // useEffect(() => {
-    //     const handleOutsideClick = (event: MouseEvent) => {
-    //         if (autocompleteRef.current && !autocompleteRef.current.contains(event.target as Node)) {
-    //             setShowSuggestions(false);
-    //         }
-    //     };
-
-    //     document.addEventListener('click', handleOutsideClick);
-
-    //     return () => {
-    //         document.removeEventListener('click', handleOutsideClick);
-    //     };
-    // }, []);
-
     return (
         <div className="container">
             <label className="label">Country</label>

@@ -9,12 +9,6 @@ export const userSchema = yup.object().shape({
             return value;
         }),
 
-    // picture: yup
-    //     .string()
-    //     .required('add a picture')
-    //     .test('is-valid-picture', 'The image must have a PNG or JPEG extension', (value) => {
-    //         return;
-    //     }),
     picture: yup
         .string()
         .required('picture is required')

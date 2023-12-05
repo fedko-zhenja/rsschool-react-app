@@ -4,6 +4,9 @@ import { userSchema } from '../../validations/userValidationSecondForm';
 import { ValidData } from './types';
 import { AutoComplete } from '../../components/AutoComplete/AutoCompleteSecondForm';
 import { useState } from 'react';
+import { setIsDataLoaded, setDataToHistory } from '../../store/reducer';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export function SecondForm() {
     const {
@@ -11,14 +14,43 @@ export function SecondForm() {
         setValue,
         handleSubmit,
         formState: { errors, isDirty, isValid },
-        // reset,
     } = useForm<ValidData>({ mode: 'onTouched', resolver: yupResolver(userSchema) });
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [passwordStrength, setPasswordStrength] = useState(['', '']);
 
-    const onSubmitHandler: SubmitHandler<ValidData> = (data) => {
-        console.log({ data });
-        // reset();
+    const encodeFile = (file: File) => {
+        if (file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+
+                reader.onloadend = () => {
+                    const result = reader.result as string;
+                    if (result) {
+                        const base64String = result.split(',')[1];
+                        resolve(base64String);
+                    } else {
+                        reject(new Error('Failed to read file'));
+                    }
+                };
+
+                reader.onerror = reject;
+
+                reader.readAsDataURL(file);
+            });
+        } else {
+            return Promise.reject(new Error('No file selected'));
+        }
+    };
+
+    const onSubmitHandler: SubmitHandler<ValidData> = async (data) => {
+        const picture = await encodeFile(data.picture[0]);
+        data.picture = picture as FileList;
+        dispatch(setIsDataLoaded(true));
+        dispatch(setDataToHistory(data));
+        navigate('/');
     };
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
