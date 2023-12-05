@@ -9,7 +9,7 @@ export function SecondForm() {
         handleSubmit,
         formState: { errors },
         // reset,
-    } = useForm({ resolver: yupResolver(userSchema) });
+    } = useForm<ValidData>({ mode: 'onTouched', resolver: yupResolver(userSchema) });
 
     const onSubmitHandler: SubmitHandler<ValidData> = (data) => {
         console.log({ data });
@@ -66,11 +66,11 @@ export function SecondForm() {
                         <span className="error-message">{errors.confirmPassword?.message}</span>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <label className="label">Picture</label>
                         <input {...register('picture')} className="input" type="file" />
                         <span className="error-message">{errors.picture?.message}</span>
-                    </li>
+                    </li> */}
 
                     <li className="item_checkbox">
                         <input {...register('acceptTCRef')} className="input" type="checkbox" />

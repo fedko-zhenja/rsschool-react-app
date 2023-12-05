@@ -15,6 +15,9 @@ export const userSchema = yup.object().shape({
             'is-valid-picture',
             'Invalid picture format, the format should have been .pgn or .jpeg(.jpg)',
             (value) => {
+                if (!value.length) {
+                    return false;
+                }
                 const fileName = value[0].name.toLocaleLowerCase() || '';
 
                 if (fileName.includes('.png') || fileName.includes('.jpeg') || fileName.includes('.jpg')) {
