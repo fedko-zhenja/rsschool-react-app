@@ -7,7 +7,7 @@ export function SecondForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isDirty, isValid },
         // reset,
     } = useForm<ValidData>({ mode: 'onTouched', resolver: yupResolver(userSchema) });
 
@@ -66,11 +66,11 @@ export function SecondForm() {
                         <span className="error-message">{errors.confirmPassword?.message}</span>
                     </li>
 
-                    {/* <li>
+                    <li>
                         <label className="label">Picture</label>
                         <input {...register('picture')} className="input" type="file" />
                         <span className="error-message">{errors.picture?.message}</span>
-                    </li> */}
+                    </li>
 
                     <li className="item_checkbox">
                         <input {...register('acceptTCRef')} className="input" type="checkbox" />
@@ -78,7 +78,7 @@ export function SecondForm() {
                         <span className="error-message">{errors.acceptTCRef?.message}</span>
                     </li>
                     <li>
-                        <button className="submit-btn" type="submit">
+                        <button type="submit" disabled={!isDirty || !isValid}>
                             Submit
                         </button>
                     </li>
