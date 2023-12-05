@@ -2,10 +2,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { userSchema } from '../../validations/userValidationSecondForm';
 import { ValidData } from './types';
+import { AutoComplete } from '../../components/AutoComplete/AutoCompleteSecondForm';
 
 export function SecondForm() {
     const {
         register,
+        setValue,
         handleSubmit,
         formState: { errors, isDirty, isValid },
         // reset,
@@ -51,7 +53,11 @@ export function SecondForm() {
                         <span className="error-message">{errors.email?.message}</span>
                     </li>
 
-                    {/* <AutoComplete errorMessage={errorMessage} ref={countryRef} /> */}
+                    <AutoComplete
+                        setValue={setValue}
+                        register={register('country')}
+                        errorMessage={errors.country?.message}
+                    />
 
                     <li className="item-password">
                         <label className="label">Password</label>

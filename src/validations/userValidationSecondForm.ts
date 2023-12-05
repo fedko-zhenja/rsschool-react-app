@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { countryData } from '../data/countryData';
 
 export const userSchema = yup.object().shape({
     acceptTCRef: yup
@@ -47,12 +48,12 @@ export const userSchema = yup.object().shape({
             }
         ),
 
-    // country: yup
-    //     .string()
-    //     .required('choose the country')
-    //     .test('is-valid-country', 'choose the country', (value) => {
-    //         return countryData.includes(value);
-    //     }),
+    country: yup
+        .string()
+        .required('choose the country')
+        .test('is-valid-country', 'choose the country', (value) => {
+            return countryData.includes(value);
+        }),
 
     email: yup.string().email().required(),
 

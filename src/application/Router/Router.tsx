@@ -30,7 +30,11 @@ const router = createBrowserRouter([
             },
             {
                 path: Path.secondForm,
-                element: <SecondForm />,
+                element: (
+                    <Provider store={firstFormStore}>
+                        <SecondForm />
+                    </Provider>
+                ),
             },
         ],
     },
